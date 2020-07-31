@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <META HTTP-EQUIV="pragma" CONTENT="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <!-- load css -->
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.css" media="all">
+    <link rel="stylesheet" href="../js/lib/bootstrap-table/bootstrap-table.css">
+    <link rel="stylesheet" href="../js/lib/bootstrap-table-pagejump/bootstrap-table-pagejump.css">
+    <link rel="stylesheet" type="text/css" href="../layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../css/public.css">
+    <link rel="stylesheet" href="../font/material-icons.css">
+</head>
+<body>
+<div id="student_M">
+    <div class="clear message">
+        <div class="lf imgWrap"><img src="" alt="" class="photopath"/></div>
+        <div class="lf basic_M">
+
+            </ul>
+        </div>
+        <div class="btnWrap">
+            <button class="layui-btn no active borderRadiusAll">总览</button>
+            <button class="layui-btn no history borderRadiusAll">历史</button>
+        </div>
+    </div>
+    <div class="recordWrap">
+        <div class="records" style="display: block">
+            <div class="DataDisplay clear">
+                <div class="lf left">
+                    <div id="student_eachars">
+                    </div>
+                </div>
+                <div class="rg right">
+                    <div class="rightTitle">
+                        <span class="project_name"></span>
+                        <i class="project_name_value"></i>
+                    </div>
+                    <div class="orderOne">
+                        <ul class="rank">
+                            <li id="canvas_top" class="clear">
+                                <div id="canvas_top_Wrap"  style="width:170px; height:170px;"></div>
+                                <p class="top"></p>
+                                <p class="top_rank"></p>
+                            </li>
+                            <li id="canvas_top_majorGroup"class="clear">
+                                <div id="canvas_top_majorGroup_Wrap" style="width:170px; height:170px;"></div>
+                                <p class="top_majorGroup"></p>
+                                <p class="top_majorGroup_rank"></p>
+                            </li>
+                            <li id="canvas_top_classgrade" class="clear">
+                                <div id="canvas_top_classgrade_Wrap" style="width:170px; height:170px;"></div>
+                                <p class="top_classgrade"></p>
+                                <p class="top_classgrade_rank"></p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="clear  countOne">
+                        <span style="display: block;width: 100%;font-size: 16px;font-weight: bold;margin-bottom: 35px" class="behavior_title"></span>
+                        <ul class="lf GoodArr" style="width: 50%;">
+                        </ul>
+                        <ul class="lf failArr" style="width: 50%;">
+                        </ul>
+                    </div>
+                    <div class="record">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="records" style="display: none">
+            <form class="layui-form clear" action="" style="padding-bottom: 40px;" >
+                <span class="rg active switchIcon" style="cursor: pointer;">
+						  <img src="../images1/echars.png" alt="" />
+					</span>
+            </form>
+            <div style="position: relative;min-height: 500px;background: #FFFFFF;">
+                <div class="tableWrap active moreSelect">
+                    <table class="table table-no-bordered" id="table1" style="border: none;"></table>
+                </div>
+                <div class="tableWrap" id="tableEchars">
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<style type="text/css">
+    .layui-btn.no{
+        background: #f3f5f8;
+        color: #2196F3;
+        padding: 0 18px;
+        width: 80px;
+    }
+    .layui-btn.no.active{
+        background: #2196F3;
+        color: #ffffff;
+    }
+    #student_M {
+        padding: 30px 40px;
+        background: #FFFFFF;
+        position: relative;
+    }
+
+    #student_M h3 {
+        font-size: 16px;
+        padding: 0 0 36px;
+        color: #000000;
+        font-weight: bold;
+    }
+
+    #student_M .message .imgWrap {
+        width: 150px;
+        height: 150px;
+        background: #f6f6f6;
+        font-size: 0;
+        position: relative;
+        overflow: hidden;
+    }
+    #student_M .message .imgWrap img{
+        width: 100%;
+        position: absolute;
+        left: 0;
+        top: -10px;
+    }
+
+    #student_M .message {
+        padding-bottom: 50px;
+        position: relative;
+    }
+
+    #student_M .basic_M {
+        width: 750px;
+        padding-left: 40px;
+        position: relative;
+        height: 150px;
+
+    }
+
+    #student_M .basic_M ul li {
+        padding-bottom: 17px;
+        color: #000000;
+        opacity: 0.87;
+        width: 33%;
+        height: 33px;
+    }
+
+    #student_M .basic_M ul li span {
+        display: inline-block;
+    }
+    #student_M .basic_M ul li p{
+        display: inline-block;
+        line-height: 22px;
+    }
+
+    #student_M .postWrap {
+        padding: 20px 0;
+    }
+
+    #student_M .postWrap ul li {
+        margin-right: 20px;
+        color: #515151;
+    }
+
+    #student_M .postWrap ul li i {
+        display: inline-block;
+        font-style: normal;
+        padding-left: 20px;
+    }
+
+    #student_M .postWrap ul li button.add {
+        background: #e41100;
+    }
+
+    #student_M .btnWrap {
+        position: absolute;
+        right: 0;
+        top:0;
+    }
+
+
+    #student_M .DataDisplay {
+        width: 100%;
+    }
+
+    #student_M .DataDisplay .left {
+        width: 50%;
+        box-sizing: border-box;
+    }
+
+    #student_eachars {
+        width: 100%;
+        height: 400px;
+    }
+
+    #student_M .DataDisplay .right {
+        width: 50%;
+        box-sizing: border-box;
+    }
+    #student_M .DataDisplay .right .rightTitle{
+        margin-bottom: 30px;
+        position: relative;
+    }
+    #student_M .DataDisplay .right .rightTitle span{
+        display: inline-block;
+        font-size: 16px;
+        font-weight: bold;
+    }
+    #student_M .DataDisplay .right .rightTitle i{
+        display: inline-block;
+        font-style: normal;
+        font-size: 24px;
+        color: #2196F3;
+        font-weight: bold;
+        vertical-align: middle;
+        position: absolute;
+        top: -4px;
+        left: 117px;
+    }
+    #student_M .DataDisplay li {
+        display: inline-block;
+        padding-bottom: 20px;
+    }
+    #student_M .countOne li  span{
+        display: inline-block;
+        width: 24px;
+        height: 20px;
+    }
+    #student_M .countOne li  span img{
+        width: 100%;
+        height: 100%;
+    }
+    #student_M .record li{
+        display: block;
+    }
+    #student_M .DataDisplay li p{
+        display: inline-block;
+        vertical-align: middle;
+        line-height: 21px;
+        min-width: 50px;
+    }
+    #student_M .DataDisplay .rank li p{
+        display: block;
+        vertical-align: middle;
+        line-height: 21px;
+        min-width: 175px;
+        text-align: center;
+    }
+    #student_M .orderOne {
+        padding-bottom: 40px;
+    }
+
+    #student_M .countOne {
+        padding-bottom: 50px;
+    }
+    #student_M .layui-form-select {
+        width: 200px;
+        display: inline-block;
+        margin-right: 40px;
+    }
+    #student_M table {
+        padding: 20px 20px 34px;
+        border: none;
+    }
+    #student_M table th {
+        height: 30px;
+        line-height: 30px;
+        font-weight: normal;
+        color: #c2c2c2;
+        border: transparent;
+    }
+    #student_M table td {
+        max-width: 450px !important;
+        color: #000000;
+        opacity: 0.87;
+        line-height: 50px;
+        border-bottom: 1px solid #f3f5f8;
+    }
+    #student_M .fixed-table-container {
+        border: none;
+    }
+    #tableEchars {
+        width: 100%;
+        height: 400px;
+    }
+    #student_M .tableWrap {
+        display: none;
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+    #student_M .tableWrap.active {
+        display: block;
+    }
+    .moreSelect .pagination-detail span.page-list{
+        display: inline-block;
+    }
+    .moreSelect .dropdown-menu > .active > a{
+        background-color:#2196F3 ;
+    }
+</style>
+<!-- 加载js文件 -->
+<script type="text/javascript" src="../layui/layui.js"></script>
+<script src="../js/lib/echarts.js"></script>
+<script type="text/javascript" src="../js/lib/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="../js/lib/jquery.cookie.js"></script>
+<script type="text/javascript" src="../js/all2.js"></script>
+<script type="text/javascript" src="../tool/mask.js"></script>
+<script type="text/javascript" src="../tool/PercentPie.js"></script>
+<script type="text/javascript" src="../tool/canvas_echars.js"></script>
+<script type="text/javascript" src="../tool/tool.js"></script>
+<script type="text/javascript" src="../js/lib/bootstrap.js"></script>
+<script type="text/javascript" src="../js/lib/bootstrap-table/bootstrap-table.min.js"></script>
+<script type="text/javascript" src="../js/lib/bootstrap-table-pagejump/bootstrap-table-pagejump.js"></script>
+<script type="text/javascript" src="../js/lib/bootstrap-table/bootstrap-table-zh-CN.js"></script>
+<script type="text/javascript" src="../js/lib/jquery_code/jquery.code.js"></script>
+<script type="text/javascript" src="../js/lib/jquery_code/qrcode.js"></script>
+<script type="text/javascript" src="../tool/exportCode.js"></script>
+<script type="text/javascript" src="../js/pprojectForStudent/pprojectForStudent_Mask.js"></script>
+<script type="text/javascript" src="../tool/MaskForStudent.js"></script>
+<script type="text/javascript" src="../tool/getPersonalMessageFortableList.js"></script>
+<!-- 引入当前页面js文件 -->
+<script>
+    layui.use(['layer', 'form', 'element'], function() {
+        layer = parent.layer === undefined ? layui.layer : top.layer
+        form = layui.form;
+        var identityId=sessionStorage.getItem('identity_id');
+        if(identityId==4||identityId==12||identityId==13||identityId==6||identityId==7){
+            $('#canvas_top').hide();
+            $('#canvas_top_majorGroup').hide();
+        }else {
+            $('#canvas_top').show();
+            $('#canvas_top_majorGroup').show();
+        }
+    })
+      var Information = null;
+        //查看历史记录
+        histotyList =(function () {
+            var _m={};
+            var self=_m;
+            //初始化
+            _m.init=function () {
+                var identity_id = sessionStorage.identity_id
+                if(identity_id==7){
+                    self.family()
+                }else {
+                    self.fill();
+//                    self.all_table();
+                }
+                self.switch();
+            }
+            //通过家长id获取学生id
+            _m.family = function () {
+               var params={
+                   token:token,
+                   faid:userId,
+                   family_id:userId
+               }
+                $.axse(urls+'/accountStudent/getStudentForFamily.action',params,function(result){
+                    console.log(result);
+                    var data= result.data;
+                    var ids = result.data.id;
+                    Information=data;
+                    $('.switchIcon').attr('data-id',ids);
+                    var bodys=$('#student_M');
+                    var studentInformation = new PersonalInformation(Information,bodys);
+                    studentInformation.fillPhoto();//填充头像
+                    var dom=studentInformation.ForTeacherToMessage();
+                    bodys.find('.basic_M').append(dom);
+                    studentInformation.fillCodeData();//填充二维码
+                    var LookMessage= new MaskForStudent(bodys.find('#personal_data'),data); //查看详细信息
+                    var code = new exportCode(bodys.find('#codeBtn')); //生成二维码
+                    self.all_table(ids);
+                    var wayNum = Information.accountData.identitysData[6].st_way;
+                    ForStudent().fill_Score2($('#student_M'),ids,wayNum);
+                })
+            }
+            _m.switch=function () {
+                $('#student_M .switchIcon').unbind('click').bind('click', function() {
+                    $(this).toggleClass('active');
+                    if($(this).hasClass('active')) {
+                        $('#student_M .tableWrap').removeClass('active');
+                        $('#student_M .tableWrap').eq(0).addClass('active');
+                    } else {
+                        var ids=$(this).attr('data-id');
+                        $('#student_M .tableWrap').removeClass('active');
+                        $('#student_M .tableWrap').eq(1).addClass('active');
+                        histotyList.RecordHistoty_pic(ids);
+                    }
+                })
+            }
+            //表格
+            _m.table = function (filed) {
+                if(!filed.token||!sessionStorage.identity_id){
+                    tool().judge_token(function () {
+                        top.location.href=loginSrc;
+                    })
+                    return;
+                }
+                if(filed) $.extend(filed,pclogin);
+                $('#table1').bootstrapTable({
+                    url: urls+ studentHistoryRecord,
+                    queryParams: function (params) {
+                        var obj = {
+                            size: params.limit,
+                            page: params.offset / params.limit,
+                        }
+                        if (filed) $.extend(obj, filed);
+                        return obj;
+                    },
+                    sidePagination: "server",
+                    contentType:"application/x-www-form-urlencoded; charset=UTF-8",
+                    method: 'POST',
+                    async:true,
+                    pagination: true,
+                    paginationLoop: false,
+                    paginationShowPageGo: true,
+                    cache:false,
+                    striped:true,
+                    pageNumber: 1,
+                    pageSize: 5,
+                    pageList: [5, 10, 15],
+                    columns: [{
+                        field: 'commit_time',
+                        align: "center",
+                        title: '打分时间',
+                        formatter: function(value, row, index) {
+                            var a=tool().get_date(row.commit_time);
+                            return a;
+                        }
+                    }, {
+                        field: 'project_name',
+                        align: "center",
+                        title: '打分项',
+                    }, {
+                        field: 'rule_name',
+                        align: "center",
+                        title: '打分内容',
+                       formatter: function(value, row, index) {
+                        var beizhu=row.annotation||'';
+                        var a ='<a onclick="sl_Mask.remind_ForScoreHistoryMask($(this))" style="cursor: pointer" data-annotation='+beizhu+'>'+row.rule_name+'</a>';
+                         return a;
+                       }
+                    }, {
+                        field: 'value',
+                        align: "center",
+                        title: '分值',
+                        formatter: function(value, row, index) {
+                            if(row.operation == 1){
+                                var a= '+'+row.value;
+                            }
+                            if(row.operation == 2){
+                                var a= '-'+row.value;
+                            }
+                            return a;
+                        }
+
+                    },{
+                        field: '',
+                        align: "center",
+                        title: '总分',
+                        formatter: function(value, row, index) {
+                            var a = row.root_value;
+                            return a;
+                        }
+                    }, {
+                        field: '',
+                        align: "center",
+                        title: '打分人',
+                        formatter: function(value, row, index) {
+                            var a = row.operation_account_rname;
+                            return a;
+                        }
+                    }
+                    ],responseHandler:function(result){
+                        if(result.error){
+                            if(400<=result.error.errorCode&&result.error.errorCode<=500){
+                                parent.location.href='login.html'
+                            }else {
+                               sl_Mask.NoTip(result.error.message);
+                                return {
+                                    "rows":'',
+                                    "total":''
+                                }
+                            }
+                        }else{
+                            return {
+                                "rows":result.data.list,
+                                "total":result.data.count
+                            }
+                        }
+                    },
+                    formatLoadingMessage: function(){
+                    return '<img src="../img/loading.gif" style="margin: 60px auto" width="20px" height="20px">';
+                }
+
+                })
+            }
+            //所有记录table
+            _m.all_table=function (taid) {
+                $('#student_M').find('#table1').bootstrapTable('destroy');
+//                var taid=$('.btnWrap .history').attr('data-taid');
+//                var stime=$('select[name="termid"]').find("option:selected").attr('data-stime')
+//                var etime=$('select[name="termid"]').find("option:selected").attr('data-etime')
+                var params={
+                    token:token,
+                    faid:userId,
+                    taid:taid||userId
+//                            e_time:etime,
+//                            s_time:stime
+                }
+                self.table(params);
+            }
+            //所以打分记录图表
+            _m.RecordHistoty_pic = function (taid) {
+//                var taid=$('.btnWrap .history').attr('data-taid');
+//                var stime=$('select[name="termid"]').find("option:selected").attr('data-stime')
+//                var etime=$('select[name="termid"]').find("option:selected").attr('data-etime')
+                var params={
+                    token:token,
+                    faid:userId,
+                    taid:taid||userId,
+                    size:1000
+//                            e_time:etime,
+//                            s_time:stime
+
+                }
+                $.axse(urls+ studentHistoryRecord, params, function(result) {
+
+                        var list = result.data.list;
+                        if (list) {
+                            var lsit = list.reverse();
+                            var xAxisArr = [];
+                            var RexcordArr = [];
+                            for (var i = 0; i < list.length; i++) {
+                                xAxisArr.push(tool().get_date(list[i].commit_time));
+                                RexcordArr.push(list[i].root_value);
+                            }
+                            self.echarsRecordHistoty(xAxisArr, RexcordArr);
+                        }
+
+                })
+            }
+            //打分历史记录线新图
+            _m.echarsRecordHistoty=function (xAxisArr,RexcordArr) {
+                var table_echarts = echarts.init(document.getElementById('tableEchars'));
+                option = {
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: {
+                            type: 'cross'
+                        }
+                    },
+                    toolbox: {
+                        show: true
+                    },
+                    xAxis: {
+                        type: 'category',
+                        data: xAxisArr
+                    },
+                    yAxis: {
+                        type: 'value'
+                    },
+                    series: [{
+                        data: RexcordArr,
+                        type: 'line',
+                        smooth: true
+                    }]
+                };
+                table_echarts.setOption(option);
+            }
+            //填充页面信息(在学生权限下);
+            _m.fill = function () {
+                self.student();
+                var wayNum = JSON.parse(sessionStorage.positionId)[6].st_way;
+                ForStudent().fill_Score2($('#student_M'),userId,wayNum);
+            }
+            //在学生权限下获取学生的基本信息
+            _m.student = function () {
+                var params={
+                    token:token,
+                    faid:userId,
+                    taid:userId
+                }
+                var loadings= top.layui.layer.load(2);
+                $.axse(urls+onestudentList,params,function(result){
+                    top.layui.layer.close(loadings);
+                    var data = result.data;
+                    Information=data;
+                    var ids = result.data.id;
+                    $('.switchIcon').attr('data-id',ids);
+                    var bodys=$('#student_M');
+                    var studentInformation = new PersonalInformation(Information,bodys);
+                    studentInformation.fillPhoto();//填充头像
+                    var dom=studentInformation.ForTeacherToMessage();
+                    bodys.find('.basic_M').append(dom);
+                    studentInformation.fillCodeData();//填充二维码
+                    var LookMessage= new MaskForStudent(bodys.find('#personal_data'),data); //查看详细信息
+                    var code = new exportCode(bodys.find('#codeBtn')); //生成二维码
+
+                })
+            }
+
+            return _m;
+        })()
+        histotyList.init();
+        histotyList.switch();
+        //切换按钮
+        $('#student_M .btnWrap button').unbind('click').bind('click', function() {
+            var index = $(this).index();
+            $('#student_M .recordWrap .records').hide();
+            $('#student_M .recordWrap .records').eq(index).show();
+            $('#student_M .btnWrap button').removeClass('active');
+            $(this).addClass('active');
+            if($(this).hasClass('history')){
+                var taid= $('#student_M .switchIcon').attr('data-id');
+                    console.log(taid);
+                histotyList.all_table(taid);
+            }
+        })
+
+</script>
+</head>
+
+</body>

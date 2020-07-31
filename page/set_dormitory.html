@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="Author" content="larry" />
+    <meta name="renderer" content="webkit">
+    <META HTTP-EQUIV="pragma" CONTENT="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <!-- load css -->
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.css" media="all">
+    <link rel="stylesheet" href="../js/lib/bootstrap-table/bootstrap-table.css">
+    <link rel="stylesheet" href="../js/lib/bootstrap-table-pagejump/bootstrap-table-pagejump.css">
+    <link rel="stylesheet" type="text/css" href="../layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../css/public.css">
+    <!--<link rel="stylesheet" href="../css/main.css">-->
+    <link rel="stylesheet" href="../css/school_PublicStyle/school_PublicStyle.css">
+    <style>
+        #account .layui-form-select {
+            width: 200px;
+            display: inline-block;
+            margin-right: 25px;
+        }
+    </style>
+</head>
+<body>
+<div id="account" class="sl-container MarginTop45">
+    <div style="position: relative">
+        <h3 class="sl-title" style="margin-bottom: 24px">寝室管理</h3>
+    </div>
+    <div class="tableWrap">
+        <form class="layui-form changeV1" action="" style="padding-bottom: 20px;">
+            <select name="school_district_id" lay-filter="school_district_id">
+                <option value="">请选择校区</option>
+                <option value="1">丁桥校区</option>
+                <option value="2">翠苑校区</option>
+            </select>
+            <select name="dormitory_type" lay-filter="dormitory_type">
+                <option value="">请选择寝室类型</option>
+                <option value="1">男生寝室</option>
+                <option value="2">女生寝室</option>
+            </select>
+            <select name="floor" lay-filter="floor">
+                <option value="">请选择楼层</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+            </select>
+            <span class="layui-btn-normal blue rg borderRadiusAll" style="width: 120px;height: 35px;line-height: 35px;border: none;text-align: center;color: #ffffff;cursor: pointer" id="addWeek">新增寝室</span>
+        </form>
+        <table class="table table-no-bordered"  id="table1" style="border: none;"></table>
+    </div>
+
+</div>
+
+<!-- 加载js文件 -->
+<script type="text/javascript" src="../layui/layui.js"></script>
+<script type="text/javascript" src="../js/lib/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="../js/lib/jquery.cookie.js"></script>
+<script type="text/javascript" src="../js/all2.js"></script>
+<script type="text/javascript" src="../tool/mask.js"></script>
+<script type="text/javascript" src="../tool/tool.js"></script>
+<script type="text/javascript" src="../js/lib/bootstrap.js"></script>
+<script type="text/javascript" src="../js/lib/bootstrap-table/bootstrap-table.min.js"></script>
+<script type="text/javascript" src="../js/lib/bootstrap-table-pagejump/bootstrap-table-pagejump.js"></script>
+<script type="text/javascript" src="../js/lib/bootstrap-table/bootstrap-table-zh-CN.js"></script>
+<script type="text/javascript" src="../js/Basic_set/set_dormitory.js"></script>
+<!-- 引入当前页面js文件 -->
+
+</body>
+</html>

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <META HTTP-EQUIV="pragma" CONTENT="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <!-- load css -->
+    <link rel="stylesheet" type="text/css" href="../layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../css/public.css">
+    <link rel="stylesheet" href="../css/school_PublicStyle/school_PublicStyle.css">
+    <style type="text/css">
+        #leaveprocess input{
+            background: #f3f5f8;
+            border: none;
+        }
+        #leaveprocess textarea{
+            background: #f3f5f8;
+            border: none;
+        }
+        #leaveprocess .layui-form-select {
+            width: 370px;
+            float: left;
+            margin-right: 20px;
+        }
+
+        #leaveprocess ul li {
+            padding-bottom: 20px;
+        }
+
+        #leaveprocess .layui-form-label {
+            text-align: left;
+            color: #000000;
+        }
+        #leaveprocess li{
+            position: relative;
+        }
+        #leaveprocess li i.tips{
+            position: absolute;
+            left: 0;
+            top: 13px;
+            color: #ff4747;
+        }
+        #leaveprocess .layui-form-select,.xm-form-select,.xm-select-parent {
+            width: 200px;
+            float: left;
+            margin-right: 15px;
+            border-radius: 0;
+        }
+
+        #leaveprocess .chooseStudent .layui-form-select,#leaveprocess .chooseStudent .xm-form-select,#leaveprocess .chooseStudent .xm-select-parent,#leaveprocess  ul li.chooseStudent input{
+            width: 370px;
+        }
+        #leaveprocess  ul li.chooseStudent .layui-form-select input{
+            width: 370px;
+        }
+        .xm-select-title{
+            height: 35px!important;
+            border-radius: 0;
+            border: none;
+        }
+        #leaveprocess  ul li .layui-form-select input{
+            width: 200px;
+            border-radius: 0;
+        }
+        #leaveprocess .xm-icon-yes:after{
+            width: 8px;
+            height: 5px;
+            top: 2.7px;
+        }
+        #AllStudent{
+            width: 360px;
+            height: 35px;
+            background: #f3f5f8;
+            color: #999999;
+            padding-left: 10px;
+            line-height: 35px;
+            font-size: 14px;
+            cursor: pointer;
+            display: inline-block;
+        }
+        .NoClick{
+            position: relative;
+        }
+        .NoClick::before{
+            content: '提交中...';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 90%;
+            height: 100%;
+            background: #2196F3;
+            z-index: 11;
+            border-radius: 4px;
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+<div id="leaveprocess" style="background: #FFFFFF;padding: 45px 40px">
+    <span style="display: block;font-size: 24px;font-weight: bold;border-bottom:1px solid #ececec;padding-bottom: 25px;">发起退住</span>
+    <form class="layui-form" action="" style="padding: 40px 0">
+        <ul>
+            <li class="clear">
+                <label class="layui-form-label lf">选择学生</label>
+                <div id="AllStudent" class="lf">请选择学生</div>
+                <i class="tips">*</i> <i class="tips">*</i>
+            </li>
+            <li class="clear">
+                <label class="layui-form-label">退住时间</label>
+                <input type="text"  id="time" required lay-verify="required" placeholder="请选择退住时间" autocomplete="off" class="layui-input" style="width: 370px;" readonly name="time">
+                <i class="tips">*</i>
+            </li>
+            <li class="clear chooseStudent">
+                <label class="layui-form-label lf">退住类型</label>
+                <select name="type" lay-verify="required">
+                    <option value="">选择退住类型</option>
+                    <option value="0">违纪退住</option>
+                    <option value="1">学生申请</option>
+                </select>
+                <i class="tips">*</i>
+            </li>
+            <li class="clear">
+                <label class="layui-form-label lf">退住原因</label>
+                <textarea name="des" placeholder="请输入内容" class="layui-textarea lf" style="width: 370px;"></textarea>
+            </li>
+        </ul>
+        <div style="text-align: left;width: 600px;padding-top: 27px" >
+            <span class="layui-btn blue borderRadiusAll" lay-filter="formDemo" lay-submit>提交</span>
+        </div>
+    </form>
+</div>
+<script type="text/javascript" src="../layui/layui.js"></script>
+<script type="text/javascript" src="../js/lib/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="../js/lib/jquery.cookie.js"></script>
+<script type="text/javascript" src="../js/all2.js"></script>
+<script type="text/javascript" src="../tool/mask.js"></script>
+<script type="text/javascript" src="../js/leave/jquery.ztree.core.min.js"></script>
+<script type="text/javascript" src="../js/lib/jquery.ztree.excheck.js"></script>
+<script type="text/javascript" src="../tool/tool.js"></script>
+<script type="text/javascript" src="../tool/classgrade_Tree.js"></script>
+<script type="text/javascript" src="../tool/choose_student.js"></script>
+<script>
+    //Demo
+    layui.use(['layer', 'form', 'element', 'laydate'], function() {
+        var layer = layui.layer,
+            form = layui.form,
+            element = layui.element,
+            laydate = layui.laydate
+           var pp1= new choose_Student('AllStudent',{
+               url:get_liveSchool,
+               field:2,
+               treeType:1   //以年级tree为开头
+             });
+            laydate.render({
+                 elem: '#time', //指定元素
+                 format: 'yyyy-MM-dd' //可任意组合
+             });
+            //退住提交
+            leaveprocess = (function () {
+                 var _m={};
+                 var self=_m;
+                   //初始化
+                    _m.init = function () {
+                        self.sumbit();
+                    }
+                    //提交
+                _m.sumbit=function () {
+                    form.on('submit(formDemo)', function(data) {
+                        if($(this).hasClass('NoClick')){
+                            return;
+                        }
+                        var account_ids = $('#AllStudent').attr('data-id');
+                            if(!account_ids){sl_Mask.NoTip('请选择学生'); return}
+                        var field = data.field;
+                        var params = {
+                            token: token,
+                            faid: userId,
+                            type: field.type,
+                            account_ids: account_ids,
+                            time: new Date(field.time.replace(/-/g, "/")+' 00:00:00').getTime()
+                        }
+                        //备注
+                        if (field.des) {
+                            params.des = field.des;
+                        }
+                        self.shenqi(params,$(this));
+                    })
+                    }
+                _m.shenqi =function (params,that) {
+                    tool().Switched_Roles('images1/Score.png','确定提交本次退住申请',function () {
+//                        var loadings= top.layui.layer.load(2);
+//                        setTimeout(function () {
+//                            top.layui.layer.close(loadings);
+//                        }, 3000)
+                        that.addClass('NoClick');
+                        tool().onClick(that);
+                        $.axse(urls + '/dormitoryCheck/checkOut.action', params, function (result) {
+                            that.removeClass('NoClick');
+                            $('.fading-circle').remove();
+//                                top.layui.layer.close(loadings);
+                                 sl_Mask.YesTip('提交成功');
+                                //请假学生
+                                $('#AllStudent').attr('data-id','');
+                                $('#AllStudent').attr('title','');
+                                $('#AllStudent').html('').text('请选择学生');
+                                //请假类型
+                                $('select[name="type"]').val('');
+                                $('input[name="time"]').val('');
+                            //备注
+                               $('textarea[name="des"]').val('');
+                                form.render();
+                                //请假时间
+                        },function () {
+                            that.removeClass('NoClick');
+                            $('.fading-circle').remove();
+//                            top.layui.layer.close(loadings);
+                        })
+                    })
+                }
+                   return _m;
+            })();
+        leaveprocess.init();
+    })
+</script>
+</body>
+
+</html>

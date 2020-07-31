@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="renderer" content="webkit">
+    <META HTTP-EQUIV="pragma" CONTENT="no-cache">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="format-detection" content="telephone=no">
+	<!-- load css -->
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.css" media="all">
+    <link rel="stylesheet" href="../js/lib/bootstrap-table/bootstrap-table.css">
+    <link rel="stylesheet" href="../js/lib/bootstrap-table-pagejump/bootstrap-table-pagejump.css">
+	<link rel="stylesheet" type="text/css" href="../layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../css/public.css">
+    <link rel="stylesheet" href="../css/school_PublicStyle/school_PublicStyle.css">
+    <link rel="stylesheet" href="../font/material-icons.css">
+</head>
+<body>
+  <div id="account" class="sl-container">
+       <div class="sl-searchWrap clear">
+            <div class="sl-search search lf" id="QueryWrap">
+                <i class="material-icons search" style="color: #2196F3;font-size: 20px" >search</i>
+                <input type="text" placeholder="请输入教职工姓名" onfocus="placeholder=''" id="search" autocomplete="off"><span class="school_Btn borderRadiusRight"  onclick="mainPage.search_table()" style="display: none">搜索</span>
+            </div>
+            <div class="Make rg">
+                <span class="layui-btn layui-btn-normal blue MarginTop3" onclick="mainPage.tip('创建账户')">添加账号</span>
+            </div>
+       </div>
+      <div class="sl-formWrap formwrap" id="ForState">
+                <ul class="clear">
+                    <li class='lf active' onclick="mainPage.all_table()"><i></i><span>全部</span></li>
+                    <li class='lf' onclick="mainPage.normal_table()"><i></i><span>正常</span></li>
+                    <li class='lf' onclick="mainPage.recycle_table()"><i></i><span>回收站</span></li>
+      	        </ul>
+      </div>
+      <div class="tableWrap">
+          <table class="table table-no-bordered"  id="table1" style="border: none;"></table>
+      </div>
+  </div>
+
+<!-- 加载js文件 -->
+  <script type="text/javascript" src="../layui/layui.js"></script>
+  <script type="text/javascript" src="../js/lib/jquery-1.12.4.min.js"></script>
+  <script type="text/javascript" src="../js/lib/jquery.cookie.js"></script>
+  <script type="text/javascript" src="../js/all2.js"></script>
+  <script type="text/javascript" src="../tool/mask.js"></script>
+  <script type="text/javascript" src="../tool/tool.js"></script>
+  <script type="text/javascript" src="../js/lib/bootstrap.js"></script>
+  <script type="text/javascript" src="../js/lib/bootstrap-table/bootstrap-table.min.js"></script>
+  <script type="text/javascript" src="../js/lib/bootstrap-table-pagejump/bootstrap-table-pagejump.js"></script>
+  <script type="text/javascript" src="../js/lib/bootstrap-table/bootstrap-table-zh-CN.js"></script>
+  <script type="text/javascript" src="../tool/Query_Component.js"></script>
+  <script type="text/javascript" src="../js/account/teacher.js"></script>
+  <script type="text/javascript" src="../tool/getPersonalMessageFortableList.js"></script>
+  <script type="text/javascript" src="../tool/MaskForEditPersonalIformation.js"></script>
+      <!-- 引入当前页面js文件 -->
+</body>
+</html>

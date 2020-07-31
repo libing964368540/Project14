@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<META HTTP-EQUIV="pragma" CONTENT="no-cache">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="format-detection" content="telephone=no">
+		<!-- load css -->
+		<link rel="stylesheet" type="text/css" href="../css/bootstrap.css" media="all">
+		<link rel="stylesheet" href="../js/lib/bootstrap-table/bootstrap-table.css">
+		<link rel="stylesheet" href="../js/lib/bootstrap-table-pagejump/bootstrap-table-pagejump.css">
+		<link rel="stylesheet" type="text/css" href="../layui/css/layui.css" media="all">
+		<link rel="stylesheet" type="text/css" href="../css/formSelects-v4.css">
+		<link rel="stylesheet" href="../css/public.css">
+		<link rel="stylesheet" href="../css/school_PublicStyle/school_PublicStyle.css">
+		<link rel="stylesheet" href="../font/material-icons.css">
+	</head>
+     <style type="text/css">
+     	    #account .layui-form-select{
+     	    	width: 200px;
+     	    	display: inline-block;
+     	    }
+     </style>
+	<body>
+		<div id="account" class="sl-container">
+			<div class="sl-searchWrap clear">
+				<div class="sl-search search lf" id="QueryWrap">
+					<!--<img src="../images1/search.png" alt="" />-->
+					<i class="material-icons search" style="color: #2196F3;font-size: 20px" >search</i>
+					<input type="text" placeholder="请输入班级名称" id="search" autocomplete="off">
+					<span class="school_Btn search_btn borderRadiusRight" style="display: none">搜索</span>
+				</div>
+				<div class="Make rg">
+				       <button class="layui-btn layui-btn-normal blue" id="add">新增班级</button>
+			     </div>
+			</div>
+			<div class="layui-form changeV1">
+				<form style="border-bottom: 1px solid #f3f5f8;padding: 25px 0;">
+					<select name="major_group_id" lay-filter="major_group_id" lay-search="">
+						<option value="">请选择专业部</option>
+					</select>
+				</form>
+			</div>
+			<div class="tableWrap">
+				<table class="table table-no-bordered" id="table1" style="border: none;"></table>
+			</div>
+		</div>
+		<!-- 加载js文件 -->
+		<script type="text/javascript" src="../layui/layui.js"></script>
+		<script type="text/javascript" src="../js/lib/jquery-1.12.4.min.js"></script>
+		<script type="text/javascript" src="../js/lib/jquery.cookie.js"></script>
+		<script type="text/javascript" src="../js/all2.js"></script>
+		<script type="text/javascript" src="../tool/mask.js"></script>
+		<script type="text/javascript" src="../tool/tool.js"></script>
+		<script type="text/javascript" src="../js/lib/bootstrap.js"></script>
+		<script type="text/javascript" src="../js/lib/bootstrap-table/bootstrap-table.min.js"></script>
+		<script type="text/javascript" src="../js/lib/bootstrap-table-pagejump/bootstrap-table-pagejump.js"></script>
+		<script type="text/javascript" src="../js/lib/bootstrap-table/bootstrap-table-zh-CN.js"></script>
+		<script type="text/javascript" src="../tool/Query_Component.js"></script>
+		<!-- 引入当前页面js文件 -->
+		<script>
+            layui.config({
+                base: '../js/lib/' //此处路径请自行处理, 可以使用绝对路径
+            }).extend({
+                formSelects: 'formSelects-v4.min'
+            });
+			layui.use(['layer', 'form', 'element','formSelects'], function() {
+				var layer = parent.layer === undefined ? layui.layer : top.layer,
+					form = layui.form,
+					element = layui.element
+                    formSelects = layui.formSelects;
+				var groupData=null;  //专业部初始化数据
+				var DirectorData=null; //班主任初始化数据
+				var vice_directorData=null; //副班主任初始化数据
+				var AllTeacher = null;//获取全部教师添加打分专员
+
+				//增加专业
+				$('#add').unbind('click').bind('click', function() {
+				    if(!groupData||!DirectorData||!vice_directorData){
+				        sl_Mask.NoTip('初始化数据未加载完成，请1秒后再试。');
+				        return;
+					}
+					var index = parent.layer.open({
+						type: 1,
+						title: false,
+						closeBtn: 0,
+						shadeClose: false,
+                        skin:'add_director',
+						area: ['400px', 'auto'],
+						content: '<div style="padding:30px 50px 24px;color:#898989;position:relative" class="layui-form major_set">' +
+                        '<p class="self_Mask_title" style="padding-bottom:20px;">新增班级</p>' +
+                        '<i class="layui-icon layui-icon-close closeBtn NoTip self_Mask_close">&#x1006;</i> '+
+							'<div style="padding:20px 0 20px">' +
+							'<ul >' +
+						'<li  class="clear self_Mask_row"><label class="layui-form-label" style="width:60px;text-align:left;padding:9px 0;">专业部</label> <select lay-verify="required" name="groupid" lay-filter="groupid"><option value=""></option></select></li>' +
+                        '<li  class="clear self_Mask_row"><label class="layui-form-label" style="width:60px;text-align:left;padding:9px 0;">所属专业</label><select lay-verify="required" name="major_id" lay-filter="major_id"><option value=""></option></select></li>' +
+                        '<li class="clear self_Mask_row"><label class="layui-form-label" style="width:60px;text-align:left;padding:9px 0;">年级</label> <select lay-verify="required" name="grade"><option value=""></option><option value="2016">2016</option><option value="2017">2017</option><option value="2018">2018</option><option value="2019">2019</option></select></li>' +
+                        '<li  class="clear self_Mask_row"><label class="layui-form-label" style="width:60px;text-align:left;padding:9px 0;">班主任</label><select name="director_id"  id="directorid" lay-search=""></select></li>' +
+                        '<li  class="clear self_Mask_row"><label class="layui-form-label" style="width:60px;text-align:left;padding:9px 0;">副班主任</label><select name="vice_director_aid"  id="vice_director_aid" lay-search=""></select></li>' +
+                        '<li class="clear self_Mask_row"><label class="layui-form-label" style="width:60px;text-align:left;padding:9px 0;">班级名称</label><input class="layui-input rg" type="text"  placeholder="请输入班级名称"style="width:220px;border: none;background: #f3f5f8;" lay-verify="required" name="name"></li>' +
+							'</ul>' +
+							'</div>' +
+							'<div class="yesTip self_Mask_btn" lay-filter="formDemo" lay-submit>确定</div>' +
+							'</div>',
+						success: function(layer, index) {
+                            parent.layui.formSelects.render('directorid');
+                            parent.layui.form.render();
+                            school_classSz.getbranch($(layer));
+                            school_classSz.fillDirector($(layer));
+                            school_classSz.vice_director_aid($(layer));
+                            parent.layui.form.on('submit(formDemo)', function(data){
+                                 var params=data.field;
+                                     params.faid=userId;
+								     params.token=token;
+                                $.axse(urls+createClass,params,function(result){
+                                          $('#account').find('#table1').bootstrapTable('destroy');
+                                          school_classSz.allclass();
+                                          sl_Mask.YesTip('添加成功');
+                                          top.layer.close(index);
+								},function () {
+
+                                })
+
+							})
+							$(layer).find('.NoTip').unbind('click').bind('click', function() {
+								top.layer.close(index);
+							})
+						}
+					})
+
+				})
+
+
+			//班级设置
+			 school_classSz = (function () {
+			    var _m={};
+			    var self=_m;
+			    //初始化
+				_m.init=function () {
+					self.allclass();
+					form.render();
+                    self.getType($('#account .layui-form'),1);
+                    self.getDirectorData();
+                    self.getVice_directorData();
+                    self.seach_table();
+                    self.keyword();
+                    self.allTeacher();
+                }
+                //获取全部教师
+				 _m.allTeacher = function () {
+                     var params ={
+                         faid:userId,
+                         token:token,
+                         iids:'3-4-5',
+                         size:500,
+                         state:1
+                     }
+
+                     $.axse(urls+'/account/getAccountsStaff.action',params,function(result) {
+                         var list=result.data.list;
+                         AllTeacher=list;
+                     })
+                 }
+                 //获取班主任数据（初始化进行存储）
+				 _m.getDirectorData=function () {
+                     var params ={
+                         faid:userId,
+                         token:token,
+                         iid:4,
+                         size:500,
+                         state:1
+                     }
+                     $.axse(urls+'/account/getAccountsStaff.action',params,function(result) {
+                         var list=result.data.list;
+                         DirectorData=list;
+					 })
+                 }
+				 //获取副班主任数据（初始化进行存储）
+				 _m.getVice_directorData = function () {
+                     var params ={
+                         faid:userId,
+                         token:token,
+                         iid:12,
+                         size:500,
+                         state:1
+                     }
+                     $.axse(urls+'/account/getAccountsStaff.action',params,function(result) {
+                         var list = result.data.list;
+                         vice_directorData = list;
+					 })
+                 }
+                //表格
+				_m.table= function (filed) {
+                    if(!filed.token||!sessionStorage.identity_id){
+                        tool().judge_token(function () {
+                            parent.location.href=loginSrc;
+                        })
+                        return;
+                    }
+                    if(filed) $.extend(filed,pclogin);
+                    $('#table1').bootstrapTable({
+                        url:urls + '/classgrade/getClassgrades.action',
+                        queryParams:function(params){
+                            var obj={
+                                size:params.limit,
+                                page:params.offset/params.limit,
+                            }
+                            if(filed) $.extend(obj,filed);
+                            return obj;
+                        },
+                        sidePagination: "server",
+                        contentType:"application/x-www-form-urlencoded; charset=UTF-8",
+                        method: 'POST',
+                        async:true,
+                        pagination: true,
+                        striped:true,
+                        paginationLoop: false,
+                        paginationShowPageGo: true,
+                        pageNumber:1,
+                        cache:false,
+                        pageSize: 10,
+                        pageList: [10, 15, 25],
+                        columns:
+                            [  {
+                                field: '',
+                                align:"center",
+                                title: '序号',
+                                width:'80px',
+                                formatter: function(value, row, index,limit) {
+                                    var pageSize=$('#table1').bootstrapTable('getOptions').pageSize;
+                                    //通过表的#id 可以得到每页多少条
+                                    var pageNumber=$('#table1').bootstrapTable('getOptions').pageNumber;
+                                    //通过表的#id 可以得到当前第几页
+                                    return pageSize * (pageNumber - 1) + index + 1;
+                                    //返回每条的序号： 每页条数 * （当前页 - 1 ）+ 序号
+                                }
+
+                            },{
+                                field: 'name',
+                                align:"center",
+//                                width:'240px',
+                                title: '班级名称',
+                                formatter: function(value, row, index,limit) {
+                                      var a=row.name;
+                                      return a;
+								}
+
+                            }, {
+                                field: '',
+//                                width:'240px',
+                                align:"center",
+                                title: '专业',
+                                formatter: function(value, row, index,limit) {
+                                    var a=row.major.name;
+                                    return a;
+                                }
+                            }, {
+                                field: '',
+                                align:"center",
+//                                width:'150px',
+                                title: '专业部',
+                                formatter: function(value, row, index) {
+                                    var a = row.major.group.name;
+                                    return a;
+                                }
+                            }, {
+                                field: '',
+                                align:"center",
+//                                width:'150px',
+                                title: '班主任',
+                                formatter: function(value, row, index) {
+                                    if(row.director){
+                                        var obj = row.director;
+                                        var a= obj.accountData.rname;
+                                            return a;
+									}
+                                }
+                            }, {
+                                field: '',
+                                align:"center",
+//                                width:'150px',
+                                title: '副班主任',
+                                formatter: function(value, row, index) {
+                                    if(row.vice_director){
+                                        var obj = row.vice_director;
+                                        var a= obj.accountData.rname;
+                                        return a;
+                                    }
+
+                                }
+                            },{
+                                field: '',
+                                align:"center",
+//                                width:'150px',
+                                title: '打分专员',
+                                formatter: function(value, row, index) {
+                                    if(row.performance_director){
+                                        var obj = row.performance_director;
+                                        var name= obj.username;
+                                        var a = '<a class="blue" onclick="school_classSz.setScoreUser($(this))" data-classgrade='+row.name+'  data-id='+row.id+' data-value='+obj.id+'>'+name+'</a>';
+                                        return a;
+                                    }else{
+                                        var a = '<a class="blue" onclick="school_classSz.setScoreUser($(this))" data-classgrade='+row.name+'  data-id='+row.id+'>设置</a>';
+                                        return a;
+									}
+                                }
+                            },{
+                                field: '',
+                                align:"center",
+//                                width:'160px',
+                                title: '操作',
+                                formatter: function(value, row, index) {
+                                    var a = '<a class="blue" onclick="school_classSz.edit_table('+row.id+')">编辑</a>';
+                                    return a;
+                                }
+                            }],
+                        responseHandler:function(result){
+                            if(result.error){
+                                if(400<=result.error.errorCode&&result.error.errorCode<=500){
+                                    tool().judge_token(function () {
+                                        parent.location.href=loginSrc;
+                                    })
+                                }else {
+                                    sl_Mask.NoTip(result.error.message);
+                                    return {
+                                        "rows":'',
+                                        "total":''
+                                    }
+                                }
+
+                            }else{
+                                return {
+                                    "rows":result.data.list,
+                                    "total":result.data.count
+                                }
+                            }
+                        }, formatLoadingMessage: function(){
+                            return '<img src="../img/loading.gif" style="margin: 60px auto" width="20px" height="20px">';
+                        }
+                    })
+
+                }
+                //获取所有班级
+				_m.allclass=function () {
+                    $('#account').find('#table1').bootstrapTable('destroy');
+					var params={
+					    faid:userId,
+						token:token
+					}
+                    self.table(params);
+                }
+                //通过专业刷选
+                _m.majorSelect = function (major_group_id) {
+                    $('#account').find('#table1').bootstrapTable('destroy');
+                    var params={
+                        faid:userId,
+                        token:token,
+                        major_group_id:major_group_id
+                    }
+                    self.table(params);
+                }
+				//添加班级
+				 //获取某一条班级信息的接口
+				 _m.oneClassMessage = function (classgrade_id,obj) {
+				     var params={
+				         token:token,
+						 faid:userId,
+                         classgrade_id:classgrade_id
+					 }
+                     $.axse(urls+oneClass,params,function(result){
+                              var data=result.data;
+                              //填充专业部
+							  school_classSz.getbranch(obj,data.major.group.id,data.major.id);
+							  //填充专业
+//                              school_classSz.getMajor(obj,data.major.group.id,data.major.id);
+							  //填充年级
+							  obj.find('select[name="grade"]').val(data.grade);
+							  //填充班主任
+							  if(data.director){
+                                  school_classSz.editfillDirector(obj,data.director.id);
+//                                  school_classSz.vice_director_aid(obj);
+							  }else {
+                                  school_classSz.editfillDirector(obj);
+//                                  school_classSz.vice_director_aid(obj);
+							  }
+							  //填充副班主任;
+
+                               if(data.vice_director){
+
+								   school_classSz.vice_director_aid(obj,data.vice_director.id);
+                                }else {
+                                    school_classSz.vice_director_aid(obj);
+                                 }
+							  //填充班级名称
+                              obj.find('#classNameS').val(data.name);
+                              obj.find('#classNameS').attr('data-name',data.name);
+
+
+
+					 })
+                 }
+				//填充班主任
+				_m.fillDirector = function (obj,value) {
+					        var data = DirectorData;
+                            var dom="";
+                                dom += "<option value=''>选择班主任</option>";
+                            if (data && data.length > 0) {
+                                for (var i = 0; i < data.length; i++) {
+                                    dom += '<option value="' + data[i].id + '">' + data[i].accountData.rname + '</option>'
+                                }
+                                obj.find('select[name="director_id"]').html(dom);
+                                if(value){
+                                    obj.find('select[name="director_id"]').val(value);
+								}
+                                parent.layui.form.render();
+                            }
+
+                }
+                //给设置打分专员添加全部的老师
+				 _m.fillAllTeacher = function (obj,value) {
+                     var data = AllTeacher;
+                     var dom="";
+                     dom += "<option value=''>选择打分专员</option>";
+                     if (data && data.length > 0) {
+                         for (var i = 0; i < data.length; i++) {
+                             if(!data[i].accountData.rname){
+                                 dom += '<option value="' + data[i].id + '">' + data[i].username + '</option>'
+							 }
+                         }
+                         obj.find('select[name="performance_director_id"]').html(dom);
+                         if(value){
+                             obj.find('select[name="performance_director_id"]').val(value);
+						 }
+                         parent.layui.form.render();
+                     }
+                 }
+                //编辑填充班主任
+				 _m.editfillDirector =function (obj,value) {
+					         var data = DirectorData;
+                             var dom="";
+                                 dom += "<option value=''></option>";
+                             if (data && data.length > 0) {
+                                 for (var i = 0; i < data.length; i++) {
+                                     dom += '<option value="' + data[i].id + '" >' + data[i].accountData.rname + '</option>'
+                                 }
+                                 obj.find('select[name="director_id"]').html(dom);
+
+								 if(value){
+                                     obj.find('select[name="director_id"]').val(value);
+                                     obj.find('select[name="director_id"]').attr('data-value',value);
+                                 }
+                                 parent.layui.form.render();
+                             }
+                 }
+                 _m.addClass = function () {
+
+                }
+                //获取专业部信息（初始化进行存储）
+                _m.getbranch=function (obj,value,value1) {
+                        var dom="<option value=''>请选择所属专业部</option>";
+					    var data=groupData;
+                        if(data&&data.length>0){
+                            for(var i=0;i<data.length;i++){
+                                dom+='<option value="'+data[i].id+'">'+data[i].name+'</option>'
+                            }
+                            obj.find('select[name="groupid"]').html(dom)
+                            parent.layui.form.render();
+							if(value){
+                                obj.find('select[name="groupid"]').val(value);
+                                parent.layui.form.render();
+                                school_classSz.getMajor(obj,value,value1);
+							}
+                            top.layui.form.on('select(groupid)', function (majordata) {
+                                self.getMajor(obj,majordata.value);
+                            })
+                        }
+                }
+                // 二级联动通过专业部刷选专业
+				_m.getMajor=function (obj,groupid,value) {
+                    var params = {
+                        faid: userId,
+                        token: token,
+                        groupid:groupid
+                    }
+                    $.axse(urls+Get_Major, params, function (result) {
+                         if(!result.error) {
+                             var data = result.data;
+                             if (data && data.length > 0) {
+                                 var dom = "<option value=''>选择所属专业</option>";
+                                 for (var i = 0; i < data.length; i++) {
+                                     dom += '<option value=' + data[i].id + '>' + data[i].name + '</option>'
+                                 }
+                                 obj.find("select[name='major_id']").html(dom);
+                                 if(value){
+                                     obj.find('select[name="major_id"]').val(value);
+                                 }
+                                 top.layui.form.render();
+                             }
+                         }
+					})
+                }
+                //获取专业信息
+                _m.getType=function (obj,type) {
+                    var params = {
+                        faid: userId,
+                        token: token
+                    }
+                    $.axse(urls + '/major/getMajorGroups.action', params, function (result) {
+                        var data = result.data;
+                        groupData = data;
+                        if (data && data.length > 0) {
+                            var dom="<option value=''>请选择所属专业部</option>";
+                            for (var i = 0; i < data.length; i++) {
+                                dom += '<option value="' + data[i].id + '">' + data[i].name + '</option>'
+                            }
+                            obj.find('select[name="major_group_id"]').html(dom)
+                            if(type){
+                                form.render();
+                                form.on('select(major_group_id)', function(data){
+                                    self.majorSelect(data.value)
+                                });
+							}else {
+                                parent.layui.form.render();
+							}
+                        }
+                    }, function () {
+
+                    })
+                }
+                //搜索专业
+				_m.seach_table = function () {
+                        var val1=$('#search').val();
+                        if($.trim(val1)){
+                            $('#account').find('#table1').bootstrapTable('destroy');
+                            var params={
+                                faid:userId,
+                                token:token,
+                                keyword:val1
+                            }
+                            self.table(params);
+                        }else{
+                            self.allclass();
+                        }
+                }
+                //编辑接口
+				 _m.edit_table = function (classgrade_id) {
+                     if(!groupData||!DirectorData||!vice_directorData){
+                         sl_Mask.NoTip('初始化数据未加载完成，请1秒后再试。')
+                         return;
+                     }
+                     var index = parent.layer.open({
+                         type: 1,
+                         title: false,
+                         closeBtn: 0,
+                         shadeClose: false,
+                         skin:'add_director',
+                         area: ['400px', 'auto'],
+                         content: '<div style="padding:30px 50px 24px;color:#898989;position:relative" class="layui-form major_set">' +
+                         '<p class="self_Mask_title" style="padding-bottom:20px;">编辑班级</p>' +
+                         '<i class="layui-icon layui-icon-close closeBtn NoTip self_Mask_close">&#x1006;</i> '+
+                         '<div style="padding:20px 10px 20px">' +
+                         '<ul >' +
+                         '<li  class="clear self_Mask_row"><label class="layui-form-label" style="width:60px;text-align:left;padding:9px 0;">专业部</label> <select lay-verify="required" name="groupid" lay-filter="groupid"><option value=""></option></select></li>' +
+                         '<li  class="clear self_Mask_row"><label class="layui-form-label" style="width:60px;text-align:left;padding:9px 0;">所属专业</label><select lay-verify="required" name="major_id" lay-filter="major_id"><option value=""></option></select></li>' +
+                         '<li class="clear self_Mask_row"><label class="layui-form-label" style="width:60px;text-align:left;padding:9px 0;">年级</label> <select lay-verify="required" name="grade"><option value=""></option><option value="2016">2016</option><option value="2017">2017</option><option value="2018">2018</option><option value="2019">2019</option></select></li>' +
+                         '<li  class="clear self_Mask_row"><label class="layui-form-label" style="width:60px;text-align:left;padding:9px 0;">班主任</label><select name="director_id" id="director_id" lay-search=""></select></li>' +
+                         '<li  class="clear self_Mask_row"><label class="layui-form-label" style="width:60px;text-align:left;padding:9px 0;">副班主任</label><select name="vice_director_aid"  id="vice_director_aid" lay-search=""></select></li>' +
+                         '<li class="clear self_Mask_row"><label class="layui-form-label" style="width:60px;text-align:left;padding:9px 0;">班级名称</label><input class="layui-input rg" type="text"  placeholder="请输入班级名称"style="width:220px;border: none;background: #f3f5f8" lay-verify="required" id="classNameS"></li>' +
+                         '</ul>' +
+                         '</div>' +
+                         '<div class="yesTip self_Mask_btn" lay-filter="formDemo" lay-submit>确定</div>' +
+                         '</div>',
+                         success: function(layero, index) {
+                             parent.layui.formSelects.render('director_id');
+                             parent.layui.form.render();
+                             school_classSz.oneClassMessage(classgrade_id,$(layero));
+                             parent.layui.form.on('submit(formDemo)', function(data){
+                                 var params={};
+                                     params.groupid=data.field.groupid;
+                                     params.major_id = data.field.major_id;
+                                     params.grade=data.field.grade;
+                                     params.faid=userId
+                                     params.token=token
+								     params.classgrade_id=classgrade_id;
+//                                     params.director_id= params.director_id||0;
+                                     self.jude_edit_director(data.field,params,$(layero));
+                                     self.jude_edit_vice_director(data.field,params,$(layero));
+								 var val1=$(layero).find('#classNameS').val();
+								 var val2 = $(layero).find('#classNameS').attr('data-name');
+                                     if(val1!=val2){
+                                         params.name=val1;
+									 }
+                                 $.axse(urls+modifyClass,params,function(result){
+									     sl_Mask.YesTip('修改成功');
+                                         $('#account').find('#table1').bootstrapTable('refresh');
+//                                         $('#account').find('#table1').bootstrapTable('destroy');
+//                                         school_classSz.allclass();
+                                         top.layer.close(index);
+
+                                 },function () {
+
+                                 })
+
+                             })
+                             $(layero).find('.NoTip').unbind('click').bind('click', function() {
+                                 top.layer.close(index);
+                             })
+                         }
+                     })
+                 }
+                 //键盘事件
+				 _m.keyword = function () {
+                     $(document).keyup(function(event) {
+                         var e=event||window.event;
+                         if(e.keyCode == 13) {
+                            self.seach_table();
+                         }
+                     });
+                 }
+                 //填充副班主任
+				 _m.vice_director_aid = function (obj,value) {
+					         var data = vice_directorData;
+                             var dom="";
+                             dom += "<option value=''></option>";
+                             if (data && data.length > 0) {
+                                 for (var i = 0; i < data.length; i++) {
+                                     dom += '<option value="' + data[i].id + '">' + data[i].accountData.rname + '</option>'
+                                 }
+                                 obj.find('select[name="vice_director_aid"]').html(dom);
+                                 if(value){
+                                     obj.find('select[name="vice_director_aid"]').val(value);
+                                     obj.find('select[name="vice_director_aid"]').attr('data-value',value);
+                                 }
+                                 parent.layui.form.render();
+                             }
+                 }
+                 //在编辑班级判断是否传班主任id;
+				 _m.jude_edit_director=function (data,params,obj) {
+				     var director_idOld = obj.find('select[name="director_id"]').attr('data-value');
+					 if(!data.director_id){
+                        if(director_idOld){
+                            params.director_id=0;
+						}
+					 }else {
+					     if(data.director_id!=director_idOld){
+                             params.director_id=data.director_id;
+						 }
+					 }
+					 return params;
+                 }
+				 //在编辑班级判断是否传副班主任id；
+                 _m.jude_edit_vice_director=function (data,params,obj) {
+                     var vice_director_aid_Old = obj.find('select[name="vice_director_aid"]').attr('data-value');
+                     if(data.vice_director_aid){
+                         if(data.vice_director_aid!=vice_director_aid_Old){
+                             params.vice_director_aid = data.vice_director_aid
+						 }
+                     }else {
+                         if(vice_director_aid_Old){
+                             params.vice_director_aid=0;
+						 }
+					 }
+                     return params;
+                 }
+                 //设置打分专员
+				 _m.setScoreUser = function (that) {
+                     if(!AllTeacher){
+                         sl_Mask.NoTip('初始化数据未加载完成，请1秒后再试。')
+                         return;
+                     }
+                     var val = that.attr('data-classgrade')
+                     var index = parent.layer.open({
+                         type: 1,
+                         title: false,
+                         closeBtn: 0,
+                         shadeClose: false,
+                         skin: 'add_director',
+                         area: ['400px', 'auto'],
+                         content: '<div style="padding:30px 50px 24px;color:#898989;position:relative" class="layui-form major_set">' +
+                         '<p class="self_Mask_title" style="padding-bottom:20px;">设置</p>' +
+                         '<i class="layui-icon layui-icon-close closeBtn NoTip self_Mask_close">&#x1006;</i> '+
+                         '<div style="padding:20px 10px 20px">' +
+                         '<ul >' +
+                         '<li  class="clear self_Mask_row"><label class="layui-form-label" style="width:60px;text-align:left;padding:9px 0;">打分专员</label><select name="performance_director_id" id="performance_director_id" lay-search="" lay-verify="required"></select></li>' +
+                         '<li class="clear self_Mask_row"><label class="layui-form-label" style="width:60px;text-align:left;padding:9px 0;">班级名称</label><input class="layui-input rg" type="text"  placeholder="请输入班级名称"style="width:220px;border: none;background: #f3f5f8" lay-verify="required" id="classNameS" readonly value='+val+'></li>' +
+                         '</ul>' +
+                         '</div>' +
+                         '<div class="yesTip self_Mask_btn" lay-filter="formDemo" lay-submit>确定</div>' +
+                         '</div>',
+                         success: function(layero, index) {
+                             parent.layui.form.render();
+                             var values = that.attr('data-value');
+                             if(values){
+                                 self.fillAllTeacher($(layero),values);
+							 }else {
+                                 self.fillAllTeacher($(layero));
+							 }
+                             parent.layui.form.on('submit(formDemo)', function(data){
+                                 var params={};
+                                 params.faid=userId
+                                 params.token=token
+                                 params.classgrade_id= that.attr('data-id');
+                                 params.performance_director_id = data.field.performance_director_id
+                                 $.axse(urls+'/classgrade/setPerformanceDirector.action',params,function(result){
+                                     sl_Mask.YesTip('操作成功');
+                                     $('#account').find('#table1').bootstrapTable('refresh');
+                                     top.layer.close(index);
+								 })
+							 })
+                             $(layero).find('.NoTip').unbind('click').bind('click', function() {
+                                 top.layer.close(index);
+                             })
+						 }
+                     })
+
+                 }
+                return _m;
+            })();
+            school_classSz.init();
+                // input搜索
+                var query = new Query_table('QueryWrap',{
+                    tip:'请输入班级名称',
+                    successFn:school_classSz.seach_table
+                })
+			})
+			//点击
+		</script>
+	</body>
+
+</html>

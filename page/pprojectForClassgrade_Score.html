@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<meta name="Author" content="larry" />
+	<meta name="renderer" content="webkit">
+	<META HTTP-EQUIV="pragma" CONTENT="no-cache">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="format-detection" content="telephone=no">
+	<!-- load css -->
+	<link rel="stylesheet" type="text/css" href="../layui/css/layui.css" media="all">
+	<link rel="stylesheet" href="../css/public.css">
+	<link rel="stylesheet" href="../font/material-icons.css">
+	<link rel="stylesheet" href="../css/school_PublicStyle/school_PublicStyle.css">
+</head>
+<style type="text/css">
+	#student_Score {
+		padding: 45px 40px;
+		box-sizing: border-box;
+		background: #FFFFFF;
+	}
+	#student_Score .inputWrap{
+		padding-top: 20px;
+	}
+	#student_Score .inputWrap ul li input{
+		width: 300px;
+		display: inline-block;
+		background: #f3f5f8;
+		border: 1px solid #f3f5f8;
+		line-height: 35px;
+		height: 35px;
+	}
+	#student_Score .inputWrap ul li{
+		margin-bottom: 20px;
+	}
+	#student_Score .more span.layui-btn{
+		min-width: 300px;
+		margin-bottom: 20px;
+		margin-right: 35px;
+		margin-left:0 ;
+	}
+	#student_Score .layui-form-select,.xm-form-select,.xm-select-parent {
+		width: 200px;
+		float: left;
+		margin-right: 15px;
+	}
+	.xm-form-select,.xm-select-parent {
+		width: 415px;
+		float: left;
+		margin-right: 15px
+	}
+	.xm-form-select,.xm-select-parent .xm-input{
+		width: 415px!important;
+	}
+	.xm-select-title{
+		height: 35px!important;
+	}
+	#student_Score  ul li .layui-form-select input{
+		width: 200px;
+
+	}
+	.ScoreFrom{
+		display: none;
+	}
+	.ScoreFrom.switch{
+		display: block;
+	}
+	#AllClass,#StudentForClass{
+		width: 300px;
+		height: 35px;
+		background: #f3f5f8;
+		color: #999999;
+		padding-left: 10px;
+		line-height: 35px;
+		font-size: 14px;
+		cursor: pointer;
+		display: inline-block;
+		box-sizing: border-box;
+	}
+	.NoClick{
+		position: relative;
+	}
+	.NoClick::before{
+		content: '提交中...';
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 90%;
+		height: 100%;
+		background: #2196F3;
+		z-index: 11;
+		border-radius: 4px;
+		text-align: right;
+	}
+</style>
+
+<body>
+<div id="student_Score">
+	<div class="head" style="position: relative">
+		<span style="display: block;font-size: 24px;font-weight: bold;border-bottom:1px solid #ececec;padding-bottom: 25px ">为各班级的表现打分</span>
+		<!--<i class="rg " style="position: absolute;top:15px;right:0;color: #2196F3;cursor: pointer;font-style:normal;">导入表格</i>-->
+	</div>
+	<form class="layui-form ScoreFrom more switch">
+		<div class="inputWrap">
+			<ul>
+				<li>
+					<label class="layui-form-label lf" style="padding-left: 0;width: 115px;text-align: left">选择班级</label>
+					<div id="AllClass">选择班级</div>
+				</li>
+				<li>
+					<label class="layui-form-label lf" style="padding-left: 0;width: 115px;text-align: left">选择打分项（班）</label>
+				   <input type="text" placeholder="选择打分项" autocomplete="off" class="layui-input" name="names" readonly><i class="school_Btn borderRadiusRight" style=""id="Choice">选择</i>
+		    	</li>
+				<div class="btnWrap"style="padding-top: 20px;padding-bottom: 28px;">
+			   </div>
+				<div id="ModelForStudent" style="display: none">
+					<li>
+						<label class="layui-form-label lf" style="padding-left: 0;width: 115px;text-align: left">选择学生</label>
+						<div id="StudentForClass">选择学生</div>
+					</li>
+					<li>
+						<label class="layui-form-label lf" style="padding-left: 0;width: 115px;text-align: left">选择打分项（学）</label>
+						<input type="text" placeholder="选择打分项" autocomplete="off" class="layui-input" name="namesForStudent" readonly><i class="school_Btn borderRadiusRight" style=""id="ChoiceForStudent">选择</i>
+					</li>
+					<div class="btnWrapForStudent" style="padding-top: 20px;padding-bottom: 28px;">
+					</div>
+				</div>
+
+			</ul>
+		</div>
+
+		<div class=""> <!-- 注意：这一层元素并不是必须的 -->
+			<label class="layui-form-label" style="padding-left: 0;text-align: left;width: 115px;">考评日期</label>
+			<input type="text" class="layui-input" id="time" placeholder="请选择考评日期" style="background: #f3f5f8;
+			border: 1px solid #f3f5f8;width: 300px;" readonly>
+		</div>
+		<textarea name="desc" placeholder="可填写打分项备注" class="layui-textarea beizhu" class="beizhu"style="background: #f3f5f8;border: none;margin-top: 25px;width: 510px"></textarea>
+		<div class="layui-form-item" style="margin-top: 40px;width: 510px;text-align: center">
+				<div class="layui-btn blue borderRadiusAll" lay-submit lay-filter="formDemo" style="padding:0 18px;width: 100px!important;text-align: center">提交</div>
+		</div>
+	</form>
+	<form class="layui-form ScoreFrom">
+		<ul style="padding: 42px 0;">
+			<li class="lf"><span class="layui-btn blue DownFile borderRadiusAll">下载Excel打分模板</span></li>
+			<li class="lf" style="background: #f3f5f8;width: 340px;margin-left: 70px;padding-left: 24px;height: 35px;position: relative;"><span style="display: inline-block;position: relative;">
+						   <span style="display:block;width: 80px;height: 25px;background: #b1b1b1;line-height: 25px;color: #ffffff;text-align: center;cursor: pointer;float: left;margin-top: 5px;">选择文件</span>
+						   <p style="display: block;width: 170px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;line-height: 35px;float: left;padding-left: 5px;" class="Filename">未选择任何文件</p>
+						  <input type="file" style="padding-top: 5px;width: 80px;height: 25px;position: absolute;left: 0;top: 0px;opacity: 0" onchange="tool().upFile($(this))"></span>
+				           <span class="school_Btn borderRadiusRight"  onclick="tool().ClassupFileAjax($(this))"style="position: absolute;right: 0;top:0;">上传</span>
+			</li>
+		</ul>
+	</form>
+</div>
+</body>
+<!-- 加载js文件 -->
+<script type="text/javascript" src="../layui/layui.js"></script>
+<script type="text/javascript" src="../js/lib/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="../js/lib/jquery.cookie.js"></script>
+<script type="text/javascript" src="../js/leave/jquery.ztree.core.min.js"></script>
+<script type="text/javascript" src="../tool/mask.js"></script>
+<script type="text/javascript" src="../js/all2.js"></script>
+<script type="text/javascript" src="../tool/choose_Score.js"></script>
+<script type="text/javascript" src="../tool/tool.js"></script>
+<script type="text/javascript" src="../tool/classgrade_Tree.js"></script>
+<script type="text/javascript" src="../tool/choose_grade_student.js"></script>
+<script type="text/javascript" src="../tool/choose_student.js"></script>
+<script type="text/javascript" src="../tool/rules.js"></script>
+<!-- 引入当前页面js文件 -->
+<script type="text/javascript" src="../js/pprojectForClassgrade/pprojectForClassgrade_Score.js"></script>
+
+</html>

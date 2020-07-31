@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="Author" content="larry" />
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <META HTTP-EQUIV="pragma" CONTENT="no-cache">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <!-- load css -->
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.css" media="all">
+    <link rel="stylesheet" href="../js/lib/bootstrap-table/bootstrap-table.css">
+    <link rel="stylesheet" type="text/css" href="../layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../css/public.css?v=1.0">
+    <link rel="stylesheet" href="../css/studyTime_seting.css?v=1.0">
+</head>
+<body>
+<div id="studyTime_seting" >
+    <div style="position: relative">
+        <h3 class="title">我的课程表</h3>
+    </div>
+    <div>
+        <form class="layui-form clear" action="" style="padding-bottom: 20px;">
+            <select class="termid" lay-filter='termid' name='termid'>
+                <option value="">选择学期</option>
+            </select>
+        </form>
+    </div>
+    <div class="clear weekList" style="padding-bottom: 20px;">
+        <span class="lf DateNum" >星期一</span>
+        <span class="lf DateNum active" >星期二</span>
+        <span class="lf DateNum" >星期三</span>
+        <span class="lf DateNum">星期四</span>
+        <span class="lf DateNum">星期五</span>
+    </div>
+    <div>
+        <table class="table"  id="table1"></table>
+    </div>
+</div>
+
+<!-- 加载js文件 -->
+<script type="text/javascript" src="../layui/layui.js"></script>
+<script type="text/javascript" src="../js/lib/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="../js/lib/jquery.cookie.js"></script>
+<script type="text/javascript" src="../js/all2.js?v=1.0"></script>
+<script type="text/javascript" src="../tool/tool.js?v=1.0"></script>
+<script type="text/javascript" src="../js/lib/bootstrap.js"></script>
+<script type="text/javascript" src="../js/lib/bootstrap-table/bootstrap-table.min.js"></script>
+<script type="text/javascript" src="../js/lib/bootstrap-table/bootstrap-table-zh-CN.js"></script>
+<script type="text/javascript">
+    layui.use(['layer', 'form', 'element'], function() {
+        var layer = layui.layer
+            , form = layui.form
+            , element = layui.element
+        var datas = [{
+            'pic': '1',
+            'jghname': '08:00-08:45',
+            'rq': '17计1',
+            'msg': '计算机基础',
+            'banji': '黄水萍',
+            'total': '正常'
+        },
+            {
+                'pic': '2',
+                'jghname': '09:00-09:45',
+                'rq': '17计2',
+                'msg': '线性代数',
+                'banji': '翁成浩',
+                'total': '正常'
+            },
+            {
+                'pic': '3',
+                'jghname': '10:00-10:45',
+                'rq': '17计2',
+                'msg': 'c语言程序设计',
+                'banji': '刘圣',
+                'total': '正常'
+            }
+
+        ]
+        $('#table1').bootstrapTable({
+            data: datas,
+            sidePagination: "client",
+            pagination: true,
+            paginationLoop: false,
+            pageNumber: 1,
+            pageSize: 10,
+            pageList: [5, 10, 15],
+            columns: [
+                {
+                    field: '',
+                    align: "center",
+                    title: '序号',
+                    formatter: function(value, row, index) {
+                        var index = index+1
+                        return index;
+                    }
+                }, {
+                    field: 'jghname',
+                    align: "center",
+                    title: '课程时间'
+
+                }, {
+                    field: 'msg',
+                    align: "center",
+                    title: '课程名称'
+                }, {
+                    field: 'rq',
+                    align: "center",
+                    title: '授课班级'
+
+                },
+                {
+                    field: '',
+                    align: "center",
+                    title: '操作',
+                    formatter: function(value, row, index) {
+                        var a='<span style="color:#2387f9;cursor: pointer;">编辑</span>'
+                        return a;
+                    }
+
+                }
+            ]
+
+        })
+        tool().termSelect()
+        //班级课表
+        var studyTime_teacher = (function () {
+            var _m={};
+            self = _m;
+            //初始化
+            _m.init = function () {
+                self.Date();
+            }
+            //表格
+            _m.table = function () {
+
+            }
+            //星期日的切换
+            _m.Date = function () {
+                $('#studyTime_seting .weekList .DateNum').unbind('click').bind('click',function () {
+                    $('#studyTime_seting .weekList .DateNum').removeClass('active');
+                    $(this).addClass('active');
+                })
+            }
+            return _m;
+        })();
+        studyTime_teacher.init();
+    })
+</script>
+
+<!-- 引入当前页面js文件 -->
+
+</body>
+</html>

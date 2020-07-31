@@ -1,0 +1,64 @@
+#account .layui-form-select {
+	width: 200px;
+	display: inline-block;
+	margin-left: 25px;
+	background: #f3f5f8;
+}
+#account .account_head .search input,#account .tableWrap form input {
+	display: inline-block;
+	height: 35px;
+	border: none;
+	outline: none;
+	line-height: 35px;
+	background: none;
+	width: 250px;
+	padding-left: 20px;
+}
+#account .account_head .search input{
+	letter-spacing: 1px;
+}
+#account .leaveState{
+    display: inline-block;
+   width: 40px;
+   height: 25px;
+   line-height:25px ;
+	font-size: 12px;
+	text-align: center;
+	color: #ffffff;
+}
+#account .leaveState.gray{
+	background: #c1c1c1;
+}
+#account .leaveState.blue{
+	background: #2387f9;
+	color: #FFFFFF;
+}
+#account .leavePeople{
+	color: #6a6a6a;
+}
+#account .leavePeopleH{
+	color: #969696;
+}
+#account .splitH{
+	display: inline-block;
+	width: 20px;
+	color: #ededed;
+	text-align: center;	
+}
+#account .subject{
+	color: #989898;
+	padding-right: 8px;
+}
+#account .major{
+	color: #989898;
+}
+#account a.red{
+   color: #ff4747;
+}
+#account a.blue{
+   color:#2196F3;
+}
+#account a.gray{
+	color:#868686;
+}
+

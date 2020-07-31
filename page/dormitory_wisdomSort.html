@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <META HTTP-EQUIV="pragma" CONTENT="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <!-- load css -->
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.css" media="all">
+    <link rel="stylesheet" href="../js/lib/bootstrap-table/bootstrap-table.css">
+    <link rel="stylesheet" type="text/css" href="../layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../css/public.css">
+    <link rel="stylesheet" href="../font/material-icons.css">
+    <link rel="stylesheet" href="../css/school_PublicStyle/school_PublicStyle.css">
+</head>
+<style type="text/css">
+  .choose{
+      width: 117px;margin-right: 25px;background: #86bdff;font-weight: normal;
+  }
+  .red{
+      background: #ff4747;
+      font-weight: normal;
+  }
+    .chooseWrap{
+        padding-top: 30px;
+    }
+  .chooseWrap dl{
+      margin-bottom: 50px;
+  }
+  .chooseWrap p{
+      display: inline-block;
+      font-weight: normal;
+      padding-left: 50px;
+      vertical-align: bottom;
+  }
+  .chooseWrap p i{
+      display: inline-block;
+      color:#86bdff ;
+      font-style: normal;
+  }
+</style>
+<body>
+<div id="student_all" class="sl-container MarginTop45">
+    <div class="" style="border-bottom: 1px solid #ececec;">
+        <span class="sl-title">智能排寝</span>
+    </div>
+    <div class="chooseWrap">
+        <dl id="AllClassgrade">
+            <dt>
+                <span class="school_Btn choose" id="choose_Classgrade">选择班级</span><span class="school_Btn red" onclick="dormitory_wisdomSort.clear($('#AllClassgrade'))">清空</span><p>选中<i class="ClassCount">0</i>个班级，共<i class="studentCount">0</i>名学生，其中男生<i class="manCount">0</i>名，女生<i class="wonmanCount">0</i>名</p>
+            </dt>
+            <dd>
+                <textarea name="desc"  class="layui-textarea beizhu" class="beizhu"style="background: #f3f5f8;border: none;margin-top: 25px;width: 770px" readonly ></textarea>
+                <input type="hidden" name="classgradeIds">
+            </dd>
+        </dl>
+        <dl id="AllManDormitory">
+            <dt>
+                <span class="school_Btn choose" id="choose_ManDormitory">选择男生寝室</span><span class="school_Btn red" onclick="dormitory_wisdomSort.clear($('#AllManDormitory'))">清空</span><p>选中<i class="dormitoryCount">0</i>个男生寝室，空余床位<i class="stayCount">0</i>位</p>
+            </dt>
+            <dd>
+                <textarea name="desc"  class="layui-textarea beizhu" class="beizhu"style="background: #f3f5f8;border: none;margin-top: 25px;width: 770px" readonly ></textarea>
+                <input type="hidden" name="dormitoryManIds">
+            </dd>
+        </dl>
+        <dl id="AllWonmanDormitory">
+            <dt>
+                <span class="school_Btn choose" id="choose_WonmanDormitory">选择女生寝室</span><span class="school_Btn red" onclick="dormitory_wisdomSort.clear($('#AllWonmanDormitory'))">清空</span><p>选中<i class="dormitoryCount">0</i>个女生寝室，空余床位<i class="stayCount">0</i>位</p>
+            </dt>
+            <dd>
+                <textarea name="desc"  class="layui-textarea beizhu" class="beizhu"style="background: #f3f5f8;border: none;margin-top: 25px;width: 770px" readonly></textarea>
+                <input type="hidden" name="dormitoryWoumanIds">
+            </dd>
+        </dl>
+    </div>
+    <div>
+        <span class="layui-btn blue borderRadiusAll" id="startGive" style="padding:0 18px;width: 100px;text-align: center">开始分配</span>
+    </div>
+</div>
+</body>
+<!-- 加载js文件 -->
+<script type="text/javascript" src="../layui/layui.js"></script>
+<script type="text/javascript" src="../js/lib/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="../js/lib/jquery.cookie.js"></script>
+<script type="text/javascript" src="../js/all2.js"></script>
+<script type="text/javascript" src="../tool/mask.js"></script>
+<script type="text/javascript" src="../js/leave/jquery.ztree.core.min.js"></script>
+<script type="text/javascript" src="../js/lib/jquery.ztree.excheck.js"></script>
+<script type="text/javascript" src="../tool/tool.js"></script>
+<script type="text/javascript" src="../js/lib/bootstrap.js"></script>
+<script type="text/javascript" src="../tool/choose_classSort.js"></script>
+<script type="text/javascript" src="../tool/choose_dormitory.js"></script>
+<!-- 引入当前页面js文件 -->
+<script type="text/javascript" src="../js/dormitory/dormitory_wisdomSort.js?v=1.0"></script>
+</html>

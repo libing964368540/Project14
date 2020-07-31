@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <META HTTP-EQUIV="pragma" CONTENT="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <!-- load css -->
+    <link rel="stylesheet" href="../font/material-icons.css">
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.css" media="all">
+    <link rel="stylesheet" href="../js/lib/bootstrap-table/bootstrap-table.css">
+    <link rel="stylesheet" type="text/css" href="../layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../css/public.css">
+</head>
+<style type="text/css">
+    #student_record {
+        padding: 45px 40px;
+        box-sizing: border-box;
+        background: #FFFFFF;
+    }
+    #student_record .inputWrap{
+        margin-top: 45px;
+    }
+    #student_record .inputWrap ul li input{
+        width: 300px;
+        height: 35px;
+        display: inline-block;
+        background: #f3f5f8;
+        border: 1px solid #f3f5f8;
+        border-radius: 0;
+    }
+    #student_record .inputWrap ul li{
+        margin-bottom: 22px;
+    }
+    #student_record .inputWrap ul li span{
+        display: inline-block;
+        width: 60px;
+        line-height: 40px;
+        text-align: left;
+    }
+    #student_record .btnWrap{
+        padding-top: 5px;
+        padding-bottom: 26px;
+    }
+    #student_record .btnWrap button{
+        margin-right: 35px;
+        margin-bottom: 24px;
+        width: 300px;
+        margin-left: 0;
+    }
+    #student_record span.layui-btn{
+        min-width: 300px;
+        text-align: center;
+        margin-right: 36px;
+        margin-left: 0;
+        margin-top: 18px;
+        position: relative;
+    }
+    #student_record span.layui-btn i{
+        font-style: normal;
+        position: absolute;
+        right: 10px;
+    }
+</style>
+<body>
+<div id="student_record">
+    <span class="title" style="display:block;font-size: 24px;font-weight: bold;padding-bottom: 25px;border-bottom: 1px solid #ececec">查看打分项</span>
+    <form class="layui-form">
+        <div class="inputWrap">
+            <ul>
+                <li class="clear">
+                    <span class="lf">名称</span>
+                    <input type="text"  placeholder="" autocomplete="off" class="layui-input lf" lay-verify="required" name="names" readonly>
+                </li>
+                <li class="clear">
+                    <span class="lf">总分</span>
+                    <input type="text"  placeholder="" autocomplete="off" class="layui-input lf total" readonly>
+                </li>
+            </ul>
+        </div>
+        <p style="padding-top: 27px;margin-bottom: 30px">打分项</p>
+        <div style="" class="btnWrap">
+        </div>
+    </form>
+</div>
+</body>
+<!-- 加载js文件 -->
+<script type="text/javascript" src="../layui/layui.js"></script>
+<script type="text/javascript" src="../js/lib/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="../js/lib/jquery.cookie.js"></script>
+<script type="text/javascript" src="../js/all2.js"></script>
+<script type="text/javascript" src="../tool/tool.js"></script>
+<!-- 引入当前页面js文件 -->
+<script type="text/javascript">
+    layui.use(['layer', 'form', 'element', 'upload','laydate'], function() {
+        layer = parent.layer === undefined ? layui.layer : top.layer
+        form = layui.form
+        var upload = layui.upload;
+        //选择打分项弹框
+        add_Record = (function () {
+            var _m={};
+            var self=_m;
+            //初始化
+            _m.init=function () {
+                self.add_Record();
+                self.submit();
+            }
+            //添加打分项
+            _m.addProject = function (arr) {
+                tool().Switched_Roles('images1/addRecord.png','确定添加打分项？', function () {
+                    var params = {
+                        faid: userId,
+                        token: token,
+                        name: $('#student_record input[name="names"]').val(),
+                        rules: JSON.stringify(arr)
+                    };
+                    $.axse(urls + createStudentRecord, params, function (result) {
+                        if (result.error) {
+                            top.layer.msg(result.error.message);
+                        } else {
+                            top.layer.msg('提交成功');
+                            $('input[name="names"]').val();
+                            //打分项的清除
+                            $('#student_record .total').val();
+                            //总分的清除
+                            $('#student_record .btnWrap .del').remove();
+                            //打分规则的请除
+
+                        }
+                    })
+                })
+            }
+            //添加打分规则提交按钮
+            _m.submit=function () {
+                layui.form.on('submit(formDemo)', function(data) {
+                    var lenghts = $('#student_record .btnWrap span.del').length;
+                    var objs = $('#student_record .btnWrap span.adds');
+                    var delobjs = $('#Del_Add_btnWrap span');
+                    var addlenghts = $('#student_record .btnWrap span.adds').length;
+                    var dellenghts = $('#Del_Add_btnWrap span').length;
+                    if (lenghts > 0) {
+                        var arr = [];
+                        for (var i = 0; i < addlenghts; i++) {
+                            arr.push({
+                                name: objs.eq(i).attr('data-name'),
+                                des: objs.eq(i).attr('data-name'),
+                                value: objs.eq(i).attr('data-num'),
+                                id: objs.eq(i).attr('data-id') || "0"
+                            })
+                        }
+
+                        if (dellenghts > 0) {
+                            for (var j = 0; j < dellenghts; j++) {
+                                arr.push({
+                                    name: delobjs.eq(j).attr('data-name'),
+                                    des: delobjs.eq(j).attr('data-name'),
+                                    value: delobjs.eq(j).attr('data-num'),
+                                    id: delobjs.eq(j).attr('data-id') || "0"
+                                })
+                            }
+                        }
+
+
+                        var projectid = $('#student_record .sumbit').attr('data-projectid');
+                        if (projectid) {
+                            self.make_Record(arr, projectid);
+                        } else {
+                            self.addProject(arr);
+                        }
+
+                    } else {
+                        top.layer.msg('请添加打分规则');
+                    }
+                });
+
+            }
+            //修改打分项
+            _m.make_Record = function (arr,projectid) {
+                tool().Switched_Roles('images1/addRecord.png','确定修改打分项？', function () {
+                    var params = {
+                        faid: userId,
+                        token: token,
+                        name: $('#student_record input[name="names"]').val(),
+                        projectid: projectid,
+                        rules: JSON.stringify(arr)
+                    };
+                    $.axse(urls + reviseStudentRecord, params, function (result) {
+                        if (result.error) {
+                            top.layer.msg(result.error.message);
+                        } else {
+                            top.layer.msg('修改成功');
+                            $('#Del_Add_btnWrap').empty();
+
+                        }
+                    })
+                })
+            }
+            _m.del=function (that) {
+                tool().Switched_Roles('images1/del.png','确认要删除么？', function() {
+                    that.remove();
+                })
+            }
+            //添加打分规则
+            _m.add_Record = function () {
+                $('#student_record .add').unbind('click').bind('click',function () {
+                    var index = top.layer.open({
+                        type: 1,
+                        title: false,
+                        closeBtn: 0,
+                        shadeClose: true,
+                        area: ['400px', 'auto'],
+                        content: '<div style="padding:30px 30px 50px;color:#898989;position:relative"class="layui-form major_set">' +
+                        '<p style="text-align:center;padding-bottom:20px;border-bottom:1px solid #f6f6f6; ">添加</p>' +
+                        '<div style="padding:20px 10px 20px">' +
+
+                        '<ul >' +
+                        '<li class="clear" style="line-height:30px;margin-bottom: 15px;"><label class="layui-form-label" style="width:80px;text-align:left;padding:9px 0;">描述</label><input class="layui-input rg" type="text"  placeholder="单行输入"style="width:220px" lay-verify="required" name="name"></li>' +
+                        '<li class="clear" style="line-height:30px;margin-bottom: 15px;"><label class="layui-form-label" style="width:80px;text-align:left;padding:9px 0;">分值</label><input class="layui-input rg" type="number"  placeholder="单行输入"style="width:220px" lay-verify="required" name="num"></li>' +
+                        '</ul>' +
+
+                        '</div>' +
+                        '<div class="yesTip"style="width:50%;text-align:center;line-height:50px;color:#2488fa;position: absolute;left:50%;bottom:0;cursor: pointer;background:#f6f6f6;" lay-filter="formDemo" lay-submit>确定</div>' +
+                        '<div class="NoTip"style="width:50%;text-align:center;line-height:50px;color:#2488fa;position: absolute;left:0;bottom:0;cursor: pointer;background:#f6f6f6;">取消</div>' +
+                        '<i style="font-style:normal;position:absolute;left:0;right:0;margin:auto;display:inline-block;width:2px;text-align:center;bottom:17px;font-size:18px;">|</i>' +
+                        '</div>',
+                        success: function (layeor, index) {
+                            //确定按钮
+                            top.layui.form.on('submit(formDemo)', function(data){
+                                var field=data.field;
+                                if(field.num>0){
+                                    field.num =field.num;
+                                }
+                                var dom="";
+                                dom +='<span class="layui-btn adds del" onclick="add_Record.del($(this))" data-name="'+field.name+'" data-num="'+field.num+'">'+field.name+field.num+'<i class="material-icons"style="font-size: 16px">clear</i></span>';
+                                $('#student_record .btnWrap').prepend(dom);
+                                top.layer.close(index);
+                            })
+                            //取消按钮
+                            $(layeor).find('.NoTip').unbind('click').bind('click',function () {
+                                top.layer.close(index);
+                            })
+                        }
+                    })
+                })
+
+            }
+            return _m;
+        })()
+        add_Record.init();
+    })
+
+</script>
+
+</html>

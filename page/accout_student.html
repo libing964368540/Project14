@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+    <META HTTP-EQUIV="pragma" CONTENT="no-cache">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="format-detection" content="telephone=no">
+	<!-- load css -->
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.css" media="all">
+    <link rel="stylesheet" href="../js/lib/bootstrap-table/bootstrap-table.css">
+    <link rel="stylesheet" href="../js/lib/bootstrap-table-pagejump/bootstrap-table-pagejump.css">
+	<link rel="stylesheet" type="text/css" href="../layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../css/public.css">
+    <link rel="stylesheet" href="../font/material-icons.css">
+    <link rel="stylesheet" href="../css/school_PublicStyle/school_PublicStyle.css">
+</head>
+<style>
+    #account .layui-form-select {
+        width: 200px;
+        display: inline-block;
+        margin-right: 25px;
+    }
+    #account span.MoreBtn{
+        color: #2196F3;
+        position: absolute;
+        top: 20px;
+        padding-left: 25px;
+        cursor: pointer;
+    }
+    #account span.MoreBtn.stop{
+        color: #a6a6a6;
+    }
+    #account span.MoreBtn i{
+        position: absolute;
+        left: 0;
+        font-size: 20px!important;
+    }
+    #account .ScoreFrom{
+        display: none;
+    }
+    #account .ScoreFrom.switch{
+        display: block;
+    }
+    span#MoreSwitchTitle{
+        display: none;
+    }
+</style>
+<body>
+  <div id="account" class="sl-container">
+       <div class="sl-searchWrap clear">
+            <div class="sl-search search lf" id="QueryWrap">
+            	<!--<img src="../images1/search.png" alt="" />-->
+                <i class="material-icons search" style="color: #2196F3;font-size: 20px" >search</i>
+                <input type="text" placeholder="请输入学生姓名" id="search" autocomplete="off">
+                <span class="school_Btn borderRadiusRight"  onclick="mainPage.search_table()" style="display: none">搜索</span>
+            </div>
+            <span style="font-size: 24px;font-weight: bold;padding-top: 8px" id="MoreSwitchTitle">批量导入新生信息</span>
+            <div class="Make rg head">
+                <button class="layui-btn layui-btn-normal blue" onclick="mainPage.tip('创建账户')" style="margin-right: 20px;padding: 0 18px">添加账号</button>
+                <i class="layui-btn layui-btn-normal blue" style="padding: 0 18px;font-style: normal">导入表格</i>
+            </div>
+
+       </div>
+      <div class="ScoreFrom switch">
+          <form class="layui-form clear changeV1" action="" style="padding-bottom: 20px;padding-top: 20px">
+              <select class="groupid" lay-filter='groupid' name='groupid'>
+                  <option value="">选择专业部</option>
+              </select>
+              <select name='majorid' class='majorid' lay-filter='majorid'>
+                  <option value="">选择专业</option>
+              </select>
+              <select name='classgaderid' class='classgaderid' lay-filter='classgaderid' >
+                  <option value="">选择班级</option>
+              </select>
+          </form>
+          <div class="sl-formWrap formwrap" id="ForState" style="position: relative">
+              <ul class="clear">
+                  <li class='lf active' data-state="1"><i></i><span>正常</span></li>
+                  <li class='lf' data-state="2"><i></i><span>回收站</span></li>
+                  <li class='lf' data-state="101"><i></i><span>已离校</span></li>
+                  <li class='lf '><i></i><span>全部</span></li>
+              </ul>
+              <span class="MoreBtn stop removeBtn" style="right: 180px;"onclick="mainPage.deleteUserList($(this),3)"><i class="material-icons" style="vertical-align: top">cancel</i>彻底删除</span>
+              <span class="MoreBtn deleteBtn" style="right: 300px;" onclick="mainPage.deleteUserList($(this),2)"><i class="material-icons" style="vertical-align: top">delete</i>删除</span>
+              <span class="MoreBtn stop renewBtn" style="right: 90px;"onclick="mainPage.deleteUserList($(this),1)"><i class="material-icons" style="vertical-align: top">settings_backup_restore</i>恢复</span>
+              <span class="MoreBtn stop leaveBtn" style="right: 0;" onclick="mainPage.deleteUserList($(this),4)"><i class="material-icons" style="vertical-align:top">directions</i>离校</span>
+          </div>
+          <div class="tableWrap moreSelect">
+              <table class="table table-no-bordered "  id="table1" style="border: none;"></table>
+          </div>
+      </div>
+
+      <form class="layui-form ScoreFrom ">
+          <ul style="padding: 42px 0;">
+              <li class="lf"><span class="layui-btn blue borderRadiusAll" id="Import">下载学生信息</span></li>
+              <li class="lf" style="background: #f3f5f8;width: 340px;margin-left: 70px;padding-left: 24px;height: 35px;position: relative;"><span style="display: inline-block;position: relative;">
+						   <span style="display:block;width: 80px;height: 25px;background: #b1b1b1;line-height: 25px;color: #ffffff;text-align: center;cursor: pointer;float: left;margin-top: 5px;">选择文件</span>
+						   <p style="display: block;width: 170px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;line-height: 35px;float: left;padding-left: 5px;" class="Filename">未选择任何文件</p>
+						  <input type="file" style="padding-top: 5px;width: 80px;height: 25px;position: absolute;left: 0;top: 0px;opacity: 0" onchange="tool().upFile($(this))"></span>
+                  <!--<span class="school_Btn"  onclick="tool().upFileAjax($(this))"style="position: absolute;right: 0;top:0;">上传</span>-->
+                  <span class="school_Btn borderRadiusRight"style="position: absolute;right: 0;top:0;" id="UpFile">上传</span>
+              </li>
+          </ul>
+      </form>
+  </div>
+
+<!-- 加载js文件 -->
+ <script type="text/javascript" src="../layui/layui.js"></script>
+ <script type="text/javascript" src="../js/lib/jquery-1.12.4.min.js"></script>
+  <script type="text/javascript" src="../js/lib/jquery.cookie.js"></script>
+  <script type="text/javascript" src="../js/all2.js"></script>
+  <script type="text/javascript" src="../tool/mask.js"></script>
+ <script type="text/javascript" src="../tool/tool.js"></script>
+ <script type="text/javascript" src="../js/lib/bootstrap.js"></script>
+  <script type="text/javascript" src="../js/lib/bootstrap-table/bootstrap-table.js"></script>
+  <script type="text/javascript" src="../js/lib/bootstrap-table-pagejump/bootstrap-table-pagejump.js"></script>
+  <script type="text/javascript" src="../js/lib/bootstrap-table/bootstrap-table-zh-CN.js"></script>
+  <script type="text/javascript" src="../tool/Query_Component.js"></script>
+  <script type="text/javascript" src="../js/account/student.js"></script>
+  <script type="text/javascript" src="../tool/File.js"></script>
+  <script type="text/javascript" src="../tool/getPersonalMessageFortableList.js"></script>
+  <script type="text/javascript" src="../tool/MaskForEditPersonalIformation.js"></script>
+<!-- 引入当前页面js文件 -->
+</body>
+</html>

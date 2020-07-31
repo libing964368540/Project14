@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="keywords"  />
+    <meta name="description" content="" />
+    <meta name="Author" content="larry" />
+    <meta name="renderer" content="webkit">
+    <META HTTP-EQUIV="pragma" CONTENT="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <!-- load css -->
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.css" media="all">
+    <link rel="stylesheet" href="../js/lib/bootstrap-table/bootstrap-table.css">
+    <link rel="stylesheet" href="../js/lib/bootstrap-table-pagejump/bootstrap-table-pagejump.css">
+    <link rel="stylesheet" type="text/css" href="../layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../css/public.css">
+    <link rel="stylesheet" href="../css/school_PublicStyle/school_PublicStyle.css">
+    <link rel="stylesheet" href="../font/material-icons.css">
+</head>
+<body>
+<div id="Score_term" class="sl-container MarginTop45">
+    <h3 class="sl-title">班级打分项</h3>
+    <div class="sl-searchWrap clear" style="margin-bottom: 20px">
+        <div class="sl-search search lf" style="margin-top: 0;" id="QueryWrap">
+            <!--<img src="../images1/search.png" alt="" />-->
+            <i class="material-icons search" style="color: #2196F3;font-size: 20px" >search</i>
+            <input type="text" placeholder="请输入班级打分项" id="search" autocomplete="off">
+            <span class="school_Btn search_btn borderRadiusRight" style="display: none">搜索</span>
+        </div>
+        <div class="Make rg" style="margin-top: 0">
+            <span class="layui-btn layui-btn-normal blue lf" onclick="pprojectForClassgrade_Mask().class_ScoreItemAdd()">新增打分项</span>
+        </div>
+    </div>
+    <div class="tableWrap">
+        <table class="table table-no-bordered" id="table1" style="border: none;"></table>
+        </div>
+    </div>
+    <!-- 加载js文件 -->
+    <script type="text/javascript" src="../layui/layui.js"></script>
+    <script type="text/javascript" src="../js/lib/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript" src="../js/lib/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../js/all2.js"></script>
+    <script type="text/javascript" src="../tool/mask.js"></script>
+    <script type="text/javascript" src="../tool/tool.js"></script>
+    <script type="text/javascript" src="../js/lib/bootstrap.js"></script>
+    <script type="text/javascript" src="../js/lib/bootstrap-table/bootstrap-table.min.js"></script>
+    <script type="text/javascript" src="../js/lib/bootstrap-table-pagejump/bootstrap-table-pagejump.js"></script>
+    <script type="text/javascript" src="../js/lib/bootstrap-table/bootstrap-table-zh-CN.js"></script>
+    <script type="text/javascript" src="../js/pprojectForClassgrade/pprojectForClassgrade_Mask.js"></script>
+<script type="text/javascript" src="../tool/Query_Component.js"></script>
+    <!-- 引入当前页面js文件 -->
+    <script>
+        layui.use(['layer', 'form', 'element', 'laydate'], function() {
+            var layer = layui.layer,
+                form = layui.form,
+                element = layui.element,
+                laydate = layui.laydate
+            laydate.render({
+                elem: '#startEnd',
+                type: 'datetime',
+                range: true
+            });
+        })
+        var mainPage = (function() {
+            var _m = {};
+            var self = _m;
+            //初始化
+            _m.init = function() {
+                self.all_table();
+                self.search();
+                self.keyword();
+            }
+            //生成表格
+            _m.table = function(filed){
+                if(!filed.token||!sessionStorage.identity_id){
+                    tool().judge_token(function () {
+                        top.location.href=loginSrc;
+                    })
+                    return;
+                }
+                if(filed) $.extend(filed,pclogin);
+                $('#table1').bootstrapTable({
+                    url:urls + ClassRecord,
+                    queryParams:function(params){
+                        var obj={
+                            size:params.limit,
+                            page:params.offset/params.limit,
+                        }
+                        if(filed) $.extend(obj,filed);
+                        return obj;
+                    },
+                    sidePagination: "server",
+                    contentType:"application/x-www-form-urlencoded; charset=UTF-8",
+                    method: 'POST',
+                    async:true,
+                    pagination: true,
+                    paginationLoop: false,
+                    paginationShowPageGo: true,
+                    pageNumber:1,
+                    cache:false,
+                    pageSize: 10,
+                    pageList: [10, 15, 25],
+                    striped : true,
+                    columns:
+                        [  {
+                            field: 'name',
+                            align:"center",
+                            title: '打分项'
+
+                        },{
+                            field: 'value',
+                            align:"center",
+                            title: '总分'
+                        }, {
+                            field: '',
+                            align:"center",
+                            title: '内容',
+                            formatter: function(value, row, index) {
+                                var rules=row.rules;
+                                var arr=[];
+                                for(i=0;i<rules.length;i++){
+                                    arr.push(rules[i].name);
+                                }
+                                return arr.join("/")
+                            }
+                        }, {
+                            field: '',
+                            align:"center",
+                            title: '操作',
+                            formatter: function(value, row, index) {
+                                var a='<a class="blue" onclick="tool().class_ScoreItemEdit('+row.id+')">编辑</a>'
+                                return a;
+                            }
+
+                        }],
+                    responseHandler:function(result){
+                        if(result.error){
+                            if(400<=result.error.errorCode&&result.error.errorCode<=500){
+                                parent.location.href=loginSrc;
+                            }else {
+                                sl_Mask.NoTip(result.error.message);
+                                return {
+                                    "rows":'',
+                                    "total":''
+                                }
+                            }
+                        }else{
+                            return {
+                                "rows":result.data.list.reverse(),
+                                "total":result.data.count
+                            }
+                        }
+                    },
+                    formatLoadingMessage: function(){
+                        return '<img src="../img/loading.gif" style="margin: 60px auto" width="20px" height="20px">';
+                    }
+                })
+
+            }
+            //全部表格
+            _m.all_table = function() {
+                $('#Score_term').find('#table1').bootstrapTable('destroy');
+                var params={
+                    faid:userId,
+                    token:token
+                }
+                self.table(params);
+            }
+            //搜索
+            _m.search = function () {
+                $('.search_btn').unbind('click').bind('click',function () {
+                    self.searchAjax();
+                })
+            }
+            //搜索的判断
+            _m.searchAjax = function () {
+                var val1=$('#search').val();
+                if($.trim(val1)){
+                    $('#Score_term').find('#table1').bootstrapTable('destroy');
+                    var params={
+                        faid:userId,
+                        token:token,
+                        keyword:val1
+                    }
+                    self.table(params);
+                }else{
+                    self.all_table();
+                }
+            }
+            //键盘事件
+            _m.keyword = function () {
+                $(document).keyup(function(event) {
+                    var e=event||window.event;
+                    if(e.keyCode == 13) {
+                        self.searchAjax();
+                    }
+                });
+            }
+            return _m;
+
+        })();
+        mainPage.init();
+        // input搜索
+        var query = new Query_table('QueryWrap',{
+            tip:'请输入班级打分项',
+            successFn:mainPage.searchAjax
+        })
+    </script>
+</body>
+</html>

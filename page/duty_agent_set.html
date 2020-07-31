@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <META HTTP-EQUIV="pragma" CONTENT="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <!-- load css -->
+    <link rel="stylesheet" type="text/css" href="../layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../css/public.css">
+    <link rel="stylesheet" href="../font/material-icons.css">
+    <link rel="stylesheet" href="../css/school_PublicStyle/school_PublicStyle.css">
+</head>
+<style>
+    #duty_Change_set .inputWrap {
+        padding-top: 24px;
+    }
+    #duty_Change_set .inputWrap ul li {
+        margin-bottom: 20px;
+    }
+    #duty_Change_set .layui-form-label.WH100 {
+        padding-left: 0;
+        width: 100px;
+        text-align: left;
+        color: #000000;
+        opacity: 0.87;
+    }
+    #duty_Change_set .layui-form-select,.xm-form-select,.xm-select-parent {
+        width: 300px;
+        float: left;
+        margin-right: 15px;
+        border-radius: 0;
+    }
+    .NoClick{
+        position: relative;
+    }
+    .NoClick::before{
+        content: '提交中...';
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 90%;
+        height: 100%;
+        background: #2196F3;
+        z-index: 11;
+        border-radius: 4px;
+        text-align: right;
+    }
+</style>
+<body>
+<div id="duty_Change_set"class="sl-container MarginTop45"style="height: 600px">
+    <h3 class="sl-title">值班代班申请</h3>
+    <form class="layui-form ScoreFrom switch" >
+        <div class="inputWrap">
+            <ul>
+                <li class="clear">
+                    <label class="layui-form-label lf WH100">代班日期</label>
+                    <input type="text" class="layui-input time" placeholder="请选择日期" name="time" style="background: #f3f5f8;
+			border: 1px solid #f3f5f8;width: 300px;" readonly lay-verify="required" id="time">
+                </li>
+                <li class="clear">
+                    <label class="layui-form-label lf WH100">代班教师</label>
+                    <select class="teacher_account_id" name='teacher_account_id' lay-verify="required" lay-verify="" lay-search>
+                        <option value="">请选择代班教师</option>
+                    </select>
+                </li>
+            </ul>
+        </div>
+        <div class="layui-form-item" style="margin-top: 42px;width: 730px;text-align: left">
+            <span class="layui-btn blue borderRadiusAll" lay-submit lay-filter="formDemo"  id="sumbit">提交</span>
+        </div>
+    </form>
+</div>
+<!-- 加载js文件 -->
+<script type="text/javascript" src="../layui/layui.js"></script>
+<script type="text/javascript" src="../js/lib/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="../js/lib/jquery.cookie.js"></script>
+<script type="text/javascript" src="../js/all2.js"></script>
+<script type="text/javascript" src="../tool/mask.js"></script>
+<script type="text/javascript" src="../tool/tool.js"></script>
+<script type="text/javascript" src="../js/duty/duty_mask.js"></script>
+<script type="text/javascript" src="../js/duty/duty_agent_set.js"></script>
+</body>
+</html>

@@ -1,0 +1,183 @@
+html,body{
+    height: 100%;
+    background: #F1F2F7;
+    font-size: 14px;
+    padding-right: 3px;
+}
+.head-con{
+    height: 50px;
+    color: #a94442;
+    background-color: #f2dede;
+    text-align: left;
+    line-height: 50px;
+    font-size: 14px;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    position: relative;
+}
+.head-con div{
+    display: inline-block;
+}
+.head-con i.close{
+    display: inline-block;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    color: #A94442;
+    position: absolute;
+    top: 12px;
+    right: 15px;
+}
+.head-con i.close:hover{
+    color: #FF5722;
+}
+.shortcut{
+    display: block;
+    height: auto;
+    padding: 0px;
+}
+.shortcut .panel{
+    padding: 10px 0 10px 30px;
+    height: 150px;
+    position: relative;
+    text-align: left;
+    color: #ffffff;
+    box-sizing: border-box;
+    position: relative;
+}
+.shortcut .panel i.material-icons{
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    font-size: 50px;
+    opacity: 0.2;
+}
+.shortcut .panel.active dt{
+    color: #101010;
+}
+.shortcut .panel.active dd{
+    color: #101010;
+}
+.shortcut .panel dl{
+    color: #ffffff;
+    display: inline-block;
+    margin-right: 25px;
+    cursor: pointer;
+}
+.shortcut .panel dl dt{
+    font-size: 12px;
+    margin-bottom: 1px;
+}
+.shortcut .panel dl dd{
+    font-size: 18px;
+}
+.shortcut .panel .symbol{
+    width:38%;
+    height:83px;
+    position:absolute;
+    top:0px;
+    left:0px;
+    -webkit-border-radius:4px 0px 0px 4px;
+    border-radius:4px 0px 0px 4px;
+    text-align: center;
+    line-height: 83px;
+}
+.symbol i{color: #fff;
+    font-size: 3em;}
+.shortcut .panel .value{box-sizing: border-box ; margin-bottom: 10px;}
+.shortcut-bg1{background: #1E9FFF;}
+.shortcut-bg2{background: #FF5722;}
+.shortcut-bg3{background: #009688;}
+.shortcut-bg4{background: #5FB878;}
+.shortcut-bg5{background: #F7B824;}
+.shortcut-bg6{background: #FF5722;}
+
+.value h1,.value p{margin:0;padding:0;color:#979DAF;font-family: Arial,Helvetica,sans-serif;}
+.value:hover h1,.value:hover p{color:#A7ACBB;}
+.value h1{
+    display: block;
+    height: 45px;
+    line-height: 45px;
+    padding-top: 8px;
+    font-size: 30px;
+    font-weight:300;
+}
+.value a{
+    cursor: pointer;
+}
+.value p{
+    display: block;
+    height: 30px;
+    line-height: 30px;
+    padding-top: 1px;
+}
+@media screen and (min-width: 1200px){
+    .shortcut [class*='col-lg-2']:first-child{
+        padding-left: 0px;
+    }
+    .shortcut [class*='col-lg-2']:last-child{
+        padding-right: 0px;
+    }
+}
+@media screen and (min-width: 992px) and (max-width: 1199px){
+    .shortcut [class*='col-md-4']:nth-child(1){
+        padding-left: 0px;
+    }
+    .shortcut [class*='col-md-4']:nth-child(4){
+        padding-left: 0px;
+    }
+    .shortcut [class*='col-md-4']:nth-child(3){
+        padding-right: 0px;
+    }
+    .shortcut [class*='col-md-4']:nth-child(6){
+        padding-right: 0px;
+    }
+}
+@media screen and (min-width: 768px) and (max-width: 991px){
+    .shortcut [class*='col-sm-6']:nth-child(1){
+        padding-left: 0px;
+    }
+    .shortcut [class*='col-sm-6']:nth-child(3){
+        padding-left: 0px;
+        padding-right: 15px;
+    }
+    .shortcut [class*='col-sm-6']:nth-child(5){
+        padding-left: 0px;
+    }
+    .shortcut [class*='col-sm-6']:nth-child(2){
+        padding-right: 0px;
+    }
+    .shortcut [class*='col-sm-6']:nth-child(4){
+        padding-left: 15px;
+        padding-right: 0px;
+    }
+    .shortcut [class*='col-sm-6']:nth-child(6){
+        padding-right: 0px;
+    }
+}
+@media screen and (max-width: 768px){
+    .shortcut [class*='col-xs-12']{
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+    }
+}
+@media screen and (min-width: 992px){
+    .system [class*='col-lg-6']:nth-child(1),.system [class*='col-md-6']:nth-child(1){
+        padding-left: 0px;
+
+    }
+    .system [class*='col-lg-6']:nth-child(2n),.system [class*='col-md-6']:nth-child(2n){
+        padding-right: 0px;
+
+    }
+    .system [class*='col-lg-6']:nth-child(3n),.system [class*='col-md-6']:nth-child(3n){
+        padding-left: 0px;
+
+    }
+}
+@media screen and (max-width: 991px){
+    .system [class*='col-lg-6'],.system [class*='col-md-6']{
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+}

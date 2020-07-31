@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="Author" content="larry" />
+    <meta name="renderer" content="webkit">
+    <META HTTP-EQUIV="pragma" CONTENT="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <!-- load css -->
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.css" media="all">
+    <link rel="stylesheet" href="../js/lib/bootstrap-table/bootstrap-table.css">
+    <link rel="stylesheet" href="../js/lib/bootstrap-table-pagejump/bootstrap-table-pagejump.css">
+    <link rel="stylesheet" type="text/css" href="../layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../css/public.css">
+    <link rel="stylesheet" href="../font/material-icons.css">
+</head>
+
+<body>
+<div id="student_M">
+    <div class="clear message">
+        <div class="lf imgWrap"><img src="" alt="" class="photopath"/></div>
+        <div class="lf basic_M">
+
+        </div>
+        <div class="btnWrap">
+            <button class="layui-btn no history" style="display: none">历史</button>
+        </div>
+    </div>
+    <div class="recordWrap">
+        <div class="records">
+            <form class="layui-form clear" action="" style="padding-bottom: 40px;" >
+
+                <span class="rg active switchIcon" style="cursor: pointer;">
+						  <img src="../images1/echars.png" alt="" />
+					</span>
+            </form>
+            <div class="history_wrap" style="background: #FFFFFF;min-height: 300px">
+                <div class="tableWrap active">
+                    <table class="table table-no-bordered" id="table1" style="border: none;"></table>
+                </div>
+                <div class="tableWrap" id="tableEchars">
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<style type="text/css">
+    .layui-btn.no{
+        background: #f3f5f8;
+        color: #2196F3;
+    }
+    .layui-btn.no.active{
+        background: #2196F3;
+        color: #ffffff;
+    }
+    #student_M {
+        padding: 30px 40px;
+        background: #FFFFFF;
+        position: relative;
+    }
+
+    #student_M h3 {
+        font-size: 16px;
+        padding: 0 0 36px;
+        color: #000000;
+        font-weight: bold;
+    }
+
+    #student_M .message .imgWrap {
+        width: 150px;
+        height: 150px;
+        background: #f6f6f6;
+        font-size: 0;
+        overflow: hidden;
+        position: relative;
+    }
+    #student_M .message .imgWrap img{
+        position: absolute;
+        left: 0;
+        width: 100%;
+        /*height: 100%;*/
+    }
+
+    #student_M .message {
+        padding-bottom: 50px;
+        position: relative;
+    }
+
+    #student_M .basic_M {
+        width: 750px;
+        padding-left: 40px;
+        position: relative;
+        height: 150px;
+
+    }
+
+    #student_M .basic_M ul li {
+        padding-bottom: 17px;
+        color: #000000;
+        opacity: 0.87;
+        width: 33%;
+        height: 33px;
+    }
+
+    #student_M .basic_M ul li span {
+        display: inline-block;
+    }
+    #student_M .basic_M ul li p{
+        display: inline-block;
+        line-height: 22px;
+    }
+
+    #student_M .postWrap {
+        padding: 20px 0;
+    }
+
+    #student_M .postWrap ul li {
+        margin-right: 20px;
+        color: #515151;
+    }
+
+    #student_M .postWrap ul li i {
+        display: inline-block;
+        font-style: normal;
+        padding-left: 20px;
+    }
+
+    #student_M .postWrap ul li button.add {
+        background: #e41100;
+    }
+
+    #student_M .btnWrap {
+        position: absolute;
+        right: 0;
+        top:0;
+    }
+
+
+    #student_M .DataDisplay {
+        width: 100%;
+    }
+
+    #student_M .DataDisplay .left {
+        width: 50%;
+        box-sizing: border-box;
+    }
+
+    #student_eachars {
+        width: 100%;
+        height: 400px;
+    }
+
+    #student_M .DataDisplay .right {
+        width: 50%;
+        box-sizing: border-box;
+    }
+    #student_M .DataDisplay .right .rightTitle{
+        margin-bottom: 30px;
+        position: relative;
+    }
+    #student_M .DataDisplay .right .rightTitle span{
+        display: inline-block;
+        font-size: 16px;
+        font-weight: bold;
+    }
+    #student_M .DataDisplay .right .rightTitle i{
+        display: inline-block;
+        font-style: normal;
+        font-size: 24px;
+        color: #2196F3;
+        font-weight: bold;
+        vertical-align: middle;
+        position: absolute;
+        top: -4px;
+        left: 117px;
+    }
+    #student_M .DataDisplay li {
+        display: inline-block;
+        padding-bottom: 20px;
+    }
+    #student_M .countOne li  span{
+        display: inline-block;
+        width: 24px;
+        height: 20px;
+    }
+    #student_M .countOne li  span img{
+        width: 100%;
+        height: 100%;
+    }
+    #student_M .record li{
+        display: block;
+    }
+    #student_M .DataDisplay li p{
+        display: inline-block;
+        vertical-align: middle;
+        line-height: 21px;
+        min-width: 50px;
+    }
+    #student_M .DataDisplay .rank li p{
+        display: block;
+        vertical-align: middle;
+        line-height: 21px;
+        min-width: 175px;
+        text-align: center;
+    }
+    #student_M .orderOne {
+        padding-bottom: 40px;
+    }
+
+    #student_M .countOne {
+        padding-bottom: 50px;
+    }
+
+    #student_M .layui-form-select {
+        width: 200px;
+        display: inline-block;
+        margin-right: 40px;
+    }
+
+    #student_M table {
+        padding: 20px 20px 34px;
+        border: none;
+    }
+
+    #student_M table th {
+        height: 30px;
+        line-height: 30px;
+        font-weight: normal;
+        color: #c2c2c2;
+        border: transparent;
+    }
+
+    #student_M table td {
+        max-width: 450px !important;
+        color: #000000;
+        opacity: 0.87;
+        line-height: 50px;
+        border-bottom: 1px solid #f3f5f8;
+    }
+
+    #student_M .fixed-table-container {
+        border: none;
+    }
+
+    #tableEchars {
+        width: 100%;
+        height: 400px;
+    }
+
+    #student_M .tableWrap {
+        display: none;
+    }
+    #student_M .tableWrap.active {
+        display: block;
+    }
+</style>
+<!-- 加载js文件 -->
+<script type="text/javascript" src="../layui/layui.js"></script>
+<script type="text/javascript" src="../js/lib/echarts.js"></script>
+<script type="text/javascript" src="../js/lib/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="../js/lib/jquery.cookie.js"></script>
+<script type="text/javascript" src="../js/all2.js"></script>
+<script type="text/javascript" src="../tool/mask.js"></script>
+<script type="text/javascript" src="../tool/tool.js"></script>
+<script type="text/javascript" src="../js/lib/bootstrap.js"></script>
+<script type="text/javascript" src="../js/lib/bootstrap-table/bootstrap-table.min.js"></script>
+<script type="text/javascript" src="../js/lib/bootstrap-table-pagejump/bootstrap-table-pagejump.js"></script>
+<script type="text/javascript" src="../js/lib/bootstrap-table/bootstrap-table-zh-CN.js"></script>
+<script type="text/javascript" src="../tool/MaskForStudent.js"></script>
+<!-- 引入当前页面js文件 -->
+<script>
+    layui.use(['layer', 'form', 'element'], function() {
+        layer = parent.layer === undefined ? layui.layer : top.layer;
+        form = layui.form;
+        var LookMessage= new MaskForStudent('personal_data');
+        //查看历史记录
+        var histotyList =(function () {
+            var _m={};
+            var self=_m;
+            //初始化
+            _m.init=function () {
+                self.all_table();
+                self.switch();
+            }
+            _m.switch=function () {
+                $('#student_M .switchIcon').unbind('click').bind('click', function() {
+                    $(this).toggleClass('active');
+                    if($(this).hasClass('active')) {
+                        $('#student_M .tableWrap').removeClass('active');
+                        $('#student_M .tableWrap').eq(0).addClass('active');
+                    } else {
+                        $('#student_M .tableWrap').removeClass('active');
+                        $('#student_M .tableWrap').eq(1).addClass('active');
+                        histotyList.RecordHistoty_pic();
+                    }
+                })
+            }
+            //表格
+            _m.table = function (filed) {
+                if(!filed.token||!sessionStorage.identity_id){
+                    tool().judge_token(function () {
+                        top.location.href=loginSrc;
+                    })
+                    return;
+                }
+                if(filed) $.extend(filed,pclogin);
+                $('#table1').bootstrapTable({
+                    url: urls+'/classPrivateProject/getRecords.action',
+                    queryParams: function (params) {
+                        var obj = {
+                            size: params.limit,
+                            page: params.offset / params.limit,
+                        }
+                        if (filed) $.extend(obj, filed);
+                        return obj;
+                    },
+                    sidePagination: "server",
+                    pagination: true,
+                    paginationLoop: false,
+                    paginationShowPageGo: true,
+                    pageNumber: 1,
+                    striped:true,
+                    cache:false,
+                    pageSize: 5,
+                    pageList: [5, 10, 15],
+                    columns: [{
+                        field: 'commit_time',
+                        align: "center",
+                        title: '打分时间',
+                        formatter: function(value, row, index) {
+                            var a=tool().getSmpFormatDateByLong(row.time,false);
+                            return a;
+                        }
+
+                    }, {
+                        field: 'project_name',
+                        align: "center",
+                        title: '打分项',
+
+                    }, {
+                        field: 'value',
+                        align: "center",
+                        title: '分值',
+                        formatter: function(value, row, index) {
+                            if(row.operation == 1){
+                                var a= '+'+row.value;
+                            }
+                            if(row.operation == 2){
+                                var a= '-'+row.value;
+                            }
+                            return a;
+                        }
+
+                    },{
+                        field: '',
+                        align: "center",
+                        title: '总分',
+                        formatter: function(value, row, index) {
+                            var a = 600+row.root_value;
+                            return a;
+                        }
+                    }, {
+                        field: '',
+                        align: "center",
+                        title: '打分人',
+                        formatter: function(value, row, index) {
+                            var a = row.operation_account_rname;
+                            return a;
+                        }
+                    }
+                    ],responseHandler:function(result){
+                        if(result.error){
+                            if(400<=result.error.errorCode&&result.error.errorCode<=500){
+                                top.location.href=loginSrc;
+                            }else {
+                                sl_Mask.NoTip(result.error.message);
+                                return {
+                                    "rows":'',
+                                    "total":''
+                                }
+                            }
+                        }else{
+                            return {
+                                "rows":'',
+                                "total":''
+                            }
+                        }
+                    }
+
+                })
+            }
+            //所有记录table
+            _m.all_table=function () {
+                $('#student_M').find('#table1').bootstrapTable('destroy');
+                var taid=$('.btnWrap .history').attr('data-taid');
+                var stime=$('select[name="termid"]').find("option:selected").attr('data-stime')
+                var etime=$('select[name="termid"]').find("option:selected").attr('data-etime')
+                var params={
+                    token:token,
+                    faid:userId,
+                    student_account_id:taid
+//                            e_time:etime,
+//                            s_time:stime
+                }
+                self.table(params);
+            }
+            //所以打分记录图表
+            _m.RecordHistoty_pic = function () {
+                var taid=$('.btnWrap .history').attr('data-taid');
+                var params={
+                    token:token,
+                    faid:userId,
+                    student_account_id:taid,
+                    size:1000
+                }
+                $.axse(urls+ '/classPrivateProject/getRecords.action', params, function(result) {
+                    var list= result.data.list;
+                    if(list){
+                        var lsit=list.reverse();
+                        var xAxisArr=[];
+                        var RexcordArr=[];
+                        for(var i=0;i<list.length;i++){
+                            xAxisArr.push(tool().get_date(list[i].time));
+                            RexcordArr.push(600+list[i].value);
+                        }
+                        self.echarsRecordHistoty(xAxisArr,RexcordArr);
+                    }
+
+
+                })
+            }
+            //打分历史记录线新图
+            _m.echarsRecordHistoty=function (xAxisArr,RexcordArr) {
+                $("#tableEchars").css('width',$(".history_wrap").width());//#school_class_echars为第一个页面的div宽度
+                var table_echarts = echarts.init(document.getElementById('tableEchars'));
+                option = {
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: {
+                            type: 'cross'
+                        }
+                    },
+                    toolbox: {
+                        show: true
+                    },
+                    xAxis: {
+                        type: 'category',
+                        data: xAxisArr
+                    },
+                    yAxis: {
+                        type: 'value'
+                    },
+                    series: [{
+                        data: RexcordArr,
+                        type: 'line',
+                        smooth: true
+                    }]
+                };
+                table_echarts.setOption(option);
+            }
+            return _m;
+        })()
+        histotyList.switch();
+        //切换按钮
+    })
+</script>
+</head>
+
+</body>
+</html>

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+
+		<meta name="Author" content="larry" />
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="format-detection" content="telephone=no">
+		<META HTTP-EQUIV="pragma" CONTENT="no-cache">
+		<!-- load css -->
+		<link rel="stylesheet" type="text/css" href="../css/bootstrap.css" media="all">
+		<link rel="stylesheet" href="../js/lib/bootstrap-table/bootstrap-table.css">
+		<link rel="stylesheet" type="text/css" href="../layui/css/layui.css" media="all">
+		<link rel="stylesheet" href="../css/public.css">
+		<link rel="stylesheet" href="../css/student_all.css" />
+        <style type="text/css">
+        	   #student_all .tableWrap{
+        	   	   position: absolute;
+        	       left: 0;
+        	       top:0;
+        	       opacity: 0;
+        	       width: 100%;
+        	   }
+        	   #student_all .tableWrap.active{
+        	      opacity: 1;
+        	   }
+        	    #student_all .tableNav ul{
+        	    	margin-bottom: 20px;
+        	    }
+        	   #student_all .tableNav ul li{
+        	   	  line-height: 36px;
+        	   	  margin-right: 40px;
+        	   }
+        	    #student_all .tableNav ul li.blod{
+        	    	font-weight: 800;
+        	    	font-size: 16px;
+        	    }
+        </style>
+	</head>
+
+	<body>
+		<div id="student_all">
+			<div class="formwrap">
+				<form class="layui-form" action="" style="padding-bottom: 20px;">
+					<select name="city" lay-verify="required">
+						<option value="0">2018年~2019年（第二学期）</option>
+					</select>
+				</form>
+				<form class="layui-form clear" action="" style="padding-bottom: 20px;">
+					<select name="city" lay-verify="required">
+						<option value="">全部专业</option>
+					</select>
+					<select name="city" lay-verify="required">
+						<option value="">全部年级</option>
+					</select>
+					<select name="city" lay-verify="required">
+						<option value="">五项评比</option>
+					</select>
+				</form>
+			</div>
+			<div class="tableNav">
+				  <ul class="clear">
+				  	   <li class="lf blod">五项评比</li>
+				  	   <li  class="lf">专业：电子信息</li>
+				  	   <li  class="lf">年级：高一</li>
+				  	   <li  class="lf">2018-2019（第二学期）</li>
+				  	   <li  class="lf">第17周</li>
+				  	   <li class="rg"><button class="layui-btn layui-btn-danger blue" >导出Excel</button></li>
+				  </ul>
+			</div>
+			<div class="" style="position: relative;min-height: 400px;width: 100%;">
+				<div class="tableWrap active">
+				          <table class="table table-no-bordered" id="table1" style="border: none;"></table>
+			   </div>
+			</div>
+			</div>
+			
+		</div>
+
+	</body>
+	<!-- 加载js文件 -->
+	<script type="text/javascript" src="../layui/layui.js"></script>
+	<script type="text/javascript" src="../js/lib/jquery-1.12.4.min.js"></script>
+	<script type="text/javascript" src="../tool/tool.js"></script>
+	<script type="text/javascript" src="../js/lib/bootstrap.js"></script>
+	<script type="text/javascript" src="../js/lib/bootstrap-table/bootstrap-table.min.js"></script>
+	<script type="text/javascript" src="../js/lib/bootstrap-table/bootstrap-table-zh-CN.js"></script>
+	<script src="../js/lib/echarts.js"></script>
+	<!-- 引入当前页面js文件 -->
+	<script type="text/javascript">
+		layui.use(['layer', 'form', 'element'], function() {
+			layer = parent.layer === undefined ? layui.layer : top.layer
+			form = layui.form
+			var datas = [{
+					'pic': '电子信息',
+					'jghname': '高一',
+					'rq': '1班',
+					'msg': '电子信息',
+					'banji': '高二六班',
+					'total': '630.0'
+				},
+				{
+					'pic': '电子信息',
+					'jghname': '高一',
+					'rq': '1班',
+					'msg': '电子信息',
+					'banji': '高二六班',
+					'total': '580.0'
+				},
+				{
+					'pic': '电子信息',
+					'jghname': '高一',
+					'rq': '1班',
+					'msg': '电子信息',
+					'banji': '高二六班',
+					'total': '579.0'
+				}, {
+					'pic': '电子信息',
+					'jghname': '高一',
+					'rq': '1班',
+					'msg': '电子信息',
+					'banji': '高二六班',
+					'total': '589.0'
+				},
+				{
+					'pic': '电子信息',
+					'jghname': '高一',
+					'rq': '1班',
+					'msg': '电子信息',
+					'banji': '高二六班',
+					'total': '587.0'
+				}
+
+			]
+			$('#table1').bootstrapTable({
+				data: datas,
+				sidePagination: "client",
+				pagination: true,
+				paginationLoop: false,
+				pageNumber: 1,
+				pageSize: 10,
+				pageList: [5, 10, 15],
+				columns: [{
+						field: 'pic',
+						align: "center",
+						title: '班级'
+
+					}, {
+						field: 'jghname',
+						align: "center",
+						width: '100px',
+						title: '周一',
+
+					}, {
+						field: 'rq',
+						align: "center",
+						title: '周二'
+					}, {
+						field: 'msg',
+						align: "center",
+						title: '周三'
+					}
+					, {
+						field: 'banji',
+						align: "center",
+						width: '100px',
+						title: '周四',
+
+					}, {
+						field: 'total',
+						align: "center",
+						title: '周五'
+					},
+					{
+						field: '',
+						align: "center",
+						title: '总分',
+						formatter: function(value, row, index) {
+							var a = '<button class="layui-btn layui-btn-danger blue" >操作</button>'
+							
+							return a;
+						}
+					}
+				]
+
+			})
+
+		})
+	</script>
+
+</html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <META HTTP-EQUIV="pragma" CONTENT="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <!-- load css -->
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.css" media="all">
+    <link rel="stylesheet" href="../js/lib/bootstrap-table/bootstrap-table.css">
+    <link rel="stylesheet" type="text/css" href="../layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../css/public.css">
+    <link rel="stylesheet" href="../font/material-icons.css">
+</head>
+<style type="text/css">
+    #student_Score {
+        padding: 45px 40px;
+        box-sizing: border-box;
+        background: #FFFFFF;
+    }
+    #student_Score .inputWrap{
+        padding-top: 20px;
+    }
+    #student_Score .inputWrap ul li input{
+        width: 300px;
+        display: inline-block;
+        background: #f3f5f8;
+        border: 1px solid #f3f5f8;
+        line-height: 35px;
+        height: 35px;
+    }
+    #student_Score .inputWrap ul li.chooseStudent input{
+        width: 300px;
+    }
+    #student_Score .inputWrap ul li{
+        margin-bottom: 20px;
+    }
+    #student_Score .btnWrap span.layui-btn{
+        min-width: 200px;
+        margin-bottom: 20px;
+        margin-right: 35px;
+        margin-left:0 ;
+    }
+    #student_Score .layui-form-select,.xm-form-select,.xm-select-parent {
+        width: 300px;
+        float: left;
+        margin-right: 15px;
+        border-radius: 0;
+    }
+    #student_Score .chooseStudent .layui-form-select,#student_Score .chooseStudent .xm-form-select,#student_Score .chooseStudent .xm-select-parent,#student_Score  ul li.chooseStudent input{
+        width: 300px;
+    }
+    .xm-select-title{
+        height: 35px!important;
+        border-radius: 0;
+        border: none;
+    }
+    #student_Score  ul li .layui-form-select input{
+        width: 300px;
+        border-radius: 0;
+    }
+    .ScoreFrom{
+        display: none;
+    }
+    .ScoreFrom.switch{
+        display: block;
+    }
+    .layui-form-label.WH100{
+        padding-left: 0;
+        width: 100px;
+        text-align: left;
+        color: #000000;
+        opacity: 0.87
+    }
+    #Choice{
+        width: 300px;
+        height: 35px;
+        background: #f3f5f8;
+        color: #999999;
+        padding-left: 10px;
+        line-height: 35px;
+        font-size: 14px;
+        cursor: pointer;
+        display: inline-block;
+    }
+</style>
+<body>
+<div id="student_Score">
+    <div class="head" style="position: relative;border-bottom:1px solid #ececec;width: 100%">
+        <span style="display: inline-block;font-size: 24px;font-weight: bold;padding-bottom: 25px;">编辑值班信息</span>
+        <a class="red rg delBtn" style="line-height: 55px">删除</a>
+    </div>
+    <form class="layui-form ScoreFrom switch" >
+        <div class="inputWrap">
+            <ul>
+                <li class="clear">
+                    <label class="layui-form-label lf WH100">值班日期</label>
+                    <input type="text" class="layui-input time" placeholder="请选择日期" name="time" style="background: #f3f5f8;
+			border: 1px solid #f3f5f8;width: 300px;" readonly lay-verify="required">
+                </li>
+                <li class="clear">
+                    <label class="layui-form-label lf WH100">选择值班教师</label>
+                    <select class="teacher_account_id" name='teacher_account_id' lay-verify="required" lay-verify="" lay-search>
+                        <option value="">请选择教师</option>
+                    </select>
+                </li>
+                <li class="clear">
+                    <label class="layui-form-label lf WH100" >选择值班类型</label>
+                    <select class="type" lay-verify="required" name='type'>
+                        <option value="">请选择值班类型</option>
+                        <option value="0">干部</option>
+                        <option value="1">教师</option>
+                    </select>
+                </li>
+                <li class="clear">
+                    <label class="layui-form-label lf WH100" >选择校区</label>
+                    <select class="school_district_id" lay-verify="required" name='school_district_id'>
+                        <option value="">请选择校区</option>
+                        <option value="1">丁桥校区</option>
+                        <option value="2">翠苑校区</option>
+                    </select>
+                </li>
+                <li class="chooseStudent clear">
+                    <label class="layui-form-label lf WH100 " >选择班级</label>
+                    <div id="Choice">请选择班级</div>
+                </li>
+                <input type="hidden" class="oldstr">
+                <li class="chooseStudent">
+                    <label class="layui-form-label lf WH100" >备注</label>
+                    <textarea name="des" placeholder="可填写备注" class="layui-textarea beizhu des" style="background: #f3f5f8;border: none; border-radius:0 ;width: 730px;"></textarea>
+                </li>
+            </ul>
+        </div>
+        <div class="layui-form-item" style="margin-top: 42px;width: 730px;text-align: center">
+            <span class="layui-btn blue borderRadiusAll" lay-submit lay-filter="formDemo" style="width: 100px;padding: 0 18px" id="sumbit">提交</span>
+        </div>
+    </form>
+</div>
+</body>
+<!-- 加载js文件 -->
+<script type="text/javascript" src="../layui/layui.js"></script>
+<script type="text/javascript" src="../js/lib/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="../js/lib/jquery.cookie.js"></script>
+<script type="text/javascript" src="../js/all2.js"></script>
+<script type="text/javascript" src="../js/leave/jquery.ztree.core.min.js"></script>
+<script type="text/javascript" src="../tool/mask.js"></script>
+<script type="text/javascript" src="../tool/tool.js"></script>
+<script type="text/javascript" src="../js/lib/bootstrap.js"></script>
+<script type="text/javascript" src="../tool/classgrade_Tree.js"></script>
+<script type="text/javascript" src="../tool/overtime_set.js"></script>
+<script type="text/javascript" src="../tool/choose_student.js"></script>
+<!-- 引入当前页面js文件 -->
+<script type="text/javascript" src="../js/duty/duty_edit.js"></script>
+</html>

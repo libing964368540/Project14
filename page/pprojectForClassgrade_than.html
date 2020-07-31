@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="keywords" content="" />
+		<meta name="description" content="" />
+		<meta name="Author" content="larry" />
+		<meta name="renderer" content="webkit">
+		<META HTTP-EQUIV="pragma" CONTENT="no-cache">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="format-detection" content="telephone=no">
+		<!-- load css -->
+		<link rel="stylesheet" type="text/css" href="../css/bootstrap.css" media="all">
+		<link rel="stylesheet" href="../js/lib/bootstrap-table/bootstrap-table.css">
+		<link rel="stylesheet" type="text/css" href="../layui/css/layui.css" media="all">
+		<link rel="stylesheet" href="../css/public.css">
+		<link rel="stylesheet" href="../css/school_PublicStyle/school_PublicStyle.css">
+	</head>
+	<style>
+		#student_all .addTableWrap{
+			padding-right: 0;
+			padding-left: 0;
+		}
+	</style>
+	<body>
+		<div id="student_all" class="sl-container MarginTop45">
+			<div class="" style="border-bottom: 1px solid #ececec;">
+				  <span class="sl-title">班级各项评比</span>
+				  <a class="blue rg creatThan" style="line-height: 50px" >新建评比</a>
+            </div>
+            <div class="tableWrap addTableWrap" style="padding-top: 0">
+			     <table class="table table-no-bordered" id="table1" style="border: none;"></table>
+		    </div>
+		</div>
+	</body>
+	<!-- 加载js文件 -->
+		<script type="text/javascript" src="../layui/layui.js"></script>
+		<script type="text/javascript" src="../js/lib/jquery-1.12.4.min.js"></script>
+	    <script type="text/javascript" src="../js/lib/jquery.cookie.js"></script>
+	    <script type="text/javascript" src="../js/all2.js"></script>
+	    <script type="text/javascript" src="../tool/mask.js"></script>
+		<script type="text/javascript" src="../tool/tool.js"></script>
+		<script type="text/javascript" src="../js/lib/bootstrap.js"></script>
+		<script type="text/javascript" src="../js/lib/bootstrap-table/bootstrap-table.min.js"></script>
+		<script type="text/javascript" src="../js/lib/bootstrap-table/bootstrap-table-zh-CN.js"></script>
+	    <script src="http://cdn.bootcss.com/vue/1.0.17/vue.min.js"></script>
+		<!-- 引入当前页面js文件 -->
+		<script type="text/javascript">
+			layui.use(['layer', 'form', 'element'], function() {
+				layer =layui.layer
+                form = layui.form
+                //新建评比项目
+                $('.creatThan').unbind('click').bind('click', function () {
+                    var index = top.layer.open({
+                        type: 1,
+                        title: false,
+                        closeBtn: 0,
+                        shadeClose: true,
+                        area: ['400px', 'auto'],
+                        content: '<div style="padding:30px 50px 24px;color:#898989;position:relative"class="layui-form major_set">' +
+                        '<p class="self_Mask_title">新建评比</p>' +
+                        '<i class="layui-icon layui-icon-close closeBtn self_Mask_close">&#x1006;</i> '+
+                        '<div style="padding:0 0 20px">' +
+                        '<ul >' +
+                        '<li class="clear self_Mask_row"><input class="layui-input rg" type="text"  placeholder="请输入要新建的类目名称"style="background: #f3f5f8;border: 1px solid #f3f5f8;" lay-verify="required" name="name"></li>' +
+                        '<li class="clear self_Mask_row"> <textarea placeholder="备注" class="layui-textarea" style="height: 137px;background: #f3f5f8;border: 1px solid #f3f5f8" name="des"></textarea></li>' +
+                        '</ul>' +
+                        '</div>' +
+                        '<div class="yesTip"style="width:300px;text-align:center;line-height:35px;color:#ffffff;cursor: pointer;background:#2196F3;margin: 0 auto" lay-filter="formDemo" lay-submit>确定</div>' +
+
+                        '</div>',
+                        success: function (layeor, index) {
+                            //点击确定
+                            top.layui.form.on('submit(formDemo)', function(data){
+                                class_than.create(data.field,index);
+							})
+							//点击取消
+							$(layeor).find('.closeBtn').unbind('clcik').bind('click',function () {
+								top.layer.close(index);
+                            })
+                        }
+                    })
+                })
+            })
+			class_than = (function () {
+				var _m={};
+				var self=_m;
+				//初始化
+				_m.init=function () {
+                    self.all_table();
+                }
+                //获取班级评比
+				_m.table = function (filed) {
+                    if(!filed.token||!sessionStorage.identity_id){
+                        tool().judge_token(function () {
+                            top.location.href=loginSrc;
+                        })
+                        return;
+                    }
+                    if(filed) $.extend(filed,pclogin);
+                    $('#table1').bootstrapTable({
+                        url:urls+ClassContents,
+                        queryParams:function(params){
+							return filed;
+                        },
+                        sidePagination: "client",
+                        contentType:"application/x-www-form-urlencoded; charset=UTF-8",
+                        method: 'POST',
+                        async:true,
+                        pagination: true,
+                        paginationLoop: false,
+                        pageNumber: 1,
+                        pageSize: 10,
+                        cache:false,
+                        striped : true,
+                        pageList: [5, 10, 15],
+                        columns: [{
+                            field: 'name',
+                            align: "center",
+                            title: '评比名称'
+                        }, {
+                            field: 'create_time',
+                            align: "center",
+                            title: '建立时间',
+                            formatter: function (value, row, index) {
+                                var a =tool().get_date(row.create_time);
+                                return a
+                            }
+                        }, {
+                            field: 'create_account_rname',
+                            align: "center",
+                            title: '创建人'
+                        }, {
+                            field: 'value',
+                            align: "center",
+                            title: '初始分值'
+                        }, {
+                            field: 'des',
+                            align: "center",
+                            title: '备注'
+                        },
+                            {
+                                field: '',
+                                align: "center",
+                                title: '操作',
+                                formatter: function (value, row, index) {
+                                    var a = '<a class="blue" onclick="tool().class_treeList('+row.id+')">维护</a>'
+                                    return a
+                                }
+                            }
+                        ],
+                        responseHandler:function(result){
+                            if(result.error){
+                                if(400<=result.error.errorCode&&result.error.errorCode<=500){
+                                    parent.location.href='login.html'
+                                }else {
+                                    sl_Mask.NoTip(result.error.message);
+								}
+                                return [];
+                            }else{
+                                return result.data;
+
+                            }
+                        },
+                        formatLoadingMessage: function(){
+                            return '<img src="../img/loading.gif" style="margin: 60px auto" width="20px" height="20px">';
+                        }
+
+                    })
+                }
+                _m.all_table = function () {
+                    $('#student_all').find('#table1').bootstrapTable('destroy');
+					var params={
+					    faid:userId,
+						token:token,
+                        project_id:0
+					}
+					self.table(params);
+                }
+                //创建节点
+				_m.create = function (field,index) {
+					var params={
+					    faid:userId,
+						token:token,
+                        super_id:0
+					}
+                    params.name=field.name
+					if(field.des){
+                        params.des=field.des
+					}
+                    $.axse(urls+addClassContents,params,function(result){
+                             sl_Mask.YesTip('创建成功');
+                            self.all_table();
+                            top.layer.close(index);
+					})
+                }
+                return _m;
+            })()
+            class_than.init();
+		</script>
+	</html>

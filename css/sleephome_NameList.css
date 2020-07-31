@@ -1,0 +1,128 @@
+#account{
+    padding-right:10px;
+    padding-bottom: 45px;
+}
+#account .account_head{
+    width: 100%;
+    padding: 0 40px;
+    padding-top: 20px;
+    box-sizing: border-box;
+    background: #FFFFFF;
+}
+#account .account_head .search{
+    padding-left: 25px;
+    height: 35px;
+    margin-top: 10px;
+    background: #f3f5f8;
+    position: relative;
+    overflow: hidden;
+}
+#account .account_head .search img{
+    position: absolute;
+    width: 15px;
+    height: auto;
+    top:8px;
+    left: 15px;
+}
+#account .account_head .search input{
+    display: inline-block;
+    height: 35px;
+    border: none;
+    outline: none;
+    line-height: 35px;
+    background: none;
+    width: 250px;
+    padding-left: 20px;
+    letter-spacing:1px;
+}
+#search{
+    height: 42px;
+    line-height: 40px;
+    background: #2387f9;
+    font-size: 14px;
+}
+#account .account_head .Make{
+    padding-top: 10px;
+}
+#account .account_head .Make .layui-btn{
+    height: 35px;
+    line-height: 35px;
+}
+#account .formwrap{
+    padding: 20px 50px 0;
+    background: #ffffff;
+}
+#account .formwrap ul{
+    padding-bottom: 20px;
+    border-bottom: 1px solid #f3f5f8;
+}
+#account .formwrap ul li{
+    position: relative;
+    width: 80px;
+    padding-left: 30px;
+    cursor: pointer;
+}
+#account .formwrap ul li.active span{
+    color: #000000;
+    opacity: 0.87;
+}
+#account .formwrap ul li.active i{
+    background: #2196F3;
+    border:2px solid #004799;
+
+}
+#account .formwrap ul li span{
+    color: #8a8a8a;
+}
+#account .formwrap ul li i{
+    position: absolute;
+    left: 0;
+    top:1px;
+    display: inline-block;
+    border:2px solid #a6a6a6;
+    background: #ebebeb;
+    width: 18px;
+    height: 18px;
+}
+/*#account table{*/
+    /*padding: 20px 20px 34px;*/
+    /*border: none;*/
+/*}*/
+/*#account table th .th-inner {*/
+    /*height: 70px;*/
+    /*line-height: 70px;*/
+    /*font-weight: normal;*/
+    /*color: #b9b9b9;*/
+    /*border: transparent;*/
+    /*padding: 0;*/
+/*}*/
+/*#account table th{*/
+    /*border: none;*/
+/*}*/
+/*#account table td {*/
+    /*max-width: 450px !important;*/
+    /*color: #000000;*/
+    /*opacity: 0.87;*/
+    /*line-height: 55px;*/
+    /*border-bottom:1px solid #f8f8f8 ;*/
+    /*position: relative;*/
+/*}*/
+/*#account .fixed-table-container{*/
+    /*border: none;*/
+/*}*/
+/*#account .tableWrap{*/
+    /*padding: 0 40px 20px;*/
+    /*background: #ffffff;*/
+/*}*/
+#account table th .th-inner {
+    height: 70px;
+    line-height: 70px;
+    font-weight: normal;
+    color: #b9b9b9;
+    border: transparent;
+    padding: 0;
+}
+
+#account table td{
+    line-height: 55px;
+}

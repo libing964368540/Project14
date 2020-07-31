@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="Author" content="larry" />
+    <meta name="renderer" content="webkit">
+    <META HTTP-EQUIV="pragma" CONTENT="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <!-- load css -->
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.css" media="all">
+    <link rel="stylesheet" href="../js/lib/bootstrap-table/bootstrap-table.css">
+    <link rel="stylesheet" type="text/css" href="../layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../css/public.css">
+    <link rel="stylesheet" type="text/css" href="../css/class_leave.css"/>
+</head>
+<style>
+    #stay_state{
+        padding: 45px 40px;
+        background: #ffffff;
+        color: #000000;
+        opacity: 0.87;
+        position: relative;
+    }
+    #stay_state .title{
+        font-size: 24px;
+        font-weight: bold;
+        padding-bottom: 25px;
+        border-bottom: 1px solid #f3f5f8;
+    }
+    #stay_state ul.content{
+        padding-top: 25px;
+    }
+    #stay_state ul.content li{
+        margin-bottom: 40px;
+    }
+    #stay_state ul.content li span{
+        display: inline-block;
+        width: 105px;
+        vertical-align: top;
+    }
+    #stay_state ul.content li p{
+        display: inline-block;
+        width: 600px;
+    }
+    #stay_state ul.content li p img{
+        width: 100%;
+        height: 100%;
+    }
+    #stay_state .layui-timeline span{
+        display: inline-block;
+    }
+    #stay_state .layui-timeline span.state{
+        width: 100px;
+    }
+    #stay_state .layui-timeline span.state.stay{
+        color: #2196F3;
+    }
+    #stay_state .layui-timeline span.state.red{
+        color: #ff4747;
+        padding-left: 8px;
+    }
+    #stay_state .layui-timeline p{
+        display: inline-block;
+    }
+    #stay_state .layui-timeline p.commit_time,#stay_state .layui-timeline p.examine_time{
+        width: 260px;
+    }
+    #stay_state img.Agree{
+        position: absolute;
+        left: 340px;
+        top: 45px;
+        width: 120px;
+    }
+</style>
+<body>
+      <div id="stay_state" style="min-height: 600px">
+          <div style="position: relative">
+               <h3 class="title"></h3>
+              <!--<a style="position: absolute;top:0;right: 0;font-size: 14px;color: #2196F3;cursor: pointer;display: none" id="ExportBar">导出请假条</a>-->
+          </div>
+          <div style="margin-bottom:30px;">
+              <ul class="content">
+
+              </ul>
+          </div>
+          <div style="margin-bottom:30px;border-top: 1px solid #f3f5f8;">
+              <ul class="layui-timeline"style="padding-top:30px;">
+              </ul>
+          </div>
+          <div class="AgreeWrap"style="width:100%;text-align:center;line-height:35px;cursor: pointer; display: none;margin-top: 50px;">
+              <button class="layui-btn blue" id="AgreeBtn"style="margin-right: 30px;border-radius: 4px">审批</button>
+              <button class="layui-btn borderRadiusAll" style="background: #ff4747;color: #ffffff;" id="NoAgree">驳回</button>
+          </div>
+      </div>
+</body>
+<!-- 加载js文件 -->
+<script type="text/javascript" src="../layui/layui.js"></script>
+<script type="text/javascript" src="../js/lib/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="../js/lib/jquery.cookie.js"></script>
+<script type="text/javascript" src="../js/all2.js"></script>
+<script type="text/javascript" src="../tool/mask.js"></script>
+<script type="text/javascript" src="../tool/tool.js"></script>
+<script type="text/javascript" src="../js/leave/leave_Mask.js"></script>
+<script type="text/javascript" src="../js/leave/leave_stay_state.js"></script>
+</html>

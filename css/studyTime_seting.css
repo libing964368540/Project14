@@ -1,0 +1,45 @@
+#studyTime_seting{
+    padding: 45px 40px;
+    background: #ffffff;
+}
+#studyTime_seting h3.title{
+    font-size:24px;
+    background: #ffffff;
+    padding-bottom:25px;
+    border-bottom: 1px solid #f3f5f8;
+    font-weight: bold;
+    margin-bottom: 24px
+}
+#studyTime_seting .layui-form-select {
+    width: 200px;
+    display: inline-block;
+    margin-right: 25px;
+}
+#studyTime_seting .weekList span.DateNum{
+    background: #f3f5f8;
+    height: 35px;
+    width: 115px;
+    line-height: 35px;
+    display: inline-block;
+    text-align: center;
+    color: #2196F3;
+    cursor: pointer;
+    font-style: normal;
+    margin-right: 50px;
+}
+#studyTime_seting .weekList span.DateNum.active{
+    background: #2196F3;
+    color: #ffffff;
+}
+#studyTime_seting table th .th-inner {
+    height: 70px;
+    line-height: 70px;
+    font-weight: normal;
+    color: #b9b9b9;
+    border: transparent;
+    padding: 0;
+}
+
+#studyTime_seting table td{
+    line-height: 55px;
+}

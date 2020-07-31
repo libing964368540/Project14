@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="Author" content="larry" />
+    <meta name="renderer" content="webkit">
+    <META HTTP-EQUIV="pragma" CONTENT="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <!-- load css -->
+    <link rel="stylesheet" type="text/css" href="../layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../css/public.css">
+    <link rel="stylesheet" href="../font/material-icons.css">
+    <link rel="stylesheet" href="../css/school_PublicStyle/school_PublicStyle.css">
+    <style>
+        #account .roommate{
+            width: 1145px;
+        }
+        #account .roommate li{
+            width: 82px;
+            margin-right: 40px;
+        }
+        #account .roommate li dt{
+            width: 100%;
+            height: 82px;
+            background: #f3f5f8;
+            position: relative;
+        }
+        #account .roommate li dt span, #account .roommate li dt .photo{
+            display: inline-block;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            top:0;
+            cursor: pointer;
+        }
+        #account .roommate li dd{
+            margin-top: 6px;
+            text-align: center;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        #account .roommate li dt span .add{
+            position: absolute;
+            left: 30px;
+            top: 30px;
+            font-size: 20px!important;
+            color: #aaaaac;
+            font-weight: bold;
+        }
+        #account .roommate li dt .photo .imgWrap{
+            width: 100%;
+            height: 82px;
+            overflow: hidden;
+        }
+        #account .roommate li dt .photo img{
+            width: 100%;
+            /*height: 100%;*/
+        }
+        #account .roommate li dt .photo .close{
+            width: 17.5px;
+            height: 17px;
+            position: absolute;
+            left: 73px;
+            top: -8.5px;
+            color: #f8545b;
+            border-radius: 50%;
+            display: none;
+            opacity: 1;
+            overflow: hidden;
+        }
+        #account .roommate li dt .photo:hover .close{
+            display: inline-block;
+        }
+        #account .roommate li dt .photo .close i{
+            font-size: 23px!important;
+            position: absolute;
+            left: -3px;
+            top: -2.6px;
+            background: #ffffff;
+        }
+        #account .tell{
+            display: inline-block;
+        }
+        #account .tell span{
+            display: inline-block;
+        }
+        #account .tell p{
+            display: inline-block;
+        }
+        #account .teach{
+            display: inline-block;
+            width: 167px;
+            line-height: 80px;
+            border: 1px solid #c8c8c8;
+            margin-top: 80px;
+        }
+        #account .layui-form-select {
+            width: 200px;
+            display: inline-block;
+            margin-right: 25px;
+        }
+    </style>
+</head>
+<body>
+<div id="account" style="padding: 45px 40px;background: #ffffff">
+    <div style="position: relative;padding-bottom:25px;border-bottom: 1px solid #f3f5f8;">
+        <h3 style="font-size:24px;background: #ffffff; font-weight: bold;display: inline-block;padding-right: 40px;">晚自修座位表</h3>
+        <ul class="clear tell">
+            <li class="lf" style="padding-right: 40px"><span>班级：</span><p class="director_class"></p></li>
+            <li class="lf"><span>班主任：</span><p class="director_rname"></p></li>
+        </ul>
+    </div>
+    <form class="layui-form changeV1" action="" style="padding-bottom: 20px;margin-top: 20px;">
+        <select name='classgaderid' class='classgaderid' lay-filter='classgaderid' >
+            <option value="">选择班级</option>
+        </select>
+</form>
+    <div class="tableWrap" style="padding: 0;padding-top: 24px;overflow: hidden">
+        <ul class="roommate clear">
+            <li class="lf">
+                <dl>
+                    <dt><span data-index=0><i class="material-icons add">add</i></span></dt>
+                    <dd>暂无</dd>
+                </dl>
+            </li>
+            <li class="lf">
+                <dl>
+                    <dt><span data-index=1><i class="material-icons add">add</i></span></dt>
+                    <dd>暂无</dd>
+                </dl>
+            </li>
+            <div style="width: 488px;margin: 0 auto">
+                <li class="lf">
+                    <dl>
+                        <dt>
+                            <span data-index=2><i class="material-icons add">add</i></span>
+                        </dt>
+                        <dd>暂无</dd>
+                    </dl>
+                </li>
+                <li class="lf">
+                    <dl>
+                        <dt>
+                            <span data-index=3><i class="material-icons add">add</i></span>
+                        </dt>
+                        <dd>暂无</dd>
+                    </dl>
+                </li>
+                <li class="lf"><dl><dt><span data-index=4><i class="material-icons add">add</i></span></dt><dd>暂无</dd></dl></li>
+                <li class="lf"><dl><dt><span data-index=5><i class="material-icons add">add</i></span></dt><dd>暂无</dd></dl></li>
+            </div>
+            <li class="rg"><dl><dt><span data-index=6><i class="material-icons add">add</i></span></dt><dd>暂无</dd></dl></li>
+            <li class="rg"><dl><dt><span data-index=7><i class="material-icons add">add</i></span></dt><dd>暂无</dd></dl></li>
+        </ul>
+
+        <ul class="roommate clear">
+            <li class="lf">
+                <dl>
+                    <dt><span data-index=8><i class="material-icons add">add</i></span></dt>
+                    <dd>暂无</dd>
+                </dl>
+            </li>
+            <li class="lf">
+                <dl>
+                   <dt><span data-index=9><i class="material-icons add">add</i></span></dt>
+                    <dd>暂无</dd>
+                </dl>
+            </li>
+            <div style="width: 488px;margin: 0 auto">
+            <li class="lf">
+                <dl>
+                    <dt>
+                      <span data-index=10><i class="material-icons add">add</i></span>
+                    </dt>
+                    <dd>暂无</dd>
+                </dl>
+            </li>
+            <li class="lf">
+                <dl>
+                    <dt>
+                        <span data-index=11><i class="material-icons add">add</i></span>
+                    </dt>
+                    <dd>暂无</dd>
+                </dl>
+            </li>
+            <li class="lf"><dl><dt><span data-index=12><i class="material-icons add">add</i></span></dt><dd>暂无</dd></dl></li>
+            <li class="lf"><dl><dt><span data-index=13><i class="material-icons add">add</i></span></dt><dd>暂无</dd></dl></li>
+                </div>
+            <li class="rg"><dl><dt><span data-index=14><i class="material-icons add">add</i></span></dt><dd>暂无</dd></dl></li>
+            <li class="rg"><dl><dt><span data-index=15><i class="material-icons add">add</i></span></dt><dd>暂无</dd></dl></li>
+        </ul>
+        <ul class="roommate clear">
+            <li class="lf">
+                <dl>
+                    <dt><span data-index=16><i class="material-icons add">add</i></span></dt>
+                    <dd>暂无</dd>
+                </dl>
+            </li>
+            <li class="lf">
+                <dl>
+                <dt><span data-index=17><i class="material-icons add">add</i></span></dt>
+                <dd>暂无</dd>
+              </dl></li>
+            <div style="width: 488px;margin: 0 auto">
+            <li class="lf">
+                <dl>
+                   <dt><span data-index=18><i class="material-icons add">add</i></span></dt>
+                     <dd>暂无</dd>
+                </dl></li>
+            <li class="lf"><dl><dt><span data-index=19><i class="material-icons add">add</i></span></dt><dd>暂无</dd></dl></li>
+            <li class="lf"><dl><dt><span data-index=20><i class="material-icons add">add</i></span></dt><dd>暂无</dd></dl></li>
+            <li class="lf"><dl><dt><span data-index=21><i class="material-icons add">add</i></span></dt><dd>暂无</dd></dl></li>
+            </div>
+            <li class="rg"><dl><dt><span data-index=22><i class="material-icons add">add</i></span></dt><dd>暂无</dd></dl></li>
+            <li class="rg"><dl><dt><span data-index=23><i class="material-icons add">add</i></span></dt><dd>暂无</dd></dl></li>
+        </ul>
+        <ul class="roommate clear">
+            <li class="lf">
+                <dl>
+                    <dt><span data-index=24><i class="material-icons add">add</i></span></dt>
+                    <dd>暂无</dd>
+                </dl>
+            </li>
+            <li class="lf">
+                <dl>
+                    <dt><span data-index=25><i class="material-icons add">add</i></span></dt>
+                    <dd>暂无</dd>
+                </dl>
+            </li>
+            <div style="width: 488px;margin: 0 auto">
+                <li class="lf"><dl><dt><span data-index=26><i class="material-icons add">add</i></span></dt><dd>暂无</dd></dl></li>
+                <li class="lf"><dl><dt><span data-index=27><i class="material-icons add">add</i></span></dt><dd>暂无</dd></dl></li>
+                <li class="lf"><dl><dt><span data-index=28><i class="material-icons add">add</i></span></dt><dd>暂无</dd></dl></li>
+                <li class="lf"><dl><dt><span data-index=29><i class="material-icons add">add</i></span></dt><dd>暂无</dd></dl></li>
+            </div>
+
+            <li class="rg"><dl><dt><span data-index=30><i class="material-icons add">add</i></span></dt><dd>暂无</dd></dl></li>
+            <li class="rg"><dl><dt><span data-index=31><i class="material-icons add">add</i></span></dt><dd>暂无</dd></dl></li>
+        </ul>
+        <ul class="roommate clear">
+            <li class="lf">
+                <dl>
+                    <dt><span data-index=32><i class="material-icons add">add</i></span></dt>
+                    <dd>暂无</dd>
+                </dl>
+            </li>
+            <li class="lf"><dl><dt><span data-index=33><i class="material-icons add">add</i></span></dt><dd>暂无</dd></dl></li>
+            <div style="width: 488px;margin: 0 auto">
+            <li class="lf"><dl><dt><span data-index=34><i class="material-icons add">add</i></span></dt><dd>暂无</dd></dl></li>
+            <li class="lf"><dl><dt><span data-index=35><i class="material-icons add">add</i></span></dt><dd>暂无</dd></dl></li>
+            <li class="lf"><dl><dt><span data-index=36><i class="material-icons add">add</i></span></dt><dd>暂无</dd></dl></li>
+            <li class="lf"><dl><dt><span data-index=37><i class="material-icons add">add</i></span></dt><dd>暂无</dd></dl></li>
+            </div>
+            <li class="rg"><dl><dt><span data-index=38><i class="material-icons add">add</i></span></dt><dd>暂无</dd></dl></li>
+            <li class="rg"><dl><dt><span data-index=39><i class="material-icons add">add</i></span></dt><dd>暂无</dd></dl></li>
+        </ul>
+        <ul class="roommate clear">
+            <li class="lf">
+                <dl>
+                    <dt><span data-index=40><i class="material-icons add">add</i></span></dt>
+                    <dd>暂无</dd>
+                </dl>
+            </li>
+            <li class="lf"><dl><dt><span data-index=41><i class="material-icons add">add</i></span></dt><dd>暂无</dd></dl></li>
+            <div style="width: 488px;margin: 0 auto">
+                <li class="lf"><dl><dt><span data-index=42><i class="material-icons add">add</i></span></dt><dd>暂无</dd></dl></li>
+                <li class="lf"><dl><dt><span data-index=43><i class="material-icons add">add</i></span></dt><dd>暂无</dd></dl></li>
+                <li class="lf"><dl><dt><span data-index=44><i class="material-icons add">add</i></span></dt><dd>暂无</dd></dl></li>
+                <li class="lf"><dl><dt><span data-index=45><i class="material-icons add">add</i></span></dt><dd>暂无</dd></dl></li>
+            </div>
+            <li class="rg"><dl><dt><span data-index=46><i class="material-icons add">add</i></span></dt><dd>暂无</dd></dl></li>
+            <li class="rg"><dl><dt><span data-index=47><i class="material-icons add">add</i></span></dt><dd>暂无</dd></dl></li>
+        </ul>
+        <div style="width: 1104px;text-align: center">
+              <span class="teach">讲台</span>
+        </div>
+    </div>
+
+</div>
+
+<!-- 加载js文件 -->
+<script type="text/javascript" src="../layui/layui.js"></script>
+<script type="text/javascript" src="../js/lib/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="../js/lib/jquery.cookie.js"></script>
+<script type="text/javascript" src="../js/all2.js"></script>
+<script type="text/javascript" src="../tool/mask.js"></script>
+<script type="text/javascript" src="../tool/tool.js"></script>
+<script type="text/javascript" src="../js/seat/classgradeSeat_getClass_seat.js"></script>
+<!-- 引入当前页面js文件 -->
+</body>
+</html>

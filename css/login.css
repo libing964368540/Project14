@@ -1,0 +1,212 @@
+
+html,body{
+	height: 100%;
+	overflow: hidden;
+}
+#login{
+	background: #2196F3;
+	width: 100%;
+	height: 100%;
+	position: fixed;
+}
+#login .logoWrap{
+	height: 50px;
+	border-bottom: 3px solid #0082d2;
+}
+#login .logoWrap .logo{
+	font-size: 25px;
+	line-height: 50px;
+	color: #ffffff;
+	padding-left: 50px;
+}
+#login .logoWrap .logoW{
+	position: fixed;
+	left: 0;
+	top:0;
+	width: 100%;
+	z-index: 5;
+	background: #2196F3;
+}
+#login .logoWrap .tell i{
+	display: inline-block;
+	margin-top: 10px;
+	width: 100px;
+	height: 30px;
+	line-height: 30px;
+	/*background: #ffffff;*/
+	/*color: #2387f9;*/
+	color: #ffffff;
+     text-align: center;
+    font-size: 14px;
+    font-style: normal;
+    margin-right: 70px;
+cursor: pointer;}
+#login .logoWrap .tell span{
+	margin-right: 30px;
+	display: inline-block;
+	color: #ffffff;
+	cursor: pointer;
+}
+#login .logoWrap.active .login{
+	top:-300%;
+}
+#login .logoWrap .login{
+	width: 400px;
+	height: 500px;
+	background: #ffffff;
+	position: fixed;
+	left:0;
+	right:0;
+	top:0;
+	bottom: 0;
+	margin: auto;
+	box-sizing: border-box;
+	padding: 40px;
+	z-index: 2;
+	transition:top 1s;
+	-moz-transition:top 1s; /* Firefox 4 */
+	-webkit-transition:top 1s; /* Safari and Chrome */
+	-o-transition:top 1s; /* Opera */
+}
+#login .logoWrap .downLondApp{
+	height: 500px;
+	position: fixed;
+	left:0;
+	right:0;
+	top:0;
+	margin: auto;
+	box-sizing: border-box;
+	padding: 40px;
+	z-index: 3;
+	width: 1000px;
+	bottom: -300%;
+	transition:bottom 1s;
+	-moz-transition:bottom 1s; /* Firefox 4 */
+	-webkit-transition:bottom 1s; /* Safari and Chrome */
+	-o-transition:bottom 1s; /* Opera */
+}
+#login .logoWrap.active .downLondApp{
+	bottom:0;
+}
+#login .logoWrap .downLondApp ul li{
+	width: 240px;
+	height: auto;
+	font-size: 0;
+	position: absolute;
+	bottom: 0;
+}
+#login .logoWrap .downLondApp ul li.big{
+   left: 125px;
+}
+#login .logoWrap .downLondApp ul li.small{
+	width: 200px;
+	left:0;
+}
+#login .logoWrap .downLondApp ul li img{
+	width: 100%;
+}
+#login .logoWrap .downLondApp .IconApp{
+	width: 500px;
+	position: absolute;
+	bottom:10px;
+	right: 0;
+}
+#login .logoWrap .downLondApp .IconApp dl{
+	width: 200px;
+}
+#login .logoWrap .downLondApp .IconApp dl dt{
+	width: 200px;
+	height: 200px;
+	background: #f3f5f8;
+	text-align: center;
+	line-height: 200px;
+	font-size: 28px;
+	color: rgba(208, 208, 208, 1);
+	overflow: hidden;
+}
+#login .logoWrap .downLondApp .IconApp dl dt img{
+	width: 100%;
+	height: 100%;
+}
+#login .logoWrap .downLondApp .IconApp dl dd{
+	margin-top:20px ;
+	width: 200px;
+	height: 40px;
+	border: 2px solid #ffffff;
+	text-align: center;
+	line-height: 40px;
+	font-size: 28px;
+	color: #ffffff;
+	position: relative;
+	padding-left: 20px;
+	box-sizing: border-box;
+}
+#login .logoWrap .downLondApp .IconApp dl dd span{
+	position: absolute;
+	top:0;
+	left: 35px;
+	bottom:0;
+	margin: auto;
+	display: inline-block;
+	font-size: 22px;
+}
+#login .logoWrap .login ul{
+	padding-top: 30px;
+	height: 300px;
+}
+#login .logoWrap .login ul li{
+	padding-top: 20px;
+}
+#login .logoWrap .login ul li span{
+    display: block;
+	color: #2196F3;
+}
+#login .logoWrap .login ul li input{
+    display: block;
+	width: 100%;
+	line-height: 40px;
+	height:40px;
+	border:none;
+	border-bottom:3px solid #ebebeb ;
+    outline: none;
+}
+#login .logoWrap .login ul li input.active{
+	border-bottom:3px solid #ff4747 ;
+}
+#login .logoWrap button{
+	width: 100%;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	outline: none;
+	background: #2196F3;
+	border:none ;
+	color: #ffffff;
+	cursor: pointer;
+}
+.error{
+	text-align: center;
+	color: red;
+}
+#login ul li span.checked {
+	width: 14px;
+	height: 14px;
+	position: relative;
+}
+#login ul li span.checked i{
+	position: absolute;
+	top: 0px;
+	left: -2px;
+	font-size: 20px;
+	color: #a7a7a7;
+}
+#login ul li span.checked i:hover{
+	color: #2196F3;
+}
+#login ul li span.checked.active i{
+	color: #2196F3;
+}
+#login ul li p{
+   font-size: 14px;
+	padding-left: 8px;
+}

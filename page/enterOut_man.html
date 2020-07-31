@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="keywords" content="" />
+		<meta name="description" content="" />
+		<meta name="Author" content="" />
+		<meta name="renderer" content="">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="format-detection" content="telephone=no">
+		<link rel="Shortcut Icon" href="/favicon.ico" />
+		<!-- load css -->
+		<link rel="stylesheet" type="text/css" href="../css/bootstrap.css" media="all">
+		<link rel="stylesheet" href="../js/lib/bootstrap-table/bootstrap-table.css">
+		<link rel="stylesheet" type="text/css" href="../layui/css/layui.css" media="all">
+		<link rel="stylesheet" href="../css/public.css">
+		<style type="text/css">
+			#enterOut_man {
+				padding: 30px 40px;
+				background: #FFFFFF;
+				position: relative;
+			}
+			
+			#enterOut_man h3 {
+				font-size: 16px;
+				padding: 0 0 36px;
+				color: #000000;
+				font-weight: bold;
+			}
+			
+			#enterOut_man .message .imgWrap {
+				width: 150px;
+				height: 150px;
+				background: #f6f6f6;
+			}
+			
+			#enterOut_man .message {
+				padding-bottom: 30px;
+			}
+			
+			#enterOut_man .basic_M {
+				width: 750px;
+				padding-left: 30px;
+				position: relative;
+				height: 200px;
+			}
+			
+			#enterOut_man .basic_M ul li {
+				padding-bottom: 17px;
+				color: #000000;
+				opacity: 0.87;
+				width: 33%;
+				height: 33px;
+			}
+			
+			#enterOut_man .basic_M ul li span {
+				display: inline-block;
+			}
+			
+			#enterOut_man .basic_M ul li p {
+				padding-top: 1px;
+			}
+			#enterOut_man .layui-form-select{
+              	width: 200px;
+              	float: left;
+              	font-size: 14px;
+              	margin-right: 20px;
+				height: 35px;
+				border-radius: 0;
+              }
+            #enterOut_man table {
+				padding: 20px 20px 34px;
+				border: none;
+			}
+			#enterOut_man table th .th-inner {
+				height: 70px;
+				line-height: 70px;
+				font-weight: normal;
+				color: #b9b9b9;
+				border: transparent;
+				padding: 0;
+			}
+			#enterOut_man table th {
+				height: 30px;
+				line-height: 30px;
+				font-weight: normal;
+				color: #c2c2c2;
+				border: transparent;
+			}
+			
+			#enterOut_man table td {
+				max-width: 450px !important;
+				color: #8a8a8a;
+				line-height: 60px;
+				border-bottom: 1px solid #f8f8f8;
+			}
+			
+			#enterOut_man .fixed-table-container {
+				border: none;
+			}
+			#enterOut_man .leaveState {
+				display: inline-block;
+				width: 60px;
+				height: 30px;
+				line-height: 30px;
+				border: 1px solid #ebebeb;
+				background: #f8f8f8;
+				text-align: center;
+				color: #ffffff;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="enterOut_man">
+			<div class="clear message">
+				<div class="lf imgWrap"><img src="" alt="" /></div>
+				<div class="lf basic_M">
+					<div class="" style="position: relative;">
+						<h3>李兵</h3>
+						<i style="position: absolute;left: 60px;top:-2px;font-size: 14px;color: #2387f9;font-style: normal;">详细信息</i>
+					</div>
+
+					<ul class='clear' style="padding-top: 13px">
+						<li class='clear lf'>
+							<span class='lf'>学号：</span>
+							<p class='lf'>106026031</p>
+						</li>
+						<li class='clear  lf'>
+							<span class='lf'>一卡通：</span>
+							<p class='lf'>3038402888</p>
+						</li>
+						<li class='clear  lf'>
+							<span class='lf'>是否住校：</span>
+							<p class='lf'>是</p>
+						</li>
+						<li class='clear lf'>
+							<span class='lf'>专业：</span>
+							<p class='lf'>电子信息</p>
+
+						</li>
+						<li class='clear lf'>
+							<span class='lf'>手机号：</span >
+							<p class='lf'>13735678667</p>
+						</li>
+						<li class='clear lf'>
+							<span class='lf'>宿舍房间：</span >
+						    <p class='lf'>男生宿舍403</p>
+						</li>
+						<li  class='clear lf'>
+							<span class='lf'>班级：</span >
+								<p class='lf'>电子信息17级物联网6班</p>
+						</li>
+		  	   	    	 <li class='clear lf'>
+		  	   	    	 	<span class='lf'>手机号（家长）：</span>
+							<p class='lf'>13735678667</p>
+						</li>
+						<li class='clear lf'>
+							<span class='lf'>是否有效：</span>
+							<p class='lf'>有效</p>
+						</li>
+					</ul>
+				</div>
+				
+			</div>
+             <div class="record">
+					<form class="layui-form clear" action="" style="padding-bottom: 40px;">
+						<select name="city" lay-verify="required">
+							<option value="0">2018-2019(第二学期)</option>
+							<option value="1">2018-2019(第一学期)</option>
+							<option value="2">2017-2018(第二学期)</option>
+							<option value="3">2017-2018(第一学期)</option>
+							<option value="4">2016-2017(第二学期)</option>
+						</select>
+						<input type="text" id="startEnd" placeholder="请选择时间范围"  class="layui-input lf" style="width:300px;height: 35px;line-height: 35px;margin-right: 20px;background: #f3f5f8;border-radius: 0;border: none;">
+						<select name="city" lay-verify="required">
+							<option value="">全部</option>
+							<option value="1">进校</option>
+							<option value="2">离校</option>
+						</select>
+						<select name="city" lay-verify="required">
+							<option value="">正常</option>
+							<option value="1">迟到</option>
+							<option value="2">早退</option>
+						</select>
+
+					</form>
+					<div class="tableWrap" style="width: 50%;">
+				         <table class="table table-no-bordered" id="table1" style="border: none;"></table>
+			      </div>
+			</div>
+		</div>
+	</body>
+    <!-- 加载js文件 -->
+		<script type="text/javascript" src="../layui/layui.js"></script>
+		<script type="text/javascript" src="../js/lib/jquery-1.12.4.min.js"></script>
+		<script type="text/javascript" src="../tool/tool.js"></script>
+		<script type="text/javascript" src="../js/lib/bootstrap.js"></script>
+		<script type="text/javascript" src="../js/lib/bootstrap-table/bootstrap-table.min.js"></script>
+		<script type="text/javascript" src="../js/lib/bootstrap-table/bootstrap-table-zh-CN.js"></script>
+		<!-- 引入当前页面js文件 -->
+		<script>
+			layui.use(['layer', 'form', 'element','laydate'], function() {
+				layer = parent.layer === undefined ? layui.layer : top.layer
+				form = layui.form,
+				laydate = layui.laydate,
+				laydate.render({
+					elem: '#startEnd',
+					type: 'datetime',
+					range: true,
+					
+				});
+				var datas = [{
+					'msg': '2018-09-01 8:10',
+					'banji': '进',
+					'total': '正常'
+				},
+				{
+					'msg': '2018-09-01 8:10',
+					'banji': '出',
+					'total': '正常'
+				},
+				{
+					'msg': '2018-09-01 8:10',
+					'banji': '出',
+					'total': '正常'
+				}, {
+					'msg': '2018-09-01 8:10',
+					'banji': '出',
+					'total': '正常'
+				},
+				{
+					
+					'msg': '2018-09-01 8:10',
+					'banji': '出',
+					'total': '正常'
+				},
+				{
+					'msg': '2018-09-01 8:10',
+					'banji': '进',
+					'total': '正常'
+				},
+				{
+					'msg': '2018-09-01 8:10',
+					'banji': '出',
+					'total': '正常'
+				},
+				{
+					'msg': '2018-09-01 8:10',
+					'banji': '出',
+					'total': '正常'
+				}, {
+					'msg': '2018-09-01 8:10',
+					'banji': '出',
+					'total': '正常'
+				},
+				{
+					'msg': '2018-09-01 8:10',
+					'banji': '出',
+					'total': '正常'
+				}
+
+			]
+			$('#table1').bootstrapTable({
+				data: datas,
+				sidePagination: "client",
+				pagination: true,
+				paginationLoop: false,
+				pageNumber: 1,
+				pageSize: 10,
+				pageList: [5, 10, 15],
+                striped : true,
+				columns: [
+					{
+						field: '',
+						align: "center",
+						title: '',
+						formatter: function(value, row, index) {
+                            if(row.banji=='进'){
+                                var a='<span class="leaveState" style="background: #2196F3">进校</span>';
+                            }
+                            if(row.banji=='出'){
+                                var a='<span class="leaveState" style="background: #ff4747">离校</span>';
+                            }
+                            return a;
+						},
+
+					}, {
+						field: 'msg',
+						align: "center",
+						title: '刷卡时间',
+//						sortable: true
+					}, {
+						field: 'banji',
+						align: "center",
+						title: '进出'
+					},
+					{
+						field: 'total',
+						align: "center",
+						title: '状态'
+						
+					}
+				]
+
+			})
+
+			})
+	    </script>
+</html>

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="Author" content="larry" />
+    <meta name="renderer" content="webkit">
+    <META HTTP-EQUIV="pragma" CONTENT="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <!-- load css -->
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.css" media="all">
+    <link rel="stylesheet" href="../js/lib/bootstrap-table/bootstrap-table.css">
+    <link rel="stylesheet" type="text/css" href="../layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../css/public.css">
+</head>
+<style>
+    #classdetail{
+        padding: 45px 40px 30px;
+        background: #ffffff;
+    }
+    #classdetail .layui-form-select{
+        width: 200px;
+        margin-right: 35px;
+        float: left;
+        margin-top: 38px;
+    }
+    #classdetail .btnWrap{
+        padding-top: 27px;
+    }
+    #classdetail .btnWrap button{
+        margin-right: 35px;
+    }
+    #classdetail .btnWrap button.date{
+        background: #ffffff;
+        color:#2388f9 ;
+        border: 1px solid #2388f9;
+    }
+    #classdetail table{
+        padding: 20px 20px 34px;
+        border: none;
+    }
+    #classdetail table th{
+        height: 30px;
+        line-height: 30px;
+        font-weight: normal;
+        color: #c2c2c2;
+        border: transparent;
+    }
+    #classdetail table td {
+        max-width: 450px !important;
+        color: #8a8a8a;
+        line-height: 50px;
+        border-bottom:1px solid #f8f8f8 ;
+    }
+    #classdetail .fixed-table-container{
+        border: none;
+    }
+    #classdetail .tableWrap{
+        padding: 20px 40px;
+        background: #ffffff;
+    }
+
+</style>
+<body>
+<div id="classdetail">
+    <div class="clear" style="padding-bottom: 10px;border-bottom: 1px solid #ececec">
+        <span  class="lf title" style="display:inline-block;font-size: 18px;font-weight: bold;margin-right: 25px"></span>
+        <span class="lf" style="margin-top: 3px;">班主任：</span>
+        <p class="lf" style="margin-top: 3px;">黄水萍</p>
+        <button class="rg layui-btn blue history" onclick="pprojectForClassgrade_Mask().classRecordHistory($(this))">打分历史</button>
+    </div>
+    <form class="layui-form clear">
+        <select name="termid" lay-filter="termid" >
+            <option value="">请选择学期</option>
+        </select>
+        <select name="" >
+            <option value="">15周</option>
+        </select>
+        <select name="project_id" lay-filter="project_id" >
+            <option value="">请选择评分目录</option>
+        </select>
+    </form>
+    <div class="btnWrap">
+        <button class="layui-btn blue">整周</button>
+        <button class="layui-btn date">周一</button>
+        <button class="layui-btn date">周二</button>
+        <button class="layui-btn date">周三</button>
+        <button class="layui-btn date">周四</button>
+        <button class="layui-btn date">周五</button>
+    </div>
+    <div class="tableWrap">
+        <table class="table table-no-bordered"  id="table1" style="border: none;"></table>
+    </div>
+</div>
+</body>
+<!-- 加载js文件 -->
+<script type="text/javascript" src="../layui/layui.js"></script>
+<script type="text/javascript" src="../js/lib/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="../js/lib/jquery.cookie.js"></script>
+<script type="text/javascript" src="../js/all2.js"></script>
+<script type="text/javascript" src="../tool/tool.js"></script>
+<script type="text/javascript" src="../js/lib/bootstrap.js"></script>
+<script type="text/javascript" src="../js/lib/bootstrap-table/bootstrap-table.min.js"></script>
+<script type="text/javascript" src="../js/lib/bootstrap-table/bootstrap-table-zh-CN.js"></script>
+<script type="text/javascript" src="../js/pprojectForClassgrade/pprojectForClassgrade_Mask.js"></script>
+<!-- 引入当前页面js文件 -->
+<script type="text/javascript">
+    layui.use(['layer', 'form', 'element', 'upload','laydate'], function() {
+        layer = layui.layer
+        form = layui.form
+        var upload = layui.upload;
+        //填充学期
+        tool().AssessmentClass();
+        tool().termSelect();
+        //填充五项评比
+
+        //选择打分项弹框
+
+        var datas = [{
+            'pic': '10.0',
+            'jghname': '10.0',
+            'rq': '10.0',
+            'msg': '10.0',
+            'banji': '10.0',
+            'total': '10.0'
+        },
+            {
+                'pic': '-5.0',
+                'jghname': '0',
+                'rq': '-10.0',
+                'msg': '+8.0',
+                'banji': '+15.0',
+                'total': '+8.0'
+            },
+            {
+                'pic': '10.0',
+                'jghname': '10.0',
+                'rq': '10.0',
+                'msg': '10.0',
+                'banji': '10.0',
+                'total': '558.0'
+            }
+        ]
+        $('#table1').bootstrapTable({
+            data: datas,
+            sidePagination: "client",
+            pagination: true,
+            paginationLoop: false,
+            pageNumber: 1,
+            pageSize: 10,
+            pageList: [5, 10, 15],
+            columns: [{
+                field: '',
+                align: "center",
+                title: '',
+                formatter: function(value, row, index) {
+                      if(index==0){
+                         var a='总分';
+                      }else if(index==1){
+                          var a="加/减"
+                      }else if(index==2){
+                          var a="得分"
+                      }
+
+                    return a;
+                }
+
+            },{
+                field: 'pic',
+                align: "center",
+                title: '纪律'
+
+            }, {
+                field: 'jghname',
+                align: "center",
+                width: '100px',
+                title: '两操',
+
+            }, {
+                field: 'rq',
+                align: "center",
+                title: '卫生'
+            }, {
+                field: 'msg',
+                align: "center",
+                title: '五关'
+            }
+                , {
+                    field: 'banji',
+                    align: "center",
+                    width: '100px',
+                    title: '住校',
+
+                }, {
+                    field: 'total',
+                    align: "center",
+                    title: '总分'
+                }
+            ]
+
+        })
+
+    })
+
+</script>
+
+</html>

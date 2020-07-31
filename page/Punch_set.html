@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="Author" content="larry" />
+    <meta name="renderer" content="webkit">
+    <META HTTP-EQUIV="pragma" CONTENT="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.css" media="all">
+    <link rel="stylesheet" href="../js/lib/bootstrap-table/bootstrap-table.css">
+    <link rel="stylesheet" href="../layui/css/layui.css">
+    <link rel="stylesheet" href="../css/public.css">
+    <link rel="stylesheet" href="../css/school_PublicStyle/school_PublicStyle.css">
+</head>
+<style>
+    #student_leave_set{
+        background: #ffffff;
+        padding: 45px 40px;
+    }
+    #student_leave_set .inputWrap{
+        padding-top: 30px;
+    }
+    #student_leave_set .inputWrap ul li input{
+        width: 300px;
+        display: inline-block;
+        background: #f3f5f8;
+        border: 1px solid #f3f5f8;
+        line-height: 35px;
+        height: 35px;
+        border-radius: 0;
+    }
+    #student_leave_set .inputWrap ul li{
+        margin-bottom: 30px;
+    }
+    #student_leave_set span.layui-btn{
+        width: 300px;
+        margin-bottom: 20px;
+        margin-right: 35px;
+        margin-left:0 ;
+    }
+    #student_leave_set table{
+        padding: 20px 20px 34px;
+        border: none;
+    }
+    /*#student_leave_set table th .th-inner {*/
+        /*height: 70px;*/
+        /*line-height: 70px;*/
+        /*font-weight: normal;*/
+        /*color: #b9b9b9;*/
+        /*border: transparent;*/
+        /*padding: 0;*/
+    /*}*/
+    /*#student_leave_set table th{*/
+        /*border: none;*/
+    /*}*/
+    /*#student_leave_set table td {*/
+        /*max-width: 450px !important;*/
+        /*color: #000000;*/
+        /*opacity: 0.87;*/
+        /*line-height: 55px;*/
+        /*border-bottom:1px solid #f8f8f8 ;*/
+        /*position: relative;*/
+    /*}*/
+    /*#student_leave_set .fixed-table-container{*/
+        /*border: none;*/
+    /*}*/
+    #student_leave_set .start-up{
+        display: inline-block;
+        margin-left: 20px;
+        cursor: pointer;
+        width: 50px;
+        height: 25px;
+        background: #cacaca;
+        font-size: 12px;
+        border-radius: 5px;
+        text-align: center;
+        line-height: 25px;
+        color: #ffffff;
+    }
+    .typeBtnWrap  span{
+        /*border-radius: 5px;*/
+    }
+    /*#student_leave_set .typeBtn{*/
+        /*width: 120px;*/
+        /*background: #f3f5f8;*/
+        /*color: #2196F3;*/
+        /*margin-right: 30px;*/
+    /*}*/
+    /*#student_leave_set .typeBtn.active{*/
+        /*background: #2196F3;*/
+       /*color: #ffffff;*/
+    /*}*/
+</style>
+<body>
+     <div id="student_leave_set" style="min-height: 600px">
+         <div>
+             <span style="display: block;font-size: 24px;font-weight: bold;border-bottom:1px solid #ececec;padding-bottom: 25px;">考勤规则设置</span>
+         </div>
+         <div style="padding: 20px 0" class="typeBtnWrap clear sl-formWrap formwrap">
+             <!--<span class="school_Btn typeBtn active" data-type=1>住校生</span>-->
+             <!--<span class="school_Btn typeBtn" data-type=2>通校生</span>-->
+             <ul class="clear" style="display: inline-block;border: none;margin-bottom: 0;padding-top: 10px">
+                 <li class='lf active' data-type=1 style="margin-right: 30px"><i></i><span>住校生</span></li>
+                 <li class='lf' data-type=2><i></i><span>通校生</span></li>
+             </ul>
+             <span class="school_Btn rg" id="switchBtn" style="width: 80px;margin-left: 20px;background: #ff4747"></span>
+         </div>
+         <div class="tableWrap" style="position: relative">
+             <table class="table table-no-bordered"  id="table1" style="border: none;"></table>
+         </div>
+     </div>
+</body>
+    <!-- 加载js文件 -->
+<script type="text/javascript" src="../layui/layui.js"></script>
+<script type="text/javascript" src="../js/lib/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="../js/lib/jquery.cookie.js"></script>
+<script type="text/javascript" src="../js/all2.js"></script>
+<script type="text/javascript" src="../tool/mask.js"></script>
+<script type="text/javascript" src="../tool/tool.js"></script>
+<script type="text/javascript" src="../tool/choose_Score.js"></script>
+<script type="text/javascript" src="../js/lib/bootstrap.js"></script>
+<script type="text/javascript" src="../js/lib/bootstrap-table/bootstrap-table.min.js"></script>
+<script type="text/javascript" src="../js/lib/bootstrap-table/bootstrap-table-zh-CN.js"></script>
+<script type="text/javascript" src="../tool/rules.js"></script>
+<script type="text/javascript" src="../js/Punch/Punch_set.js"></script>
+</html>

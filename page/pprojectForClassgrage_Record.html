@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="Author" content="larry" />
+    <meta name="renderer" content="webkit">
+    <META HTTP-EQUIV="pragma" CONTENT="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <!-- load css -->
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.css" media="all">
+    <link rel="stylesheet" href="../js/lib/bootstrap-table/bootstrap-table.css">
+    <link rel="stylesheet" type="text/css" href="../layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../css/public.css">
+</head>
+<style type="text/css">
+    #class_score {
+        padding: 45px 40px;
+        box-sizing: border-box;
+        background: #FFFFFF;
+    }
+    #class_score .inputWrap{
+        margin-top: 45px;
+    }
+    #class_score .inputWrap ul li input{
+        width: 300px;
+        height: 35px;
+        display: inline-block;
+        background: #f3f5f8;
+        border: none;
+        border-radius: 0;
+    }
+    #class_score .inputWrap ul li{
+        /*margin-bottom: 42px;*/
+    }
+    #class_score .inputWrap ul li span{
+        display: inline-block;
+        width: 94px;
+        line-height: 35px;
+        text-align: left;
+        color: #000000;
+        opacity: 0.87;
+    }
+    #class_score .btnWrap{
+        padding-top: 20px;
+
+    }
+    #class_score .btnWrap button{
+        margin-right: 35px;
+        margin-bottom: 24px;
+        width: 300px;
+        margin-left: 0;
+    }
+    #class_score .btnWrap span.layui-btn {
+        min-width: 200px;
+        margin-bottom: 20px;
+        margin-right: 35px;
+        margin-left: 0;
+    }
+
+</style>
+
+<body>
+<div id="class_score">
+    <span class="title" style="display:block;font-size: 24px;font-weight: bold;padding-bottom: 25px;border-bottom: 1px solid #ececec"></span>
+    <form class="layui-form">
+        <div class="inputWrap">
+            <ul>
+                <li class="clear">
+                    <span class="lf">选择打分项</span>
+                    <input type="text"  placeholder="选择打分项" autocomplete="off" class="layui-input lf" name="names">
+                    <i class="school_Btn" id="Choice">选择</i>
+                </li>
+            </ul>
+        </div>
+        <div style="" class="btnWrap">
+        </div>
+        <div style="margin-bottom:42px;" > <!-- 注意：这一层元素并不是必须的 -->
+            <label class="layui-form-label" style="padding-left: 0;text-align: left;width: 90px;">考评日期</label>
+            <input type="text" class="layui-input" id="time" placeholder="请选择日期" style="background: #f3f5f8;
+			border: 1px solid #f3f5f8;width: 300px;" readonly>
+        </div>
+        <textarea name="desc" placeholder="可填写打分项备注" class="layui-textarea beizhu" style="background: #f3f5f8;border: none;width: 455px;border-radius: 0;"></textarea>
+        <div class="layui-form-item" style="margin-top: 30px;width: 455px;text-align: center">
+                <span class="layui-btn blue" lay-submit lay-filter="formDemo" style="width: 100px;text-align: center;padding: 0;">提交</span>
+        </div>
+
+    </form>
+</div>
+</body>
+<!-- 加载js文件 -->
+<script type="text/javascript" src="../layui/layui.js"></script>
+<script type="text/javascript" src="../js/lib/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="../js/lib/jquery.cookie.js"></script>
+<script type="text/javascript" src="../tool/mask.js"></script>
+<script type="text/javascript" src="../js/all2.js"></script>
+<script type="text/javascript" src="../tool/choose_Score.js"></script>
+<script type="text/javascript" src="../tool/tool.js"></script>
+<script type="text/javascript" src="../js/lib/bootstrap.js"></script>
+<!-- 引入当前页面js文件 -->
+<script type="text/javascript">
+    layui.use(['layer', 'form', 'element', 'upload','laydate','laypage'], function() {
+//        layer = parent.layer === undefined ? layui.layer : top.layer
+        form = layui.form
+        var upload = layui.upload;
+        layui.use('laydate', function(){
+            var laydate = layui.laydate;
+            //执行一个laydate实例
+            laydate.render({
+                elem: '#time' //指定元素
+            });
+        });
+        var ClassChoice1 = new choose_Score('Choice',ClassRecord,{bind:1},function (projectid) {
+            class_score.getRules(projectid);
+        });
+        class_score = (function () {
+            var _m={};
+            var self=_m;
+            //初始化
+            _m.init= function () {
+                self.submit();
+            }
+            //获取班级打分规则
+            _m.getRules = function (projectid) {
+                var params = {
+                    faid: userId,
+                    token: token,
+                    project_id: projectid,
+                    hierarchy: 0
+                }
+                $.axse(urls + classRecordTree, params, function (result) {
+                    if (!result.error) {
+                        var data = result.data[0];
+                        $('.btnWrap').empty();
+                        $('input[name="names"]').val(data.name);
+                        var dom = "";
+                        var rules = data.rules;
+                        for (var i = 0; i < rules.length; i++) {
+                            if(rules[i].operation==1){
+                                rules[i].value='&nbsp+'+ rules[i].value
+                            }else if(rules[i].operation==2){
+                                rules[i].value='&nbsp-'+ rules[i].value
+                            }
+                            dom += '<div><span class="layui-btn gray" data-id=' + rules[i].id + '>' + rules[i].name + rules[i].value + '</span></div>'
+                        }
+                        $('.btnWrap').append(dom);
+                        $('.btnWrap').find('span.layui-btn').unbind('click').bind('click', function () {
+                            $(this).toggleClass('gray');
+                            $(this).toggleClass('blue');
+                        })
+
+                    }
+
+                })
+            }
+            //提交
+            _m.submit = function () {
+                form.on('submit(formDemo)', function(data) {
+                    tool().Switched_Roles('images1/Score.png', '确定提交本次打分？', function () {
+                        var arr = [];
+                        if ($('.btnWrap').find('.blue').length == 0) {
+                            sl_Mask.NoTip('请选择打分规则');
+                            return;
+                        } else {
+                            for (var i = 0; i < $('.btnWrap').find('.blue').length; i++) {
+                                arr.push($('.btnWrap').find('.blue').eq(i).attr('data-id'))
+                            }
+                        }
+                        var params = {
+                            faid: userId,
+                            token: token,
+                            classgrade_ids: $('span.title').attr('data-classgradeid'),
+                            rule_ids: arr.join("-")
+                        }
+                        //备注
+                        if ($.trim($('.beizhu').val())) {
+                            params.annotation = $('.beizhu').val()
+                        }
+                        //time
+                        if ($.trim($('#time').val())) {
+                            params.time = new Date($('#time').val()).getTime();
+                        }
+                        var loadings= top.layui.layer.load(2);
+                        setTimeout(function () {
+                            top.layui.layer.close(loadings);
+                        }, 3000)
+                        $.axse(urls + MoreClassRecord, params, function (result) {
+                            top.layui.layer.close(loadings);
+                            sl_Mask.YesTip('打分成功');
+                            //打分规则
+                            $('input[name="names"]').val('');
+                            $('.btnWrap').empty();
+                            //打分时间
+                            $('#time').val('');
+                            //备注
+                            $('.beizhu').val('');
+
+                        },function () {
+                            top.layui.layer.close(loadings);
+                        })
+                    })
+                })
+            }
+            return _m;
+        })();
+        class_score.init();
+    })
+
+</script>
+
+</html>

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="format-detection" content="telephone=no">
+	<!-- load css -->
+	<link rel="stylesheet" type="text/css" href="../layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../css/public.css">
+    <link rel="stylesheet" href="../css/class_Me.css">
+</head>
+<body>
+  <div id="class_Me">
+        <div class="formwrap">
+      	   <ul class="clear">
+      	   	    <li class='lf active'><i></i><span>全校对比</span></li>
+      	   	    <li class='lf'><i></i><span>同班级对比</span></li>
+      	   	    <li class='lf'><i></i><span>同年级对比</span></li>
+      	   </ul> 
+      </div>
+      <div class="echarsWrap">
+      	    <div class="echars_head">
+      	    	  <h3>三年二班</h3>
+      	          <ul class='clear'>
+      	          	  <li class='lf'>计算机应用专业</li>
+      	          	  <li class='lf'>17届</li>
+      	          	  <li class='lf'>学员数量:42</li>
+      	          	  <li class='lf'>岗位:班主任</li>
+      	          </ul>
+            </div>
+             <div id="class_echars" style="width: 100%;height: 300px;padding-left:15px;">
+            </div>
+      </div>
+     
+
+  </div>
+
+<!-- 加载js文件 -->
+<script type="text/javascript" src="../js/lib/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="../tool/tool.js"></script>
+<script src="../js/lib/echarts.js"></script>
+<!-- 引入当前页面js文件 -->
+
+  <script>
+  	  
+		var myChart = echarts.init(document.getElementById('class_echars'));
+		var obama_budget_2012 ={
+
+    "budget2011List": [
+       50,
+       100,
+       120,
+       80,
+       30,
+       200,
+       500,
+       600,
+       100,
+       140,
+        350,
+       100,
+       120,
+       80,
+       30,
+       200,
+       500,
+       600,
+       100,
+       140,
+        50,
+       100,
+       120,
+       80,
+       30,
+       200
+    ],
+    "names": [
+        '17计7',
+        '17计6',
+        '17计5',
+        '17计7',
+        '17计6',
+        '17计5',
+        '17计7',
+        '17计6',
+        '17计5',
+        '17计7', 
+        '我的班',
+        '17计6',
+        '17计5',
+         '17计7',
+        '17计6',
+        '17计5',
+         '17计7',
+        '17计6',
+        '17计5',
+        '17计7',
+        '17计6',
+        '17计5'
+        
+    ]
+}
+   myChart.showLoading();
+    myChart.hideLoading();
+
+    option = {
+        tooltip : {
+            trigger: 'axis',
+            axisPointer: {
+                type: 'shadow',
+                label: {
+                    show: false
+                }
+            }
+        },
+        toolbox: {
+            show : false,
+            feature : {
+                mark : {show: true},
+                dataView : {show: true, readOnly: false},
+                magicType: {show: true, type: ['line', 'bar']},
+                restore : {show: true},
+                saveAsImage : {show: true}
+            }
+        },
+        calculable : true,
+        grid: {
+            top: '10%',
+            left: '1%',
+            right: '10%',
+            containLabel: true
+        },
+        xAxis: [
+            {
+                type : 'category',
+                data : obama_budget_2012.names,
+               "axisLine":{       //y轴
+                      "show":false,
+                       'lineStyle':{
+                       	  color:'#6a6a6a'
+                       }
+                       },
+               "axisTick":{       //y轴刻度线
+                      "show":false
+                      },
+                "splitLine": {     //网格线
+                      "show": false
+                  },
+                  
+                  axisLabel : {
+                       show:true,
+                       interval: 'auto',    // {number}
+                         rotate:0,
+                         margin: 15,
+
+                    textStyle: {
+                        color: '#6a6a6a'
+                    }
+                   
+               } 
+               
+            }
+        ],
+        yAxis: [
+            {
+                type : 'value',
+                name : '',
+                "axisLine":{       //y轴
+                      "show":true,
+                      "lineStyle":{
+                      	color:"#f8f8f8"
+                      }
+                       },
+               "axisTick":{       //y轴刻度线
+                      "show":false,
+                      },
+                "splitLine": {     //网格线
+                      "show": false,
+                      "lineStyle":{
+                       	  color:'#f8f8f8'
+                       }
+                      
+                 },
+                  axisLabel : {
+                       show:true,
+                       interval: 'auto',    // {number}
+                         rotate:0,
+                         margin: -8,
+
+                    textStyle: {
+                        color: '#c9c9c9'
+                     }
+               } 
+
+            }
+        ],
+        dataZoom: [
+            {
+                show: false,
+                start: 40,
+                end: 94
+            },
+            {
+                type: 'inside',
+                start: 9,
+                end: 30
+            },
+            {
+                show: false,
+                yAxisIndex: 0,
+                filterMode: 'empty',
+                width: 30,
+                height: '80%',
+                showDataShadow: false,
+                left: '20%'
+            }
+        ],
+        series : [
+            {
+                name: '总分',
+                type: 'bar',
+                data: obama_budget_2012.budget2011List,
+                barWidth:30,//柱图宽度
+                barCategoryGap:10000000000000000,
+                itemStyle: {
+                       // 点的颜色。
+                         color:function(params){
+                         	var index_color = params.name;
+                         	   
+                         	    if(index_color=='我的班'){
+                         	    	return '#2387f9'
+                         	    }else{
+                         	    	return '#e0e0e0'
+                         	    }
+                         	
+                         }
+                      },
+                label: {
+                    normal: {
+                           show: true,
+                          position: 'top'
+                       }
+                   },
+               
+               }
+        ]
+    };
+
+    myChart.setOption(option);
+     //单选框的点击事件
+      $('#class_Me .formwrap ul li').unbind('click').bind('click',function(){
+      	     $('#class_Me .formwrap ul li').removeClass('active');
+      	     $(this).addClass('active');
+      })
+      	
+      //点击
+  </script>
+</body>
+</html>

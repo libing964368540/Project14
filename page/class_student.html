@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+    <META HTTP-EQUIV="pragma" CONTENT="no-cache">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="format-detection" content="telephone=no">
+	<!-- load css -->
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.css" media="all">
+    <link rel="stylesheet" href="../js/lib/bootstrap-table/bootstrap-table.css">
+	<link rel="stylesheet" type="text/css" href="../layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../css/public.css">
+    <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+  <div id="account">
+       <div class="account_head clear" style="margin-bottom: 15px;">
+            <div class="search lf">
+            	<img src="../images1/search.png" alt="" />
+                <input type="text" placeholder="请输入所要查询的姓名/学号">
+                <button class="layui-btn layui-btn-normal" id="search">搜索</button>
+            </div>
+            <div class="Make rg">
+              
+                <button class="layui-btn layui-btn-normal blue">添加账号</button>
+            </div>
+       </div>
+      <div class="tableWrap" style="padding-left: 25px;">
+          <table class="table table-no-bordered"  id="table1" style="border: none;"></table>
+      </div>
+  </div>
+<!-- 加载js文件 -->
+<script type="text/javascript" src="../layui/layui.js"></script>
+<script type="text/javascript" src="../js/lib/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="../tool/tool.js"></script>
+<script type="text/javascript" src="../js/lib/bootstrap.js"></script>
+  <script type="text/javascript" src="../js/lib/bootstrap-table/bootstrap-table.min.js"></script>
+  <script type="text/javascript" src="../js/lib/bootstrap-table/bootstrap-table-zh-CN.js"></script>
+<!-- 引入当前页面js文件 -->
+
+  <script>
+      layui.use(['layer', 'form', 'element'], function(){
+          var layer = layui.layer
+              ,form = layui.form
+              ,element = layui.element
+    
+      var datas=[
+          {
+              'pic':'../images1/head.png',
+              'jghname':'libing' ,
+              'rq':'1233312233',
+              'msg':'三年级三班',
+              'banji':'130',
+              'time':'18/09.14 15:00',
+              'score':'+5',
+              'years':'18届',
+              'major':'算计应用',
+              'state':1
+          },
+          {
+              'pic':'../images1/head.png',
+              'jghname':'libing' ,
+              'rq':'1356465456',
+              'msg':'三年级三班',
+              'banji':'130',
+              'time':'18/09.14 15:00',
+              'score':'+5',
+               'years':'18届',
+               'major':'算计应用',
+                'state':2
+              
+          },
+          {
+              'pic':'../images1/head.png',
+              'jghname':'libing' ,
+              'rq':'564654545656',
+              'msg':'三年级三班',
+              'banji':'130',
+              'time':'18/09.14 15:00',
+              'score':'+5',
+               'years':'18届',
+               'major':'算计应用',
+                 'state':3
+          }, {
+              'pic':'../images1/head.png',
+              'jghname':'libing' ,
+              'rq':'879879',
+              'msg':'三年级三班',
+              'banji':'130',
+              'time':'18/09.14 15:00',
+               'score':'+5',
+                'years':'18届',
+                'major':'算计应用'
+          },
+          {   'pic':'../images1/head.png',
+              'jghname':'libing' ,
+              'rq':'1415646541561',
+              'msg':'三年级三班',
+              'banji':'130',
+               'time':'18/09.14 15:00',
+               'score':'+5',
+                'years':'18届',
+                'major':'算计应用'
+          },
+          {
+              'pic':'../images1/head.png',
+              'jghname':'libing' ,
+              'rq':'1321313212',
+              'msg':'三年级三班',
+              'banji':'130',
+              'time':'18/09.14 15:00',
+              'score':'+5',
+               'years':'18届',
+               'major':'算计应用'
+          }
+
+      ]
+      $('#table1').bootstrapTable({
+          data:datas,
+          sidePagination: "client",
+          pagination: true,
+          paginationLoop: false,
+          pageNumber:1,
+          pageSize: 10,
+          pageList: [5, 10, 15],
+          columns:
+              [  {
+                  field: '',
+                  align:"",
+                  width:'25px',
+                  title: '',
+                   formatter: function(value, row, index) {
+                   	var a='<em></em>'
+                   	    return a;
+                   },
+                   
+                  cellStyle:{
+		             css:{"border-bottom":"2px solid transparent"}
+	               }
+
+              },{
+                  field: 'pic',
+                  align:"center",
+                  title: '',
+                  width:'80px',
+                  formatter: function(value, row, index) {
+                  	 if(row.state){
+                  	 	 	if(row.state==1){
+                  	 	        var a='<span class="school_imgwrap"><em class="OnlyTip yellow">年级No1</em><img src="'+row.pic+'" alt="" ></span>'
+                  	           }
+                  	        if(row.state==2){
+                  	 	         var a='<span class="school_imgwrap"><img src="'+row.pic+'" alt="" ><em class="OnlyTip gray">班级No1</em></span>'
+                  	           }
+                  	         if(row.state==3){
+                  	 	          var a='<span class="school_imgwrap"><img src="'+row.pic+'" alt="" ><em class="OnlyTip blue">专业No1</em></span>'
+                  	          }  
+                  	     
+                  	 }else{
+                  	     var a='<span class="school_imgwrap"><img src="'+row.pic+'" alt="" ><em></em></span>'
+                  	       }
+                  	
+                    
+                      return a;
+                  }
+
+              },{
+                  field: 'jghname',
+                  align:"center",
+                  width:'100px',
+                  title: '姓名',
+                   cellStyle:{
+		             css:{"color":"#7a7a7a"}
+	               }
+              }, {
+                  field: 'rq',
+                  align:"center",
+                  title: '专业',
+                  formatter: function(value, row, index) {
+                      var a='<p>'+row.years+'&nbsp;'+row.major+'</p>'
+                      return a;
+                  },
+                  
+                   cellStyle:{
+		             css:{"color":"#989898"}
+	               }
+
+              }, {
+                  field: 'msg',
+                  align:"center",
+                  title: '班级',
+                   cellStyle:{
+		             css:{"color":"#979797"}
+	               }
+              }, {
+                  field: 'banji',
+                  align:"center",
+                  title: '得分情况',
+                   formatter: function(value, row, index) {
+                  	 if(row.state){
+                  	 	 	if(row.state==1){
+                  	 	        var a='<span style="color:#ffb55d">'+row.banji+'</span>'
+                  	           }
+                  	        if(row.state==2){
+                  	 	         var a='<span style="color:#2d2d2d">'+row.banji+'</span>'
+                  	           }
+                  	         if(row.state==3){
+                  	 	          var a='<span style="color:#65bff8">'+row.banji+'</span>'
+                  	          }  
+                  	     
+                  	 }else{
+                  	     var a='<span>'+row.banji+'</span>'
+                  	       }
+                  	
+                    
+                      return a;
+                  }
+                  
+                  
+              }, {
+                  field: 'time',
+                  align:"center",
+                  title: '最近',
+                   formatter: function(value, row, index) {
+                      var a='<p>'+row.time+'&nbsp;'+row.score+'</p>'
+                      return a;
+                  },
+                    cellStyle:{
+		             css:{"color":"#808080"}
+	               }
+                  
+              },{
+                  field: 'caozuo',
+                  align:"center",
+                  title: '操作',
+                  formatter: function(value, row, index) {
+                      var a = '<a style="color:#2387f9; cursor: pointer;">打分</a>'
+                      return a;
+                  }
+              }]
+
+      })
+       //单选框的点击事件
+      $('#account .formwrap ul li').unbind('click').bind('click',function(){
+      	     $('#account .formwrap ul li').removeClass('active');
+      	     $(this).addClass('active');
+      })
+       //搜索按钮
+    
+      $('#account .search input').focus(function(){
+      	     $(this).css({'padding-left':'15px'}).attr('placeholder','');  	
+      	})
+      $('#account .search input').blur(function(){
+      	     if(!$.trim($(this).val())){
+      	     	$(this).css({'padding-left':'35px'}).attr('placeholder','请输入所要查询的姓名/学号'); 
+      	     }
+      	      	
+      	})
+      $('.table tr').css("background-color","#FFFFFF");
+      })
+      	
+      //点击
+  </script>
+</body>
+</html>

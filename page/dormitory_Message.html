@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="Author" content="larry" />
+    <meta name="renderer" content="webkit">
+    <META HTTP-EQUIV="pragma" CONTENT="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <!-- load css -->
+    <link rel="stylesheet" type="text/css" href="../layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../css/public.css?v=1.0">
+    <link rel="stylesheet" href="../font/material-icons.css">
+    <style>
+        #account .roommate li{
+            width: 82px;
+            margin-right: 40px;
+        }
+        #account .roommate li dt{
+            width: 100%;
+            height: 82px;
+            background: #f3f5f8;
+            position: relative;
+        }
+        #account .roommate li dt span, #account .roommate li dt .photo{
+           display: inline-block;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            top:0;
+            cursor: pointer;
+        }
+        #account .roommate li dt span, #account .roommate li dt .imgWrap{
+            width: 100%;
+            height: 82px;
+            overflow: hidden;
+        }
+        #account .roommate li dd{
+            margin-top: 6px;
+            margin-bottom: 10px;
+            text-align: center;
+            font-size: 14px;
+        }
+        #account .roommate li dt span .add{
+            position: absolute;
+            left: 30px;
+            top: 30px;
+            font-size: 20px!important;
+            color: #aaaaac;
+            font-weight: bold;
+        }
+        #account .roommate li dt .photo img{
+            width: 100%;
+            /*height: 100%;*/
+            height: auto;
+        }
+        #account .roommate li dt .photo .close{
+            width: 17.5px;
+            height: 17px;
+            position: absolute;
+            left: 73px;
+            top: -8.5px;
+            color: #f8545b;
+            border-radius: 50%;
+            display: none;
+            opacity: 1;
+            overflow: hidden;
+
+        }
+        #account .roommate li dt .photo:hover .close{
+            display: inline-block;
+        }
+        #account .roommate li dt .photo .close i{
+            font-size: 23px!important;
+            position: absolute;
+            left: -3px;
+            top: -2.6px;
+            background: #ffffff;
+        }
+        #account .roomNum{
+            width: 20px;
+            height: 20px;
+            background: #2196f3;
+            text-align: center;
+            display: block;
+            font-style: normal;
+            color: #ffffff;
+            border-radius: 50%;
+            margin: 3px auto;
+            margin-bottom: 6px;
+            line-height: 20px;
+            font-size: 12px;
+        }
+
+    </style>
+</head>
+<body>
+<div id="account" style="padding: 45px 40px;background: #ffffff">
+    <div style="position: relative">
+        <h3 style="font-size:24px;background: #ffffff; padding-bottom:25px;border-bottom: 1px solid #f3f5f8;font-weight: bold;margin-bottom: 24px"></h3>
+        <a class="red" id="del" style="position: absolute;top:12px;right: 0;">清空寝室</a>
+    </div>
+    <div class="tableWrap" style="padding: 0">
+          <ul class="roommate clear">
+          </ul>
+    </div>
+</div>
+<!-- 加载js文件 -->
+<script type="text/javascript" src="../layui/layui.js"></script>
+<script type="text/javascript" src="../js/lib/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="../js/lib/jquery.cookie.js"></script>
+<script type="text/javascript" src="../js/leave/jquery.ztree.core.min.js"></script>
+<script type="text/javascript" src="../js/all2.js"></script>
+<script type="text/javascript" src="../tool/mask.js"></script>
+<script type="text/javascript" src="../tool/classgrade_Tree.js"></script>
+<script type="text/javascript" src="../tool/dormitory_choose_student.js"></script>
+<script type="text/javascript" src="../tool/bindStudent.js"></script>
+<script type="text/javascript" src="../tool/tool.js"></script>
+<script type="text/javascript" src="../js/lib/bootstrap.js"></script>
+<script type="text/javascript" src="../js/dormitory/dormitory_DormMessage.js"></script>
+<!-- 引入当前页面js文件 -->
+</body>
+</html>

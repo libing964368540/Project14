@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="Author" content="larry" />
+    <meta name="renderer" content="webkit">
+    <META HTTP-EQUIV="pragma" CONTENT="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <!-- load css -->
+    <link rel="stylesheet" href="../css/duty/style.css">
+    <link rel="stylesheet" href="../css/duty/theme.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.css" media="all">
+    <link rel="stylesheet" href="../js/lib/bootstrap-table/bootstrap-table.css">
+    <link rel="stylesheet" type="text/css" href="../layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../css/public.css">
+    <link rel="stylesheet" href="../css/school_PublicStyle/school_PublicStyle.css">
+    <link rel="stylesheet" href="../font/material-icons.css">
+    <style>
+        #account .table-striped > tbody > tr:nth-child(2n+1) > td,
+        #account .table-striped > tbody > tr:nth-child(2n+1) > th {
+            background-color: #f3f5f8;//此处是自己想用的颜色
+        }
+        #account .table-striped > tbody > tr:nth-child(2n+1) {
+            background-color: #f3f5f8!important;
+        }
+    </style>
+</head>
+<body>
+<div id="account" class="sl-container MarginTop45" style="min-height: 600px">
+    <div class="head" style="position: relative;border-bottom: 1px solid #ececec;">
+         <span class="sl-title">值班管理</span>
+         <!--<a class="blue rg" style="line-height: 50px">导入表格</a>-->
+    </div>
+    <!--值班管理-->
+    <div class="dutyWrap" style="padding-top: 24px">
+        <div class="clear addWrap" style="margin-bottom: 20px">
+            <div class="aboluo-w-700" style="display: inline-block;">
+                <div class="aboluo-leftdiv">
+                    <div class="aboluo-tools">
+                        <div class="aboluo-calendar-select-year"></div><div class="aboluo-calendar-month"><a class="aboluo-month-a-perv" href="javascript:;"><i class="material-icons" style="vertical-align: middle;color: #2196F3">keyboard_arrow_left</i></a><a class="aboluo-month-a-next" href="javascript:;"><i class="material-icons"style="vertical-align: middle;color: #2196F3;">keyboard_arrow_right</i>  </a>
+                    </div>
+                        <span class="aboluo-toToday">返回今天</span>
+                    </div>
+                    <div class="aboluo-rilidiv">
+                        <table class="aboluo-rilitable" cellspacing="0" cellpadding="0">
+                            <thead class="aboluo-rilithead">
+                            <tr>
+                                <th>一</td>
+                                <th>二</td>
+                                <th>三</td>
+                                <th>四</td>
+                                <th>五</td>
+                                <th style="color:red;">六</td>
+                                <th style="color:red;">日</td>
+                            </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+                <div class="aboluo-rightdiv">
+                    <p class="aboluo-xssj"><p>
+                    <p class="aboluo-currday"></p>
+                    <p class="aboluo-ssjjr"style="display: none"></p>
+                    <p class="aboluo-xsmx" style="display: none"></p>
+                </div>
+            </div>
+            <!--<span class="school_Btn rg" style="width: 120px;" id="addOverTime" onclick="duty_mask().teacher_Work_Add($(this))">新增值班</span>-->
+        </div>
+        <div class="tableWrap" style="padding: 0">
+            <table class="table table-no-bordered"  id="table1" style="border: none;"></table>
+        </div>
+    </div>
+    <!--导入表格-->
+    <div class="dutyWrap" style="display: none;">
+        <ul style="padding: 42px 0;">
+            <li class="lf" style="margin-right: 15px"><span class="layui-btn blue DownFile borderRadiusAll">下载Excel模板（教师）</span></li>
+            <li class="lf"><span class="layui-btn blue DownFile borderRadiusAll">下载Excel模板（干部）</span></li>
+            <li class="lf" style="background: #f3f5f8;width: 340px;margin-left: 70px;padding-left: 24px;height: 35px;position: relative;">
+                <span style="display: inline-block;position: relative;">
+                       <span style="display:block;width: 80px;height: 25px;background: #b1b1b1;line-height: 25px;color: #ffffff;text-align: center;cursor: pointer;float: left;margin-top: 5px;">选择文件</span>
+                       <p style="display: block;width: 170px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;line-height: 35px;float: left;padding-left: 5px;" class="Filename">未选择任何文件</p>
+                       <input type="file" style="padding-top: 5px;width: 80px;height: 25px;position: absolute;left: 0;top: 0px;opacity: 0" onchange="tool().upFile($(this))">
+                </span>
+                <!--<span class="school_Btn"  onclick="web_File().UpFile_duty($(this))"style="position: absolute;right: 0;top:0;">上传</span>-->
+                <span class="school_Btn borderRadiusRight"style="position: absolute;right: 0;top:0;" id="UpFile">上传</span>
+            </li>
+        </ul>
+    </div>
+</div>
+<!-- 加载js文件 -->
+<script type="text/javascript" src="../layui/layui.js"></script>
+<script type="text/javascript" src="../js/lib/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="../js/lib/jquery.cookie.js"></script>
+<script type="text/javascript" src="../js/all2.js"></script>
+<script type="text/javascript" src="../tool/mask.js"></script>
+<script type="text/javascript" src="../tool/tool.js"></script>
+<script type="text/javascript" src="../js/lib/bootstrap.js"></script>
+<script type="text/javascript" src="../js/lib/bootstrap-table/bootstrap-table.min.js"></script>
+<script type="text/javascript" src="../js/lib/bootstrap-table/bootstrap-table-zh-CN.js"></script>
+<script type="text/javascript" src="../js/js.js"></script>
+<script type="text/javascript" src="../js/duty/duty_mask.js"></script>
+<script type="text/javascript" src="../tool/File.js"></script>
+<script type="text/javascript" src="../js/duty/duty_getDutys.js"></script>
+<script type="text/javascript" src="../tool/overtime_set.js"></script>
+
+<!-- 引入当前页面js文件 -->
+</body>
+</html>

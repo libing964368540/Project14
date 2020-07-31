@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="Author" content="larry" />
+    <meta name="renderer" content="webkit">
+    <META HTTP-EQUIV="pragma" CONTENT="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <!-- load css -->
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.css" media="all">
+    <link rel="stylesheet" href="../js/lib/bootstrap-table/bootstrap-table.css">
+    <link rel="stylesheet" type="text/css" href="../layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../css/public.css">
+</head>
+<style>
+    #stay_state{
+        padding: 45px 40px;
+        background: #ffffff;
+        color: #000000;
+        opacity: 0.87;
+        position: relative;
+    }
+    #stay_state .title{
+        font-size: 24px;
+        font-weight: bold;
+        padding-bottom: 25px;
+        border-bottom: 1px solid #f3f5f8;
+    }
+    #stay_state ul.content{
+        padding-top: 25px;
+    }
+    #stay_state ul.content li{
+        margin-bottom: 40px;
+    }
+    #stay_state ul.content li span{
+        display: inline-block;
+        width: 105px;
+        vertical-align: top;
+    }
+    #stay_state ul.content li p{
+        display: inline-block;
+        width: 600px;
+    }
+    #stay_state ul.content li p img{
+        width: 100%;
+        height: 100%;
+    }
+    #stay_state a.delBtn{
+        position: absolute;
+        top: 7px;
+        right: 0;
+        font-size: 14px;
+        color: #ff4747;
+        cursor: pointer;
+        display: none
+    }
+
+</style>
+<body>
+<div id="stay_state">
+    <div style="position: relative">
+        <h3 class="title">查看退住单</h3>
+        <a class="delBtn">删除此条退住</a>
+    </div>
+    <div style="margin-bottom:30px;">
+        <ul class="content">
+            <li><span>班级：</span><p class="classgrade" style="width: 140px"></p><p class=""></p></li>
+            <li><span>学生：</span><p class="account"><li>
+            <li><span>退住时间：</span><p class="time"></p><li>
+            <li><span>退住类型：</span><p class="type"></p><li>
+            <li><span>退住原因：</span><p class="des"></p><li>
+            <li><span>发起人：</span><p class="commit_account"></p><li>
+            <li><span>发起时间：</span><p class="commit_time"></p><li>
+        </ul>
+    </div>
+</div>
+</body>
+<!-- 加载js文件 -->
+<script type="text/javascript" src="../layui/layui.js"></script>
+<script type="text/javascript" src="../js/lib/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="../js/lib/jquery.cookie.js"></script>
+<script type="text/javascript" src="../js/all2.js"></script>
+<script type="text/javascript" src="../tool/tool.js"></script>
+<script type="text/javascript">
+    layui.use(['layer', 'form', 'element','laydate'], function() {
+        var layer = layui.layer
+            , form = layui.form
+            , element = layui.element
+        var stay_state= (function () {
+            var _m={};
+            var self=_m;
+            //初始化
+            _m.init = function () {
+                self.del();
+                }
+            //删除
+            _m.del = function () {
+                $('.delBtn').unbind('click').bind('click',function () {
+                       var that=$(this);
+                    tool().Switched_Roles('images1/out.png','确定删除退住单？', function() {
+                        self.delAjax(that);
+                    })
+                })
+            }
+            _m.delAjax = function (that) {
+                var ids=that.attr('data-id');
+                var params={
+                    token:token,
+                    faid:userId,
+                    checkout_id:ids
+                }
+                $.axse(urls + '/dormitoryCheck/removeCheckOut.action', params, function (result) {
+                    top.layer.msg('<i class="material-icons msgIconStyle">check_circle</i>'+'删除成功',{
+                        skin: 'msgStyle',//skin属性可以将layer的标签提取出来，重新定义样式
+                    });
+                    var index = parent.layer.getFrameIndex(window.name);
+                    parent.layer.close(index);//关闭当前页
+                    parent.$('#table1').bootstrapTable('refresh');
+                })
+            }
+            return _m;
+        })();
+        stay_state.init()
+    })
+</script>
+</html>

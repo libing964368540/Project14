@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <META HTTP-EQUIV="pragma" CONTENT="no-cache">
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="Author" content="larry" />
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <!-- load css -->
+    <link rel="stylesheet" type="text/css" href="../layui/css/layui.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../css/public.css">
+    <link rel="stylesheet" href="../font/material-icons.css">
+    <link rel="stylesheet" href="../css/school_PublicStyle/school_PublicStyle.css">
+</head>
+<style type="text/css">
+    #student_record {
+        padding: 45px 40px;
+        box-sizing: border-box;
+        background: #FFFFFF;
+    }
+    #student_record .inputWrap{
+        margin-top: 45px;
+    }
+    #student_record .inputWrap ul li input{
+        width: 300px;
+        height: 35px;
+        display: inline-block;
+        background: #f3f5f8;
+        border: none;
+        border-radius:0 ;
+    }
+    #student_record .inputWrap ul li{
+        margin-bottom: 42px;
+    }
+    #student_record .inputWrap ul li span{
+        display: inline-block;
+        width: 94px;
+        line-height: 35px;
+        text-align: left;
+    }
+    #student_record .btnWrap{
+        padding-top: 5px;
+        padding-bottom: 26px;
+    }
+    #student_record .btnWrap button{
+        margin-right: 35px;
+        margin-bottom: 24px;
+        width: 300px;
+        margin-left: 0;
+    }
+    #student_record .btnWrap span.layui-btn {
+        min-width: 200px;
+        margin-bottom: 20px;
+        margin-right: 35px;
+        margin-left: 0;
+    }
+    .NoClick{
+        position: relative;
+    }
+    .NoClick::before{
+        content: '提交中...';
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 90%;
+        height: 100%;
+        background: #2196F3;
+        z-index: 11;
+        border-radius: 4px;
+        text-align: right;
+    }
+</style>
+
+<body>
+<div id="student_record">
+    <span style="display:block;font-size: 24px;font-weight: bold;padding-bottom: 25px;border-bottom: 1px solid #ececec" class="studentTitle"></span>
+    <form class="layui-form">
+        <div class="inputWrap">
+            <ul>
+                <li class="clear">
+                    <span class="lf">学生</span>
+                    <input type="text"  placeholder="" autocomplete="off" class="layui-input lf" readonly name="rname">
+                  </li>
+                <li class="clear">
+                    <span class="lf">选择打分项</span>
+                    <input type="text"  placeholder="选择打分项" autocomplete="off" class="layui-input lf" name="names" readonly>
+                    <em class="school_Btn borderRadiusRight" id="Choice">选择</em>
+                </li>
+            </ul>
+        </div>
+        <div class="btnWrap">
+        </div>
+        <div class=""> <!-- 注意：这一层元素并不是必须的 -->
+            <label class="layui-form-label" style="padding-left: 0;text-align: left;width: 92px">考评日期</label>
+            <input type="text" class="layui-input" id="time" placeholder="请选择日期" style="background: #f3f5f8;
+			border: 1px solid #f3f5f8;width: 300px;" readonly>
+        </div>
+            <textarea name="" placeholder="可填写打分项备注" class="layui-textarea beizhu" style="background: #f3f5f8;border: none; border-radius:0 ;width: 455px;margin-top: 42px"></textarea>
+
+        <div class="layui-form-item" style="margin-top: 30px;width: 455px">
+            <div class="layui-input-block" style="text-align: center;">
+                <span class="layui-btn blue borderRadiusAll" id="sumbit" >提交</span>
+
+            </div>
+        </div>
+
+    </form>
+</div>
+</body>
+<!-- 加载js文件 -->
+<script type="text/javascript" src="../layui/layui.js"></script>
+<script type="text/javascript" src="../js/lib/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="../js/lib/jquery.cookie.js"></script>
+<script type="text/javascript" src="../js/all2.js"></script>
+<script type="text/javascript" src="../tool/mask.js"></script>
+<script type="text/javascript" src="../js/leave/jquery.ztree.core.min.js"></script>
+<script type="text/javascript" src="../js/lib/jquery.ztree.excheck.js"></script>
+<script type="text/javascript" src="../tool/choose_Score.js"></script>
+<script type="text/javascript" src="../tool/tool.js"></script>
+<script type="text/javascript" src="../tool/choose_grade_student.js"></script>
+<script type="text/javascript" src="../tool/rules.js"></script>
+<!-- 引入当前页面js文件 -->
+<script type="text/javascript">
+    layui.use(['layer', 'form', 'element', 'upload','laydate','laypage'], function() {
+        layer = parent.layer === undefined ? layui.layer : top.layer
+        form = layui.form
+        laypage = layui.laypage;
+        var upload = layui.upload;
+        layui.use('laydate', function(){
+            var laydate = layui.laydate;
+            //执行一个laydate实例
+            laydate.render({
+                elem: '#time', //指定元素
+                format: 'yyyy-MM-dd'
+            });
+        });
+        var p1 = new choose_Score('Choice',studentRecord,{free:0},function (projectid) {
+            var rules=new getRulesForStudet(projectid,$('.btnWrap'));
+        });
+        student_record = (function () {
+            var _m = {};
+            var self = _m;
+            //初始化
+            _m.init = function () {
+                self.submit();
+            }
+            //点击提交
+            _m.submit = function () {
+                $('#sumbit').unbind('click').bind('click', function () {
+                    var that = $(this);
+                    if($(this).hasClass('NoClick')){
+                        return;
+                    }
+                    tool().Switched_Roles('images1/Score.png','确定提交本次打分？',function () {
+                        var arr=[];
+                        if ($('.btnWrap').find('span.blue').length == 0) {
+                            sl_Mask.NoTip('请选择打分规则');
+                            return;
+                        }else{
+                            for(var i=0;i<$('.btnWrap').find('span.blue').length;i++){
+                                arr.push($('.btnWrap').find('span.blue').eq(i).attr('data-id'))
+                            }
+                        }
+                        var params = {
+                            faid: userId,
+                            token: token,
+                            taids: $('input[name="rname"]').attr('data-taid'),
+                            rids: arr.join("-")
+                        }
+                        if($('#time').val()){
+                            params.time=new Date($('#time').val().replace(/-/g,"/")+' 00:00:00').getTime();
+                        }
+                        if($.trim($('.beizhu').val())){
+                            params.annotation=$('.beizhu').val()
+                        }
+                        that.addClass('NoClick');
+                        tool().onClick(that);
+//                        var loadings= top.layui.layer.load(2);
+                        $.axse(urls + addStudent_Record, params, function (result) {
+                            that.removeClass('NoClick');
+                            $('.fading-circle').remove();
+//                                top.layui.layer.close(loadings);
+                                sl_Mask.YesTip('打分成功');
+                                //打分规则
+                                $('input[name="names"]').val('');
+                                $('.btnWrap').empty();
+                                //打分时间
+                                 $('#time').val('');
+                                //备注
+                                $('.beizhu').val('');
+
+                        },function () {
+                            that.removeClass('NoClick');
+                            $('.fading-circle').remove();
+//                            top.layui.layer.close(loadings);
+                        })
+                    })
+
+                })
+            }
+            return _m;
+        })();
+        student_record.init();
+    })
+</script>
+
+</html>

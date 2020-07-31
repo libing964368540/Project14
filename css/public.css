@@ -1,0 +1,792 @@
+/*公共样式*/
+.childrenBody{ padding:10px;}
+.layui-table-view{ margin:0 !important;}
+.magb0{margin-bottom:0 !important;}
+.magt0{ margin-top:0 !important;}
+.magt3{ margin-top:3px !important;}
+.magt10{ margin-top:10px !important;}
+.magb15{ margin-bottom:15px !important;}
+.magt30{ margin-top:30px !important;}
+.layui-left{text-align:left;}
+.layui-block{ width:100% !important;}
+.layui-center{text-align:center;}
+.layui-right{text-align:right;}
+.layui-elem-quote.title{ padding:10px 15px; margin-bottom:0;}
+.layui-bg-white{ background-color:#fff !important;}
+.border{ border:1px solid #e6e6e6 !important; padding:10px; border-top:none;}
+.main_btn .layui-btn{ margin:2px 5px 2px 0;}
+.layui-timeline-axis{ left:-4px;}
+.layui-elem-quote{ word-break: break-all;}
+.icons li,.icons li:hover,.loginBody .seraph,.loginBody .seraph:hover,.loginBody .layui-form-item.layui-input-focus label,.loginBody .layui-form-item label,.loginBody .layui-form-item.layui-input-focus input,.loginBody .layui-form-item input{transition: all 0.3s ease-in-out;-webkit-transition: all 0.3s ease-in-out;}
+.icons li:hover i,.icons li i{transition: font-size 0.3s ease-in-out;-webkit-transition: font-size 0.3s ease-in-out;}
+.loginBody .layui-input-focus .layui-input::-webkit-input-placeholder{transition: color 0.2s linear 0.2s;-webkit-transition: color 0.2s linear 0.2s;}
+.loginBody .layui-input-focus .layui-input::-moz-placeholder{transition: color 0.2s linear 0.2s;}
+.loginBody .layui-input-focus .layui-input:-ms-input-placeholder{transition: color 0.2s linear 0.2s;}
+.loginBody .layui-input-focus .layui-input::placeholder{transition: color 0.2s linear 0.2s;-webkit-transition: color 0.2s linear 0.2s;}
+/*后台首页*/
+.panel_box{ margin-bottom:5px;}
+.panel{ text-align:center; height:90px;}
+.panel_box a{display:block; border-radius:5px; overflow:hidden; height:80px; background-color:#f2f2f2 !important; }
+.panel_icon{ width:40%; display: inline-block; line-height:80px; float:left; position:relative; height:100%;}
+.panel_icon i{ font-size:40px !important; color:#fff; display: inline-block;}
+.panel_word{ width:60%; display: inline-block; float:right; margin:13px 0 14px; }
+.panel_word span{ font-size:25px; display:block; height:34px; }
+.panel .loginTime{ font-size:15px; color:#1E9FFF; line-height:17px;}
+.panel em{ font-style:normal;}
+.history_box{ min-height:500px; height:500px; overflow-y:scroll; padding:10px !important;}
+.history_box .layui-timeline .layui-timeline-item:last-child{ padding-bottom:0;}
+@media screen and (max-width:1200px) {
+    .history_box { height: auto !important; overflow-y: inherit; }
+}
+/*修改密码*/
+.pwdTips{ min-height:auto; margin:40px 0 15px 110px;}
+/*个人资料*/
+form input.layui-input[disabled]{ background:#f2f2f2; color:#595963!important; }
+.user_right{ text-align: center; }
+.user_right p{ margin:10px 0 25px; font-size: 12px; text-align: center; color: #FF5722;}
+.user_right img#userFace{ width:200px; height:200px; margin-top:20px; cursor:pointer; box-shadow:0 0 50px #44576b; }
+.userAddress.layui-form-item .layui-input-inline{ width:23%; }
+.userAddress.layui-form-item .layui-input-inline:last-child{ margin-right:0; }
+/*下拉多选*/
+.layui-form-item select[multiple]+.layui-form-select dd{ padding:0;}
+.layui-form-item select[multiple]+.layui-form-select .layui-form-checkbox[lay-skin=primary]{ margin:0 !important; display:block; line-height:36px !important; position:relative; padding-left:26px;}
+.layui-form-item select[multiple]+.layui-form-select .layui-form-checkbox[lay-skin=primary] span{line-height:36px !important; float:none;}
+.layui-form-item select[multiple]+.layui-form-select .layui-form-checkbox[lay-skin=primary] i{ position:absolute; left:10px; top:0; margin-top:9px;}
+.multiSelect{ line-height:normal; height:auto; padding:4px 10px; overflow:hidden;min-height:38px; margin-top:-38px; left:0; z-index:99;position:relative;background:none;}
+.multiSelect a{ padding:2px 5px; background:#908e8e; border-radius:2px; color:#fff; display:block; line-height:20px; height:20px; margin:2px 5px 2px 0; float:left;}
+.multiSelect a span{ float:left;}
+.multiSelect a i{ float:left; display:block; margin:2px 0 0 2px; border-radius:2px; width:8px; height:8px; background:url(../images1/close.png) no-repeat center; background-size:65%; padding:4px;}
+.multiSelect a i:hover{ background-color:#545556;}
+
+/*页面被吸走*/
+@keyframes pageGo{from{font-size: 12em; top:300px;} to{font-size:0; opacity:0; top: 100px;}}
+@-moz-keyframes pageGo{from{font-size: 12em; top:300px;} to{font-size:0; opacity:0; top:100px}}
+@-webkit-keyframes pageGo{from{font-size: 12em; top:300px;} to{font-size:0; opacity:0; top:100px}}
+@-o-keyframes pageGo{from{font-size: 12em; top:300px;} to{font-size:0; opacity:0; top:100px}}
+/*ufo飞走*/
+@keyframes ufo{0%{font-size: 14em; top:100px;} 20%{font-size: 12em; top:50px;} 100%{font-size:0; opacity:0; top:-100px; left:80%;}}
+@-moz-keyframes ufo{0%{font-size: 14em; top:100px;} 20%{font-size: 12em;  top:50px;} 100%{font-size:0; opacity:0; top:-100px; left:80%;}}
+@-webkit-keyframes ufo{0%{font-size: 14em; top:100px;} 20%{font-size: 12em;  top:50px;} 100%{font-size:0; opacity:0; top:-100px; left:80%;}}
+@-o-keyframes ufo{0%{font-size: 14em; top:100px;} 20%{font-size: 12em; top:50px;} 100%{font-size:0; opacity:0; top:-100px; left:80%;}}
+/*404显示*/
+@keyframes page404{from{opacity:0; font-size:2em;} to{opacity:1;font-size:2em;}}
+@-moz-keyframes page404{from{opacity:0; font-size:2em;} to{opacity:1;font-size:2em;}}
+@-webkit-keyframes page404{from{opacity:0; font-size:2em;} to{opacity:1;font-size:2em;}}
+@-o-keyframes page404{from{opacity:0; font-size:2em;} to{opacity:1;font-size:2em;}}
+/*图标管理*/
+.iconsLength{ margin:0 5px;}
+.icons li{  margin:5px 0; text-align:center; height:120px; cursor:pointer;}
+.icons li i{ display:block; font-size:35px; margin:10px 0; line-height:60px; height:60px;}
+.icons li:hover{ background:rgba(13,10,49,.9); border-radius:5px; color:#fff;}
+.icons li:hover i{ font-size:50px;}
+#copyText{ width:0;height:0; opacity:0; position:absolute; left:-9999px; top:-9999px;}
+/*开发文档*/
+h2.method{ font-size:18px; line-height:45px; padding-left:5px;}
+
+/*响应式*/
+@media screen and (max-width:450px) {
+    #userFaceBtn{ height: 30px;line-height: 30px; padding: 0 10px; font-size: 12px;}
+    .user_right img#userFace{ width:100px; height:100px; margin-top:0;}
+    .layui-col-xs12 .layui-form-label{ width:60px; padding-left:0;}
+    .layui-col-xs12 .layui-input-block,.layui-col-xs12 .layui-input-inline{ margin-left:75px;}
+    .layui-col-xs12 .layui-input-inline{ left:0 !important; width:auto !important;}
+    .noFind{ padding-top:0;}
+    *[pc]{ display:none;}
+}
+/*增加公共样式*/
+.clear:after{
+    display:block;
+    clear:both;
+    content:"";
+    visibility:hidden;
+    height:0;
+    zoom: 1;}
+.lf{
+    float: left;
+}
+.rg{
+    float: right;
+}
+.MarginTop3{
+	margin-top: -3px;
+}
+.table-striped > tbody > tr:nth-child(2n+1) > td,
+.table-striped > tbody > tr:nth-child(2n+1) > th {
+	/*background-color: #f3f5f8;//此处是自己想用的颜色*/
+}
+.table-striped > tbody > tr:nth-child(2n+1) {
+	background-color: #f3f5f8!important;
+}
+
+.layui-nav-tree .layui-nav-more {
+    border-color: #000000 transparent transparent;
+}
+.layui-nav-itemed .layui-nav-more {
+    border-color: transparent transparent #ffffff;
+}
+.layui-nav-item{
+	background: #FFFFFF;
+	margin-bottom: 4px;
+}
+.layui-nav-child dl{
+	margin-top: 3px;
+}
+.layui-nav-child dd{
+	color: #797979;
+	background: #ffffff;
+}
+.header .layui-anim-upbit a.signOut{
+	color: #ff4747;
+}
+.header .layui-anim-upbit a.signOut:hover{
+	color: #ffffff;
+}
+
+.layui-layer-title{
+	line-height: 42px!important;
+}
+.layui-layer-title a{
+	line-height: 42px;
+}
+body{
+	background: #F8F8F8;
+}
+body, div, img, ul, li a {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border: none;
+    text-decoration: none;
+   font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+   }
+a:hover{
+  text-decoration:none;
+}
+.header .layui-nav .layui-nav-item{
+	
+	background: none;
+}
+.header .layui-nav a{
+	color: #797979;
+}
+.header .topLevelMenus li a{
+	color: #ffffff;
+
+}
+.header .topLevelMenus li.layui-this a{
+	color: #ffffff;
+    opacity: 1;
+}
+.header .layui-nav span.layui-nav-bar{
+	display: none;
+}
+/*共用按钮的样式*/
+.layui-btn {
+    height: 35px;
+    line-height: 35px;
+    font-size: 14px;
+    position: relative;
+}
+.layui-btn .material-icons{
+	position: absolute;
+	top: 9px;
+	right: 5px;
+}
+.layui-btn.red{
+	background: #ea0001;
+}
+.layui-btn.blue{
+	background: #2196F3;
+}
+.layui-btn.gray{
+	background: #e1e1e1;
+	color: #787878;
+}
+i.material-icons.blue{
+	color: #ffffff;
+	cursor: pointer;
+}
+i.material-icons.gray{
+	color: #787878;
+	cursor: pointer;
+}
+a.blue{
+	color: #2196F3;
+	cursor: pointer;
+}
+a.red{
+	color: #ff4747;
+	cursor: pointer;
+}
+/*弹框的公共样式*/
+.publicMsg{
+	padding: 0 40px;
+	padding-bottom: 20px;
+}
+.publicMsg .title{
+   padding: 25px 0 25px;
+    color: #898989;
+    border-bottom: 1px solid #f6f6f6;
+			}
+.publicMsg .title .yesBtn{
+	display: inline-block;
+	padding: 0 10px;
+	color: #2387f9;
+	cursor: pointer;
+}
+.publicMsg .title .NoBtn{
+	display: inline-block;
+	padding: 0 10px;
+	cursor: pointer;
+}
+.publicMsg .PostBtn {
+	padding:25px 0 0;
+}
+.publicMsg .tip {
+	line-height: 50px;
+	color: #c9c9c9;
+	font-size: 12px;
+}
+.publicMsg .tip a{
+	color: #c9c9c9;
+}
+.publicMsg input,.publicMsg select{
+	border: 1px solid #f6f6f6;
+	height: 35px;
+	background: #f3f5f8;
+	font-size: 14px;
+	padding-left:10px ;
+	box-sizing: border-box;
+	border-radius: 0;
+}
+.publicMsg select{
+	width: 173px;
+	color: #787878;
+}
+.publicMsg ul li{
+	margin-bottom: 23px;
+}
+.publicMsg ul li.line .layui-form-select{
+	width: 188px;
+	margin-left: 0;
+    margin-right: 25px;
+}
+.publicMsg ul li.line.other .layui-form-select{
+	margin-bottom: 15px;
+}
+.major_set .layui-form-select{
+	width: 220px;
+	float: right;
+	padding-right: 0;
+}
+
+body .layer-ext-myskin .layui-layer-content {
+	overflow: visible;
+}
+.layui-layer-page .layui-layer-content{
+	overflow: visible!important;
+}
+.magLeft10{
+	margin-right: 10px!important;
+}
+.magLeft0{
+	margin-left: 0!important;;
+}
+.magright10{
+	margin-left: 20px;
+}
+.publicMsg li.photoWrap{
+	width: 150px;
+	height: 150px;
+	font-size: 0;
+	overflow: hidden;
+	position: relative;
+}
+.publicMsg .photoWrap img{
+	width: 100%;
+	/*height: 100%;*/
+	/*position: absolute;*/
+	/*left: 0;*/
+	/*top: -10px;*/
+}
+.publicMsg .layui-form-select{
+	width: 200px;
+	float: left;
+	margin-left: 25px;
+	border-radius: 0;
+}
+.publicMsg .sexWrap .layui-form-select{
+	width: 200px;
+}
+.publicMsg .layui-form-select dl{
+	padding: 0;
+}
+.pagination-detail span.page-list{
+    display: none;
+}
+.moreSelect .pagination-detail span.page-list{
+	display: inline-block;
+}
+.moreSelect .dropdown-menu > .active > a{
+	background-color:#2196F3 ;
+}
+.fixed-table-pagination span.pagination-info {
+    line-height: 45px;
+}
+.fixed-table-pagination .pull-right.pagination ul li a{
+   margin-left: 6px;
+    border-radius: 2px;
+    background: transparent;
+    border: 1px solid #d9d9d9;
+    color: #333333;
+}
+.pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover{
+    color: #2196f3!important;
+    border: 1px solid #2196F3!important;
+}
+table tr td{
+	position: relative;
+	vertical-align: middle;
+}
+table{
+    table-layout:fixed;
+}
+td{
+    /*overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;*/
+}
+/*二级页面导航的样式*/
+span.school_more{
+	width: 0;
+	height: 0;
+	display:inline-block;
+	border:5px  solid #a2a2a2;
+	border-left-width: 9px;
+	border-right-width: 9px;
+	border-top-color:transparent;
+	border-right-color:transparent;
+	border-bottom-color:transparent;
+	position: absolute;
+	right: -30px;
+	top:2px;
+}
+span.school_imgwrap{
+	position: absolute;
+	height: 50px;
+	width: 50px;
+	display:block;
+	/*border:1px solid #ebebeb;*/
+    top:11.5px;
+    right: 0;
+	overflow: hidden;
+	position: absolute;
+}
+span.school_imgwrap img{
+	position: absolute;
+	width: 50px;
+	/*height: 50px;*/
+	left: 0;
+}
+.layui-nav-tree .layui-nav-child dd.layui-this{
+	border-left: 5px solid #2196F3;
+}
+
+body{
+    font-family: 'NotoSansHans-Bold';
+	background: #f3f5f8!important;
+}
+.docs-buttons{
+	-webkit-user-select:none;
+	-moz-user-select:none;
+	-ms-user-select:none;
+	user-select:none;
+}
+img{
+	border: none;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+}
+
+input[type="number"] {
+	-moz-appearance: textfield;
+}
+
+
+body .school_Msg .title{
+	padding: 35px 0 25px;
+    color: #898989;
+    border-bottom: 1px solid #f6f6f6;
+   
+}
+em.OnlyTip{
+	display: inline-block;
+	width: 50px;
+	height: 20px;
+	position: absolute;
+	z-index:100;
+	left: -25px;
+	top:-10px;
+	border-radius:10px ;
+	color: #FFFFFF;
+	font-size: 12px;
+	line-height: 20px;
+	font-style: normal;
+}
+em.OnlyTip.yellow{
+	background: #ffb55d;
+}
+em.OnlyTip.gray{
+	background: #939393;
+}
+em.OnlyTip.blue{
+	background: #65bff8;
+}
+.xm-select-parent .xm-select{
+	border: none;
+}
+/*班级设置多选的弹框样式*/
+body .add_director .xm-select-parent{
+    width: 220px;
+	float: right;
+}
+body .add_director .xm-select-parent .xm-select--suffix input{
+	background: #f3f5f8;
+}
+/*msg弹框的多选样式*/
+body .msgStyle,body .msgStyleDownLoad{
+	padding-top: 0!important;
+	padding-bottom: 0!important;
+	background: #ffffff;
+	color: #000000;
+	opacity: 0.87;
+	border: none;
+	-moz-box-shadow:0px 10px 20px #aaaaaa;
+	-webkit-box-shadow:0px 10px 20px #aaaaaa;
+	box-shadow:0px 10px 20px #aaaaaa;
+    padding-left: 30px;
+	text-align: center;
+	min-width: 100px;
+	height: 50px;
+	line-height: 50px;
+	padding-right: 30px;
+	opacity: 1;
+}
+body .msgStyle .layui-layer-content,body .msgStyleDownLoad  .layui-layer-content{
+	padding: 0;
+    height: 50px;
+	line-height: 50px;
+	padding-left: 30px;
+}
+body .msgStyleDownLoad  .layui-layer-content{
+	padding-left: 40px;
+}
+body .msgStyleDownLoad.layui-layer-dialog .layui-layer-content .layui-layer-ico{
+	left: 0;
+	top:10px;
+}
+body .msgStyle .msgIconStyle,body .msgStyle .msgIconStyleFail{
+	color:#05D01C;
+	font-size: 20px;
+	position: absolute;
+	left: 0px;
+	top:14px;
+}
+body .msgStyle .msgIconStyleFail{
+	color:#FF4747;
+}
+body .aaa{
+	min-width: 105px;
+	padding: 0;
+	border: none;
+	z-index: 10000;
+}
+body .aaa .layui-layer-content{
+	width: 105px;
+	background: #ffffff;
+}
+/*刷选班级弹框*/
+
+/*搜索打分项的的样式*/
+
+#lauiUlWrap{
+	width: 312px;
+	margin: 0 auto;
+}
+#lauiUlWrap li{
+	position: relative;
+	cursor: pointer;
+}
+#lauiUlWrap li.active{
+	background: #f3f5f8;
+}
+#lauiUlWrap li span{
+	position: absolute;
+	left: 10px;
+	top:0;
+   display: inline-block;
+	width: 20px;
+	height: 20px;
+}
+#lauiUlWrap li span img{
+	width: 100%;
+	height: 100%;
+}
+#lauiUlWrap li p{
+	display: inline-block;
+}
+.sidenav-link-icon{
+	position: absolute;
+	left: 70px;
+	top: 5px;
+}
+.header .layui-anim-upbit{
+	top: 50px !important;
+	left: 10px;
+}
+.header .layui-anim-upbit dd,.closeBox .layui-nav-child dd{
+	height: 50px;
+	line-height: 50px;
+}
+.closeBox .layui-nav-child dd i{
+	margin-right: 10px;
+}
+.header .layui-anim-upbit cite{
+	margin-left: 30px;
+	text-align: center;
+}
+.header .layui-anim-upbit a{
+	color: #000000;
+	opacity: 0.87;
+}
+.layui-laydate-content td.laydate-selected{
+	background: #96c7ff!important;
+	color: #ffffff;
+}
+.header .layui-nav .layui-nav-item s{
+	display: none;
+}
+.header .layui-nav .layui-nav-item.active s{
+	display: inline-block;
+}
+/*导航头像*/
+.school_Btn{
+	background: #2196F3;
+	height:35px;
+	width: 60px;
+	line-height: 35px;
+	display: inline-block;
+	text-align: center;
+	color: #ffffff;
+	cursor: pointer;
+	font-style:normal ;
+	border-radius: 4px;
+}
+.school_Btn.borderRadiusRight{
+	border-top-left-radius: 0;
+	border-top-right-radius: 4px;
+	border-bottom-right-radius: 4px;
+	border-bottom-left-radius: 0;
+}
+.borderRadiusAll{
+	border-radius: 4px;
+}
+/*修改input在ie下的一些默认样式*/
+input::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+	color: #999999;
+}
+input::-moz-placeholder { /* Firefox 19+ */
+	color: #999999;
+}
+input:-ms-input-placeholder { /* IE 10+ */
+	color: #999999;
+}
+input:-moz-placeholder { /* Firefox 18- */
+	color: #999999;
+}
+input::-webkit-input-placeholder.xm-input{
+	color: #000000;
+}
+input::-ms-clear { display: none; }
+input::-ms-reveal {  display:none; }
+tbody tr.myhover:hover th,tr:hover{background:transparent!important;}
+
+/*时间插件样式的修改*/
+.layui-laydate-footer span{
+	color: #2196F3;
+}
+.layui-laydate-footer span:hover{
+	color: #2196F3!important;
+}
+.layui-laydate-content tr td {
+	color: #000;
+}
+.layui-laydate-footer span[lay-type=date] {
+	color: #2196F3!important;
+}
+/*修改bootStrap弹框的圆角*/
+.popover,.input-sm {
+	border-radius: 0;
+}
+.btn-primary,.btn-primary:hover{background-color: #2196F3;border-color: #2196F3;}
+/*学校网站弹框公用样式*/
+.self_Mask_title{text-align: center;padding-bottom: 50px;color: #010101;font-size: 20px;font-weight: bold;}
+.self_Mask_close{font-size: 20px!important;color: #000000;position: absolute;top: 14px;right: 14px;font-weight: bold;cursor: pointer;}
+.self_Mask_row{line-height: 30px;margin-bottom: 15px;}
+.self_Mask_btn{  width: 100%;text-align: center;line-height: 35px;cursor: pointer;background: #2196F3;  color: #ffffff;height: 35px}
+.self_Mask_btn.red{background: #ff4747;}
+.self_Mask_btn.gray{background: #bec2cb;}
+/*编辑框内的字体颜色*/
+.layui-input,.layui-textarea{color: #000000;}
+a:link{text-decoration:none; }  /* 指正常的未被访问过的链接*/
+
+a:visited{text-decoration:none; }/*指已经访问过的链接*/
+
+a:hover{text-decoration:none;}/*指鼠标在链接*/
+
+a:active{text-decoration:none;}/* 指正在点的链接*/
+
+/*班主任选择学生弹框样式*/
+
+body .choose_grade_student .gradeWrap{
+	 display: inline-block;
+
+ }
+body .choose_grade_student .gradeWrap span{
+	display: inline-block;
+	margin-right: 20px;
+	padding: 10px;
+	padding-left: 0;
+	cursor: pointer;
+}
+body .choose_grade_student .gradeWrap span.active{
+	color: #2196F3;
+}
+body .choose_grade_student .studentWrap{
+	 display: inline-block;
+	 width: 730px;
+	 min-height: 230px;
+	padding-bottom: 0;
+	border: none;
+	padding-left: 10px;
+ }
+body .choose_grade_student .sl-formWrap ul.studentWrap li{
+	line-height: 24px;
+}
+body .choose_grade_student .sl-formWrap ul.studentWrap li i{
+	font-style: normal;
+	text-align: center;
+	width: 20px;
+	height: 20px;
+	line-height: 17px;
+	font-size: 12px;
+}
+body .choose_grade_student ul.switchBtn{
+	display: none;
+}
+body .choose_grade_student .sl-formWrap ul.studentWrap li.active i{
+	color: #ffffff;
+}
+body .choose_grade_student .switchBtn i{
+	margin-right: 10px;
+}
+body .choose_grade_student .switchBtn li:hover{
+	color: #2196F3;
+	cursor: pointer;
+}
+/*通过 搜索、刷选 查找学生弹框*/
+
+body .grades #layui-search {
+	display: inline-block;
+	width: 250px;
+	height: 30px;
+	border: none;
+	padding: 0;
+	font-size: 13px;
+}
+body .grades .LeftWrap{
+	width: 300px;
+	height: 500px;
+	border-right: 1px solid #cccccc;
+	padding-top: 20px;
+}
+body .grades .LeftWrap .wrap {
+	height: 424px;
+	overflow-y: auto;
+}
+body .grades .LeftWrap .wrap li{
+	display:inline-block;
+	padding: 5px 10px;
+	background: #f3f5f8;
+	color: #8b8b8b;
+	margin-right: 5px;
+	margin-bottom: 10px;
+	cursor: pointer
+}
+body .grades .RightWrap{
+	width: 330px;
+	height: 400px;
+	overflow-y: auto;
+	padding-left: 20px;
+}
+body .grades .searchContent li{
+	margin-bottom: 10px;
+	font-size: 12px;
+	cursor: pointer;
+}
+body .grades .searchContent li span{
+	display: inline-block;
+	padding: 0 5px;
+	border: 1px solid #ffffff;
+}
+body .grades .searchContent li i.s_Icon,body .grades .searchContent li i.s_Icon_class{
+	background: url("../img/students.png") 0 0 no-repeat;
+	vertical-align: top;
+	line-height: 0;
+	margin: 0;
+	width: 16px;
+	height: 16px;
+	display: inline-block;
+	border: 0 none;
+	cursor: pointer;
+	outline: none;
+}
+body .grades .searchContent li i.s_Icon_class{
+	background: url("../img/classgrade.png") 0 0 no-repeat;
+}
+body .grades .searchContent li span:hover{
+	background-color: #FFE6B0;
+	color: black;
+	border: 1px #FFB951 solid;
+	opacity: 0.8;
+}
+/*弹框中选中学生或班级在页面填充的样式*/
+.selectedUser{
+	position: relative;
+	padding: 0px 8px;
+	background-color: #2196f3;
+	color: #FFF;
+	display: inline-block;
+	line-height: 20px;
+	height: 20px;
+	margin: 2px 5px 2px 0;
+	cursor: initial;
+	user-select: none;
+	font-size: 14px;
+}
+/* webkit, opera, IE9 */
+/*::selection { background:#2196f3; }*/
+/* mozilla firefox */
+/*::-moz-selection { background:#2196f3; }*/
+
+.changeV1 .layui-form-select .layui-input{
+	background: #ffffff!important;
+	border-radius: 4px;
+	box-shadow: 0px 4px 17px 0px rgba(243,245,248,1);
+}
+* {
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	outline:none;
+}

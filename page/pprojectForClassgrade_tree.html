@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en" id="app">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="keywords"  />
+    <meta name="description" content="" />
+    <meta name="Author" content="larry" />
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <META HTTP-EQUIV="pragma" CONTENT="no-cache">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" type="text/css" href="../layui/css/layui.css" media="all">
+    <link rel="stylesheet" type="text/css" href="../css/public.css" media="all">
+    <style>
+        .tree a.item {
+            display: inline-block;
+            padding: 0 20px;
+            background: #2196F3;
+            min-width: 100px;
+            text-align: center;
+            color: #ffffff;
+            height: 35px;
+            line-height: 35px;
+        }
+        .tree a{
+            display: inline-block;
+            padding: 0 20px;
+            min-width: 100px;
+            text-align: center;
+            color: #2196F3;
+            background: #f3f5f8;
+            height: 35px;
+            line-height: 35px;
+        }
+        .tree .treeBtn {
+            display: inline-block;
+            padding: 0 20px;
+            min-width: 80px;
+            text-align: center;
+            color: #2196F3;
+            font-size: 14px;
+            margin-left: 10px;
+            height: 35px;
+            line-height: 35px;
+        }
+        .tree .treeBtn.del{
+            color:#ff4747 ;
+        }
+        .tree ul {
+            margin-top: 5px;
+            margin-left: 50px;
+            position: relative;
+            height: auto;
+            overflow: hidden;
+            margin-bottom: 8px;
+        }
+        .tree ul li{
+            padding-top: 10px;
+            padding-bottom: 0;
+        }
+        .tree ul.active {
+            transition: all .5s;
+            -webkit-transition: all .5s;
+            height: 0;
+            overflow: hidden;
+        }
+        li {
+            padding: 5px 25px;
+            position: relative;
+        }
+
+        .tree {
+            background-color: #FFFFFF;
+            padding: 20px;
+        }
+        .tree input{
+            height: 40px;
+            border: none;
+
+        }
+        .tree .layui-icon{
+            transform: rotate(90deg);
+            transition: transform .3s ease-in-out;
+        }
+        .tree .layui-icon.active{
+            transform:rotate(0deg);
+        }
+    </style>
+</head>
+<body>
+<div class="tree">
+    <tree :node="rootNode"></tree>
+</div>
+<script type="text/x-template" id="myComponent">
+    <li draggable="true">
+			<span @mouseenter="showOprators" @mouseleave="hideOprators" style="display: inline-block;"><i @click="toggle" :class="{ 'layui-icon':lay_icon , 'active': is_active }" style="color:#2196F3;position: absolute;left: 0;top: 20px;" v-show="node.subProjects.length">&#xe623;</i>
+                <a @click="toggle" :class="{item:!node.rules}" style="position: relative"> {{node.name}}</a>
+                <small v-if="show_oprators">
+                    <a @click="editNode($event)" href="#" class="treeBtn" data-id="{{node.id}}" v-show="!node.rules">编辑</a>   <a @click="addNode($event)" href="#" class="treeBtn" data-id="{{node.id}}" v-show="!node.rules">添加下级节点</a>  <a @click="addScore($event)" href="#" class="treeBtn" data-id="{{node.id}}" v-show="!node.rules">添加打分项</a> <a @click="removeNode($event)" href="#" class="treeBtn del" data-id="{{node.id}}"v-show="del_icon">删除</a>
+                    <a @click="delBindNode($event)" href="#" class="treeBtn del" data-id="{{node.id}}"v-show="remove_icon">解绑</a>
+                </small>
+            </span>
+        <ul v-show="node.subProjects.length"  :class="{active:is_active}"><tree-node v-for="node in node.subProjects" :node.sync="node"></tree-node></ul>
+    </li>
+</script>
+<script type="text/x-template" id="aa">
+    <ul><tree-node :node.sync="node"></tree-node><ul>
+</script>
+</body>
+<html>
+<!--<script src="http://cdnjs.cloudflare.com/ajax/libs/vue/1.0.26/vue.min.js"></script>-->
+<!--<script src="http://cdn.bootcss.com/vue/1.0.17/vue.min.js"></script>-->
+<script type="text/javascript" src="../js/lib/vue1.0.17.min.js"></script>
+<script type="text/javascript" src="../layui/layui.js"></script>
+<script type="text/javascript" src="../js/lib/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="../js/lib/jquery.cookie.js"></script>
+<script type="text/javascript" src="../js/all2.js"></script>
+<script type="text/javascript" src="../tool/mask.js"></script>
+<script type="text/javascript" src="../tool/tool.js"></script>
+<script>
+    layui.use(['layer', 'form', 'element','table'], function() {
+        var layer = parent.layer === undefined ? layui.layer : top.layer,
+            form = layui.form,
+            element = layui.element,
+            table = layui.table
+        var Choicedom = '<div class="layui-form" style="padding-top: 45px;position: relative;height: 600px">' +
+            '<i class="layui-icon layui-icon-close closeBtn NoTip" style="font-size: 20px!important;color: #000000;position: absolute;top:14px;right: 14px;font-weight: bold;cursor: pointer">&#x1006;</i> ' +
+            '<h3 style="text-align: center;font-size: 18px;font-weight: bold;margin-bottom: 40px;">选择打分项</h3>' +
+            '<div style="width: 320px;margin: 0 auto" class="clear"><input type="text" class="layui-input lf" style="width: 250px;height: 35px;background: #f3f5f8;border: none;border-radius: 0"placeholder="请输入要查询的内容"name="searchname"><span class="school_Btn lf" id="layui-search">搜索</span></div>' +
+            '<ul id="lauiUlWrap"style="padding-top: 20px;text-align: center;color: #000000;opacity: 0.87;height: 300px;"></ul>'+
+            '<div id="test1" style="padding-top: 38px;text-align: center;color: #000000;opacity: 0.87;"></div>'+
+
+            '<div class="yesTip"style="width: 300px;text-align:center;line-height:35px;color:#ffffff;cursor: pointer;background:#2196F3;position:absolute;bottom: 20px;left: 0;right: 0;margin: auto;">确定</div>' +
+            '</div>'
+        function tablePage(obj,keyword,page) {
+            obj.find('ul').empty();
+            var params = {
+                faid: userId,
+                token: token,
+                keyword: keyword,
+                bind:0,
+                size:6,
+                page:page-1
+            }
+            $.axse(urls + ClassRecord, params, function (result) {
+                obj.find('ul').empty();
+                if (!result.error) {
+                    var dom = '';
+                    var data = result.data.list;
+                    if (data.length > 0) {
+                        for (var i = 0; i < data.length; i++) {
+                            dom += '<li style="line-height: 50px;" data-id=' + data[i].id + '><span></span><p>' + data[i].name + '</p></li>';
+                        }
+                        obj.find('ul').append(dom);
+                        obj.find('ul li').unbind('click').bind('click', function () {
+                            obj.find('ul li').removeClass('active');
+                            obj.find('ul li').find('span').empty();
+                            $(this).addClass('active');
+                            $(this).find('span').append('<i class="layui-icon" style="font-size: 25px!important;color: #2387f9;font-weight: bold;">&#xe605;</i>');
+                        })
+
+                    }
+                }
+            })
+
+        }
+        //获取打分节点
+        var Treetable = function (obj,keyword,page) {
+            var params = {
+                faid: userId,
+                token: token,
+                bind:0,
+                size:6,
+                page:page-1
+            }
+            if(keyword){
+                params.keyword = keyword;
+            }
+            $.axse(urls + ClassRecord, params, function (result) {
+                obj.find('ul').empty();
+                if (!result.error) {
+                    var dom = '';
+                    var data = result.data.list;
+                    if (data.length > 0) {
+                        for (var i = 0; i < data.length; i++) {
+                            dom += '<li style="line-height: 50px;" data-id=' + data[i].id+ '><span></span><p>' + data[i].name + '</p></li>';
+                        }
+                        obj.find('ul').append(dom);
+                        if(result.data.count>6){
+                            obj.find('#test1').show();
+                            top.laypage.render({
+                                elem:'test1',
+                                count:result.data.count,
+                                theme: '#2387f9',
+                                limit:6
+                                ,jump: function(objs, first){
+                                    if(!first){
+                                        tablePage(obj,keyword,objs.curr);
+                                    }
+                                }
+                            });
+                        }else {
+                            obj.find('#test1').empty().hide();
+                        }
+                        obj.find('ul li').unbind('click').bind('click', function () {
+                            obj.find('ul li').removeClass('active');
+                            obj.find('ul li').find('span').empty();
+                            $(this).addClass('active');
+                            $(this).find('span').append('<i class="layui-icon" style="font-size: 25px!important;color: #2387f9;font-weight: bold;">&#xe605;</i>');
+                        })
+                    } else {
+                        obj.find('ul').append('<p>暂无内容</p>');
+                    }
+                }
+            })
+        }
+        //给树形结构添加打分项
+        var TreeChoose = function (projectid,superids,that) {
+            var params={
+                faid:userId,
+                token:token,
+                intervene_project_id:projectid,
+                catalogue_project_id:superids
+            }
+            $.axse(urls + bindclassRecord, params, function(result) {
+                    var obj = result.data;
+                    obj.subProjects = [];
+                    that.push(obj);
+            })
+        }
+
+        //添加下级节点的ajax
+        var addNextNodeAjax = function (superids,that,name,index) {
+            if(!!name && !!name.trim()) {
+                var params={
+                    faid:userId,
+                    token:token,
+                    intervene:0,
+                    super_id:superids,
+                    name:name
+                }
+                $.axse(urls + addClassContents, params, function(result) {
+                        sl_Mask.YesTip('添加成功');
+                        var obj = result.data;
+                        obj.subProjects = [];
+                        that.push(obj);
+                        top.layer.close(index);
+                })
+            }
+        }
+        //添加下级节点
+        var addNextNode = function (superids,that) {
+            var index = top.layer.open({
+                type: 1,
+                title: false,
+                closeBtn: 0,
+                shadeClose: false,
+                area: ['400px', '300px'],
+                content: '<div style="padding:30px 30px 50px;color:#000000;opacity:0.87;position:relative;padding-bottom: 27px" class="layui-form">' +
+                '<i class="layui-icon layui-icon-close closeBtn" style="font-size: 20px!important;color: #000000;position: absolute;top:14px;right: 14px;font-weight: bold;cursor: pointer;">&#x1006;</i> '+
+                '<div style="height: 80px;margin-bottom: 25px;width: 80px;margin: 0 auto;margin-top: 10px;"><img src="images1/addchild.png" alt=""width="100%"height="100%"></div>'+
+                '<p style="margin:50px 20px 23px;"><input type="text" style="border: none;border-bottom: 2px solid #bdbdbd;width: 300px;line-height: 35px;height: 35px" placeholder="请输入下级节点名称" name="des"></p>'+
+                '<div class="yesTip"style="width:300px;text-align:center;line-height:35px;color:#ffffff;cursor: pointer;background:#2387f9;margin: 0 auto;" lay-filter="formDemo" lay-submit>确定<div>' +
+                '</div>',
+                success: function(layero, index) {
+                    top.layui.form.on('submit(formDemo)', function(data){
+                        addNextNodeAjax(superids,that,data.field.des,index);
+                    })
+                    $(layero).find('.closeBtn').unbind('click').bind('click', function() {
+                        top.layer.close(index);
+                    })
+                }
+            })
+
+        }
+        //编辑节点的ajax
+        var TreeEditAjax = function (superids,that,name,index) {
+            if(!!name && !!name.trim()) {
+                var params={
+                    faid:userId,
+                    token:token,
+                    project_id:superids,
+                    name:name
+                }
+                $.axse(urls+'/pprojectForClassgrade/modification.action', params, function(result) {
+                        sl_Mask.YesTip('修改成功');
+                        that.name = name.trim();
+                        top.layer.close(index);
+                })
+            }
+        }
+        //编辑节点
+        var TreeEdit = function (superids,that) {
+            var index = top.layer.open({
+                type: 1,
+                title: false,
+                closeBtn: 0,
+                shadeClose: false,
+                area: ['400px', '300px'],
+                content: '<div style="padding:30px 30px 50px;color:#000000;opacity:0.87;position:relative;padding-bottom: 27px" class="layui-form">' +
+                '<i class="layui-icon layui-icon-close closeBtn" style="font-size: 20px!important;color: #000000;position: absolute;top:14px;right: 14px;font-weight: bold;cursor: pointer">&#x1006;</i> '+
+                '<div style="height: 80px;margin-bottom: 25px;width: 80px;margin: 0 auto;margin-top: 10px;"><img src="images1/edit.png" alt=""width="100%"height="100%"></div>'+
+                '<p style="margin:50px 20px 23px;"><input style="border: none;border-bottom: 2px solid #bdbdbd;width: 300px;line-height: 35px;height:35px;" placeholder="请输入节点名称" name="des"></p>'+
+                '<div class="yesTip"style="width:300px;text-align:center;line-height:35px;color:#ffffff;cursor: pointer;background:#2387f9;margin: 0 auto;" lay-filter="formDemo" lay-submit>确定<div>' +
+                '</div>',
+                success: function(layero, index) {
+                    top.layui.form.on('submit(formDemo)', function(data){
+                        TreeEditAjax(superids,that,data.field.des,index);
+                    })
+                    $(layero).find('.closeBtn').unbind('click').bind('click', function() {
+                        top.layer.close(index);
+                    })
+                }
+            })
+        }
+        var TreeNode = Vue.extend({
+            data: function() {
+                return {
+                    show_oprators: false,
+                    is_draged: false,
+                    is_active:false,
+                    lay_icon:true,
+                    del_icon:false,
+                    remove_icon:false
+                }
+            },
+            name: 'tree-node',
+            props: ['node'],
+            template:'#myComponent',
+            ready: function () {
+                if(this.node.id!=sessionStorage.classtree){
+                    this.is_active=true;
+                }
+            },
+            methods: {
+                handleDrop: function(e) {
+                    var vm = window.__drop_node__;
+
+                    this.$el.style.backgroundColor = '';
+                    vm.$el.style.backgroundColor = '';
+
+                    var __parent__ = this;
+                    while(__parent__ !== undefined) {
+                        if(__parent__ === vm) {
+                            return;
+                        }
+                        __parent__ = __parent__.$parent;
+                    }
+
+                    var current_node = vm.node;
+                    vm.$parent.node.subProjects = vm.$parent.node.subProjects.filter(function(node) {
+                        return node !== current_node;
+                    });
+                    this.node.subProjects.push(current_node);
+
+                },
+                handleDragEnd: function() {
+                    this.$el.style.backgroundColor = '';
+                },
+                handleDragStart: function(e) {
+                    this.show = false;
+                    this.is_draged = true;
+                    window.__drop_node__ = this;
+                    this.$el.style.backgroundColor = 'grey';
+                },
+                handleDragEnter: function() {
+                    if(!this.is_draged) this.$el.style.backgroundColor = "yellow";
+                },
+                handleDragLeave: function() {
+                    if(!this.is_draged) this.$el.style.backgroundColor = "";
+                },
+                handleDragOver: function() {},
+
+                showOprators: function() {
+                    this.show_oprators = true;
+                    var that = this.node.subProjects;
+                    if(this.node.intervene){
+                        this.remove_icon = true
+                    }else {
+                        if(!that||that.length==0){
+                            this.del_icon = true
+                        }
+                    }
+                },
+                hideOprators: function() {
+                    this.show_oprators = false;
+                    this.del_icon = false;
+                    this.remove_icon = false;
+                },
+                addNode: function(e) {
+                    var that = this.node.subProjects;
+                    var superids = e.target.getAttribute('data-id');
+
+                    addNextNode(superids,that);
+                },
+                delBindNode:function (e) {
+                    Array.prototype.remove = function(val) {
+                        var index = this.indexOf(val);
+                        if (index > -1) {
+                            this.splice(index, 1);
+                        }
+                    };
+                    var name = '确定解除'+this.node.name+'？';
+                    var that = this.node;
+                    var subProjects = this.$parent.node.subProjects;
+                    var superids = e.target.getAttribute('data-id');
+                    tool().Switched_Roles('images1/del.png',name, function() {
+
+                        var params={
+                            token:token,
+                            faid:userId,
+                            intervene_project_id:superids,
+                            catalogue_project_id:0
+                        }
+                        $.axse(urls+ bindclassRecord, params, function(result) {
+                               sl_Mask.YesTip('解绑成功');
+                                subProjects.remove(that);
+                        })
+                    })
+                },
+                removeNode: function(e) {
+                    Array.prototype.remove = function(val) {
+                        var index = this.indexOf(val);
+                        if (index > -1) {
+                            this.splice(index, 1);
+                        }
+                    };
+                    var name = '确定删除'+this.node.name+'？';
+                    var that = this.node;
+                    var subProjects = this.$parent.node.subProjects;
+                    var superids = e.target.getAttribute('data-id');
+                    tool().Switched_Roles('images1/del.png',name, function() {
+                        var params={
+                            token:token,
+                            faid:userId,
+                            project_id:superids
+                        }
+                        $.axse(urls+ delClassRecord, params, function(result) {
+                                var projectid=$('.tree').attr('data-projectid');
+                                if(superids!=projectid){
+                                    subProjects.remove(that);
+                                }else{
+                                    var index = parent.layer.getFrameIndex(window.name);
+                                    parent.layer.close(index);//关闭当前页
+                                    parent.$('#table1').bootstrapTable('refresh');
+                                }
+                        })
+                    })
+
+                },
+                editNode: function(e) {
+                    var that = this.node;
+                    var superids = e.target.getAttribute('data-id');
+                    TreeEdit(superids,that);
+                },
+                toggle:function(){
+                    this.is_active=!this.is_active
+                },
+                addScore:function(e){
+                    var that = this.node.subProjects;
+                    var superids = e.target.getAttribute('data-id');
+                    var index = top.layer.open({
+                        type: 1,
+                        title: false,
+                        closeBtn: 0,
+                        skin: '',
+                        content: Choicedom,
+                        shadeClose: false,
+                        area: ['500px', '600px'],
+                        success: function (layero, index) {
+                            //初始化获取数据
+                            Treetable($(layero), $(layero).find('input[name="searchname"]').val(),1);
+                            //搜索关键字获取消息
+                            $(layero).find('#layui-search').unbind('click').bind('click', function () {
+                                var vals=$(layero).find('input[name="searchname"]').val();
+                                if($.trim(vals)){
+                                    Treetable($(layero),$(layero).find('input[name="searchname"]').val(),1);
+                                }else {
+                                    Treetable($(layero), $(layero).find('input[name="searchname"]').val(),1);
+                                }
+                            })
+                            //键盘事件
+                            $(layero).on('keyup',function(event) {
+                                var e=event||window.event;
+                                if(e.keyCode == 13) {
+                                    var vals=$(layero).find('input[name="searchname"]').val();
+                                    if($.trim(vals)){
+                                        Treetable($(layero),$(layero).find('input[name="searchname"]').val(),1);
+                                    }else {
+                                        Treetable($(layero), $(layero).find('input[name="searchname"]').val(),1);
+                                    }
+                                }
+                            });
+                            //请选择添加搜索打分项
+                            $(layero).find('.yesTip').unbind('click').bind('click', function () {
+                                var projectid = $(layero).find('ul').find('li.active').attr('data-id');
+                                if (projectid) {
+                                    TreeChoose(projectid,superids,that);
+                                    layer.close(index);
+                                } else {
+                                    sl_Mask.NoTip('请先选择或搜索打分项');
+                                }
+                            })
+                            $(layero).find('.NoTip').unbind('click').bind('click', function () {
+                                top.layer.close(index);
+                            })
+                        }
+                    })
+                }
+            }
+        });
+
+        var Tree = Vue.extend({
+            name: 'tree',
+            props: ['node'],
+            components: {
+                'tree-node': TreeNode
+            },
+            template: '#aa'
+        });
+        //学校属性
+
+            var paramsobj ={
+                faid:userId,
+                token:token,
+                project_id:sessionStorage.classtree,
+                direction:2,
+                hierarchy:10
+            }
+            $.axse(urls + ClassContents, paramsobj, function(result) {
+                    var obj=result.data[0];
+                    if(!obj.subProjects){
+                        obj.subProjects=[];
+                    }
+                    var app = new Vue({
+                        el: '#app',
+                        data: {
+                            rootNode:obj,
+                            title: ''
+                        },
+                        computed: {
+                            tree_json: function() {
+                                return JSON.stringify(this.rootNode);
+                            }
+                        },
+                        components: {
+                            'tree': Tree
+                        },
+                    });
+            },function () {
+            })
+    })
+    //添加打分项的
+
+</script>

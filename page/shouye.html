@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="Author" content="larry" />
+    <meta name="renderer" content="webkit">
+    <META HTTP-EQUIV="pragma" CONTENT="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <!-- load css -->
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../font/material-icons.css">
+    <link rel="stylesheet" href="../css/public.css">
+    <link rel="stylesheet" href="../css/school_PublicStyle/school_PublicStyle.css">
+    <link rel="stylesheet" href="../css/shouye.css">
+    <style>
+        #grad1{
+            height: 120px;
+            background-image: -webkit-linear-gradient(135deg,#D939CD  30%, #F6CEEC 100%);
+            background-image: -o-linear-gradient(135deg,#D939CD  30%, #F6CEEC 100%);
+            background-image: -moz-linear-gradient(135deg,#D939CD  30%, #F6CEEC 100%);
+            background-image: linear-gradient(135deg,#D939CD  30%, #F6CEEC 100%);
+            box-shadow: 3px 6px 15px rgba(166, 166, 166, 0.7);
+            border: none;
+        }
+        #grad2{
+            height: 120px;
+            background-image: -webkit-linear-gradient( 135deg, #3C8CE7 10%, #00EAFF 100%);
+            background-image: -o-linear-gradient( 135deg, #3C8CE7 10%, #00EAFF 100%);
+            background-image: -moz-linear-gradient( 135deg, #3C8CE7 10%, #00EAFF 100%);
+            background-image: linear-gradient( 135deg, #3C8CE7 10%, #00EAFF 100%);
+            box-shadow: 3px 6px 15px rgba(166, 166, 166, 0.7);
+            border: none;
+        }
+        #grad3{
+            height: 120px;
+            background: -webkit-linear-gradient(left, #de608a, #f9b797);
+            /* Safari 5.1 - 6.0 */
+            background: -o-linear-gradient(right, #de608a, #f9b797);
+            /* Opera 11.1 - 12.0 */
+            background: -moz-linear-gradient(right, #de608a, #f9b797);
+            /* Firefox 3.6 - 15 */
+            background: linear-gradient(to right, #de608a, #f9b797);
+            box-shadow: 3px 6px 15px rgba(166, 166, 166, 0.7);
+            border: none;
+        }
+        #grad4{
+            height: 120px;
+            background-image: -webkit-linear-gradient( -45deg, #79F1A4 10%, #0E5CAD 100%);
+            background-image: -o-linear-gradient( -45deg, #79F1A4 10%, #0E5CAD 100%);
+            background-image: -moz-linear-gradient( -45deg, #79F1A4 10%, #0E5CAD 100%);
+            background-image: linear-gradient( -45deg, #79F1A4 10%, #0E5CAD 100%);
+            box-shadow: 3px 6px 15px rgba(166, 166, 166, 0.7);
+            border: none;
+        }
+        #grad5{
+            height: 120px;
+            background: -webkit-linear-gradient(left, #a265ff , #f858ec); /* Safari 5.1 - 6.0 */
+            background: -o-linear-gradient(right, #a265ff, #f858ec); /* Opera 11.1 - 12.0 */
+            background: -moz-linear-gradient(right, #a265ff, #f858ec); /* Firefox 3.6 - 15 */
+            background: linear-gradient(to right, #a265ff , #f858ec); /* 标准的语法（必须放在最后） */
+            box-shadow: 3px 6px 15px rgba(166, 166, 166, 0.7);
+            border: none;
+        }
+        #grad6{
+            height: 120px;
+            background: -webkit-linear-gradient(left, #f0690d , #ffb501); /* Safari 5.1 - 6.0 */
+            background: -o-linear-gradient(right, #f0690d, #ffb501); /* Opera 11.1 - 12.0 */
+            background: -moz-linear-gradient(right, #f0690d, #ffb501); /* Firefox 3.6 - 15 */
+            background: linear-gradient(to right, #f0690d , #ffb501); /* 标准的语法（必须放在最后） */
+            box-shadow: 3px 6px 15px rgba(166, 166, 166, 0.7);
+            border: none;
+        }
+    </style>
+</head>
+<body>
+<div id="account" class="sl-container" style="min-height: 100%;padding-top: 45px">
+    <div style="position: relative;">
+        <h3 class="sl-title" style="border: none"></h3>
+    </div>
+    <div class="row shortcut" id="shortcut">
+        <div class="col-xs-6 col-sm-4">
+        <section class="panel" id="grad3">
+            <div class="value">
+                <dl >
+                    <cite style="display: none"></cite>
+                    <dt class="semester">&nbsp;</dt>
+                    <dd class="week">&nbsp;</dd>
+                </dl>
+            </div>
+            <div class="value">
+                <dl>
+                    <cite style="display: none"></cite>
+                    <dt class="date">&nbsp;</dt>
+                    <dd class="studentInfoCount">0人</dd>
+                </dl>
+                <dl data-url="page/duty_getDutys.html" data-title="值班设置">
+                    <cite style="display: none"></cite>
+                    <dt >今日值班</dt>
+                    <dd class="dutyCount">否</dd>
+                </dl>
+            </div>
+            <i class="material-icons">event_available</i>
+        </section>
+    </div>
+        <div class="col-xs-6 col-sm-4">
+            <section class="panel clearfix" id="grad1" >
+                <div class="value">
+                    <dl data-url="page/Punch_getPunchs.html" data-title="考勤记录" >
+                        <cite style="display: none"></cite>
+                        <dt>今日到校</dt>
+                        <dd class="punchInfoCount">0人</dd>
+                    </dl>
+                </div>
+                <div class="value">
+                    <dl data-url="page/Punch_getPunchs.html" data-title="考勤记录">
+                        <cite style="display: none"></cite>
+                        <dt>迟到</dt>
+                        <dd class="punchInfoLate">0人</dd>
+                    </dl>
+                    <dl data-url="page/Punch_getPunchs.html" data-title="考勤记录">
+                        <cite style="display: none"></cite>
+                        <dt>异常</dt>
+                        <dd class="punchInfoException">0人</dd>
+                    </dl>
+                </div>
+                <i class="material-icons">exit_to_app</i>
+            </section>
+        </div>
+        <div class="col-xs-6 col-sm-4">
+            <section class="panel" id="grad2" >
+                <div class="value">
+                    <dl data-url="page/pprojectForStudentDeleteRecord.html" data-title="打分记录" >
+                        <cite style="display: none"></cite>
+                        <dt>今日学生核心素养</dt>
+                        <dd class="performanceInfoCout">0条</dd>
+                    </dl>
+                </div>
+                <div class="value">
+                    <dl data-url="page/pprojectForStudentDeleteRecord.html" data-title="打分记录">
+                        <cite style="display: none"></cite>
+                        <dt>加分</dt>
+                        <dd class="performanceInfoACount">0条</dd>
+                    </dl>
+                    <dl data-url="page/pprojectForStudentDeleteRecord.html" data-title="打分记录">
+                        <cite style="display: none"></cite>
+                        <dt>减分</dt>
+                        <dd class="performanceInfoMCount">0条</dd>
+                    </dl>
+                </div>
+                <i class="material-icons">favorite_border</i>
+            </section>
+        </div>
+        <div class="col-xs-6 col-sm-4">
+            <section class="panel" id="grad4">
+                <div class="value">
+                    <dl data-url="page/leave_getApplys.html" data-title="审批">
+                        <cite style="display: none"></cite>
+                        <dt>今日请假</dt>
+                        <dd class="leaveInfo_otherCount">0人</dd>
+                    </dl>
+                </div>
+                <div class="value">
+                    <dl data-url="page/leave_getApplys.html" data-title="审批">
+                        <cite style="display: none"></cite>
+                        <dt>病假</dt>
+                        <dd class="leaveInfo_illCount">0人</dd>
+                    </dl>
+                    <dl data-url="page/leave_getApplys.html" data-title="审批">
+                        <cite style="display: none"></cite>
+                        <dt>事假</dt>
+                        <dd class="leaveInfo_matterCount">0人</dd>
+                    </dl>
+                    <dl data-url="page/leave_getApplys.html" data-title="审批">
+                        <cite style="display: none"></cite>
+                        <dt>活动</dt>
+                        <dd class="leaveInfo_activityCount">0人</dd>
+                    </dl>
+                </div>
+                <i class="material-icons">content_copy</i>
+            </section>
+        </div>
+        <div class="col-xs-6 col-sm-4">
+        <section class="panel" id="grad6">
+            <div class="value">
+                <dl data-url="page/classRecordHistory.html" data-title="考评记录">
+                    <cite style="display: none"></cite>
+                    <dt>今日班级评比</dt>
+                    <dd class="performanceClassgradeInfo_count">0条</dd>
+                </dl>
+            </div>
+            <div class="value" id="classgradeScoreType">
+
+            </div>
+            <i class="material-icons">people_outline</i>
+        </section>
+    </div>
+        <div class="col-xs-6 col-sm-4">
+            <section class="panel" id="grad5">
+                <div class="value">
+                    <dl data-url="page/dormitory_NameList.html" data-title="每日住校">
+                        <cite style="display: none"></cite>
+                        <dt>今日住校</dt>
+                        <dd class="inResidenceCount">0人</dd>
+                    </dl>
+                </div>
+                <div class="value">
+                    <dl data-url="page/dormitory_Stop.html" data-title="停住列表">
+                        <cite style="display: none"></cite>
+                        <dt>停住</dt>
+                        <dd class="inStopCount">0人</dd>
+                    </dl>
+                    <dl data-url="page/classgradeSeat_matchList.html" data-title="竞赛生">
+                        <cite style="display: none"></cite>
+                        <dt>竞赛生</dt>
+                        <dd class="inCompetitionCount">0人</dd>
+                    </dl>
+                </div>
+                <i class="material-icons">domain</i>
+            </section>
+        </div>
+    </div>
+    <div class="echarsWrap row shortcut clear" style="margin-top: 10px">
+        <div class="col-xs-6 col-sm-8" data-url="page/pprojectForStudentDeleteRecord.html" data-title="打分记录" id="zhuWrap">
+                <cite style="display: none"></cite>
+                <section style="height: 268px; box-shadow:1px 0px 13px #d9d9d9;padding-top: 10px;padding-left: 10px" id="zhu" >
+
+                </section>
+            </div>
+        <div class="col-xs-6 col-sm-4 rg " id="bingtuWrap" data-url="page/pprojectForStudent_tree_echars.html" data-title="数据汇总">
+            <cite style="display: none"></cite>
+            <section style="height: 268px; box-shadow:1px 0px 13px #d9d9d9;padding-top: 10px;padding-left: 10px" id="bingtu"  >
+
+            </section>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="../layui/layui.js"></script>
+<script type="text/javascript" src="../js/lib/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="../tool/loading.js"></script>
+<script type="text/javascript" src="../js/lib/jquery.cookie.js"></script>
+<script type="text/javascript" src="../js/lib/echarts.js"></script>
+<script type="text/javascript" src="../js/all2.js"></script>
+<script type="text/javascript" src="../tool/mask.js"></script>
+<script type="text/javascript" src="../tool/tool.js"></script>
+<script type="text/javascript" src="../js/shouye.js"></script>
+</html>
